@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 18, color: Colors.black),
                   obscureText: !_showPass,
                   decoration: InputDecoration(
-                    hintText: "Mật khẩu",
+                    hintText: "Password",
                     hintStyle: TextStyle(color: Colors.grey),
                     prefixIcon:
                         Icon(Icons.lock_outline, color: Color(0xff888888)),
