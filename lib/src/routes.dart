@@ -4,6 +4,9 @@ import 'package:Facebook_cnpm/src/views/Signup/signup_page.dart';
 import 'package:Facebook_cnpm/src/views/Signup/signup_name.dart';
 import 'package:Facebook_cnpm/src/views/Signup/signup_birthday.dart';
 import 'package:Facebook_cnpm/src/views/Signup/signup_phone.dart';
+import 'package:Facebook_cnpm/src/views/Signup/signup_gender.dart';
+import 'package:Facebook_cnpm/src/views/Signup/signup_password.dart';
+import 'package:Facebook_cnpm/src/views/Signup/signup_privacy.dart';
 
 
 const initialRoute = "splash_screen";
@@ -18,5 +21,8 @@ var routes = {
   'signup_screen': (context) => SignupPage(),
   'signup_name': (context) => SignupName(),
   'signup_birthday': (context) => SignupBirthday(),
+  'signup_gender': (context) => SignupGender(),
   'signup_phone': (context) => SignupPhone(),
+  'signup_password': (context) => SignupPassword(),
+  'signup_privacy': (context) => SignupPrivacy(),
 };

@@ -2,21 +2,20 @@ import 'package:Facebook_cnpm/src/helpers/validator.dart';
 import 'package:Facebook_cnpm/src/models/user.dart';
 import 'package:flutter/material.dart';
 
-
-class SignupPhone extends StatefulWidget {
+class SignupPassword extends StatefulWidget {
   @override
-  _SignupPhoneState createState() => _SignupPhoneState();
+  _SignupPasswordState createState() => _SignupPasswordState();
 }
 
-class _SignupPhoneState extends State<SignupPhone> {
-
-  var _isPhoneNull;
-
-  TextEditingController _phoneController = new TextEditingController();
+class _SignupPasswordState extends State<SignupPassword> {
+  var _isPassNull = null;
+  bool showPass;
+  TextEditingController _passController = new TextEditingController();
 
   void initState() {
     super.initState();
-    _isPhoneNull = false;
+    _isPassNull = false;
+    showPass = false;
   }
 
   @override
@@ -27,7 +26,7 @@ class _SignupPhoneState extends State<SignupPhone> {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue),
         title: Text(
-          'Phone number',
+          'Password',
           style: TextStyle(fontSize: 20, color: Colors.black),
         ),
         elevation: 0,
@@ -42,7 +41,7 @@ class _SignupPhoneState extends State<SignupPhone> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 45, 0, 45),
                 child: Text(
-                  "Type your phone number",
+                  "Type password",
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -50,28 +49,26 @@ class _SignupPhoneState extends State<SignupPhone> {
                 ),
               ),
               TextField(
-                //textInputAction: TextInputAction.,
-                keyboardType: TextInputType.phone,
                 onChanged: (text) {
                   setState(() {
-                    if (text.isNotEmpty) _isPhoneNull = false;
+                    if (text.isNotEmpty) _isPassNull = false;
                   });
                 },
-                controller: _phoneController,
+                controller: _passController,
                 autofocus: true,
                 style: TextStyle(fontSize: 18, color: Colors.black),
+                obscureText: !showPass,
                 decoration: InputDecoration(
-                    labelText: "Phone number",
-                    errorText: !_isPhoneNull
-                        ? null
-                        : "Please type a valid phone number",
+                    labelText: "Password",
+                    errorText:
+                    !_isPassNull ? null : "Please type valid password",
                     suffixIcon: Visibility(
-                      visible: _phoneController.text.isNotEmpty ? true : false,
+                      visible: _passController.text.isNotEmpty ? true : false,
                       child: new GestureDetector(
                         onTap: () {
                           setState(() {
-                            _phoneController.text = '';
-                            _isPhoneNull = false;
+                            _passController.text = '';
+                            _isPassNull = false;
                           });
                         },
                         child: new Icon(Icons.close),
@@ -87,13 +84,13 @@ class _SignupPhoneState extends State<SignupPhone> {
                   height: 56,
                   child: RaisedButton(
                     onPressed: () {
-                      if(!Validators.isValidPhone(_phoneController.text)){
+                      if (!Validators.isPassword(_passController.text)) {
                         setState(() {
-                          _isPhoneNull=true;
+                          _isPassNull = true;
                         });
                       } else {
-                        userInput.phone = _phoneController.text;
-                        Navigator.pushNamed(context, "signup_password",
+                        userInput.password = _passController.text;
+                        Navigator.pushNamed(context, "signup_privacy",
                             arguments: userInput);
                       }
                     },

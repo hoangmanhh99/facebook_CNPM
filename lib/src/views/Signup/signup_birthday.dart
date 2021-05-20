@@ -76,7 +76,7 @@ class _SignupBirthdayState extends State<SignupBirthday> {
                 child: RaisedButton(
                   onPressed: () {
                     userInput.birthday = birthday;
-                    Navigator.pushNamed(context, "signup_phone",
+                    Navigator.pushNamed(context, "signup_gender",
                         arguments: userInput);
                   },
                   shape: RoundedRectangleBorder(
