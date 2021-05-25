@@ -149,7 +149,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
                 padding: EdgeInsets.all(0),
                 //minWidth: 20,
-                child: buildTextPress("Bạn đã có tài khoản?", Colors.blue),
+                child: buildTextPress("Do you have a account?", Colors.blue),
               ),
             ),
           ],
