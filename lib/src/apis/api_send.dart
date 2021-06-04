@@ -50,9 +50,11 @@ class ApiService {
       String status,
       String state,
       bool can_edit,
-      String asset_type
-      ) async {
-    String createPostURL = apiLink + "add_post" + "/?" + "token=$token&described=$described&status=$status&state=$state&can_edit=$can_edit";
+      String asset_type) async {
+    String createPostURL = apiLink +
+        "add_post" +
+        "/?" +
+        "token=$token&described=$described&status=$status&state=$state&can_edit=$can_edit";
 
     print(images.length);
     print(video);

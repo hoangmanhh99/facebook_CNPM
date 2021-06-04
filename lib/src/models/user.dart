@@ -30,4 +30,31 @@ class UserModel {
       this.requestedFriends,
       this.friends
       );
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(json['id'], json['avatar'], json['username']);
+  }
+
+  Map toJson() {
+    return {
+      'id': id,
+      'avatar': avatar,
+      'username': username
+    };
+  }
+
+  Map userTopMap() => new Map<String, dynamic>.from({
+    "id": this.id,
+    "username": this.username,
+    "avatar": this.avatar
+  });
+
+  static List<Map> userToListMap(List<UserModel> users) {
+    List<Map> usersMap =[];
+    users.forEach((UserModel user) {
+      Map step = user.userTopMap();
+      usersMap.add(step);
+    });
+    return usersMap;
+  }
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-// import 'package:fakebook_flutter_app/src/models/post.dart';
-// import 'package:fakebook_flutter_app/src/models/user.dart';
+import 'package:Facebook_cnpm/src/models/post.dart';
+import 'package:Facebook_cnpm/src/models/user.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -127,36 +127,36 @@ class StorageUtil {
     await preferences.setString('cover_image', value);
   }
 
-  // //TODO: Set List Post
-  // static Future<void> setListPost(List<PostModel> list_post) async {
-  //   List<Map> map = list_post.map((i) => i.toJson()).toList();
-  //   SharedPreferences _preferences = await SharedPreferences.getInstance();
-  //   _preferences.setString('ListPost', jsonEncode(map));
-  // }
+  //TODO: Set List Post
+  static Future<void> setListPost(List<PostModel> list_post) async {
+    List<Map> map = list_post.map((i) => i.toJson()).toList();
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    _preferences.setString('ListPost', jsonEncode(map));
+  }
 
-  // //TODO: get List Post
-  // static Future<List<PostModel>> getListPost() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   var json = jsonDecode(preferences.getString('ListPost')) as List;
-  //   if (json == null) return null;
-  //   List<PostModel> list_post = new List<PostModel>.from(
-  //       json.map((x) => PostModel.fromJson(x)).toList());
-  //   return list_post;
-  // }
+  //TODO: get List Post
+  static Future<List<PostModel>> getListPost() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var json = jsonDecode(preferences.getString('ListPost')) as List;
+    if (json == null) return null;
+    List<PostModel> list_post = new List<PostModel>.from(
+        json.map((x) => PostModel.fromJson(x)).toList());
+    return list_post;
+  }
 
-  // //TODO: Set User info
-  // static Future<void> setUserInfo(UserModel user) async {
-  //   SharedPreferences _preferences = await SharedPreferences.getInstance();
-  //   return _preferences.setString('UserInfo', jsonEncode(user.toJson()));
-  // }
+  //TODO: Set User info
+  static Future<void> setUserInfo(UserModel user) async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    return _preferences.setString('UserInfo', jsonEncode(user.toJson()));
+  }
 
-  // //TODO: get User info
-  // static Future<UserModel> getUserInfo() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   UserModel user =
-  //       new UserModel.fromJson(jsonDecode(preferences.getString('UserInfo')));
-  //   return user;
-  // }
+  //TODO: get User info
+  static Future<UserModel> getUserInfo() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    UserModel user =
+        new UserModel.fromJson(jsonDecode(preferences.getString('UserInfo')));
+    return user;
+  }
 
   static Future<void> setConversations(var value) async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();

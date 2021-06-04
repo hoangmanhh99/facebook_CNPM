@@ -23,15 +23,19 @@ class ApiUrl {
 class API {
   String apiLink = "http://localhost:3000/it4788/";
 
-  Future<http.Response> signUpApi(String phone, String password, String uuid) async {
-    return await http.post(
-      apiLink + 'signup' + '/?' + "phonenumber=$phone&password=$password&uuid=$uuid"
-    );
+  Future<http.Response> signUpApi(
+      String phone, String password, String uuid) async {
+    return await http.post(apiLink +
+        'signup' +
+        '/?' +
+        "phonenumber=$phone&password=$password&uuid=$uuid");
   }
 
-  Future<http.Response> loginApi(String phone, String password, String uuid) async {
-    return await http.post(
-        apiLink + 'login' + '/?' + "phonenumber=$phone&password=$password&uuid=$uuid"
-    );
+  Future<http.Response> loginApi(
+      String phone, String password, String uuid) async {
+    return await http.post(apiLink +
+        'login' +
+        '/?' +
+        "phonenumber=$phone&password=$password&uuid=$uuid");
   }
 }
