@@ -71,9 +71,14 @@ class LoginController {
               } else {
                 error = "Does not exist user or invalid password, pleas try again";
               }
+            } else {
+              error = "Server Error";
             }
           });
-        }
+        } else
+          error = "Sorry, can't log in. Please check your connection";
+      } catch (e) {
+        error = "Please connect internet to log in";
       }
     }
   }

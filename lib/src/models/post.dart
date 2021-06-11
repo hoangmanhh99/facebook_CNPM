@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:Facebook_cnpm/src/helpers/parseDate.dart';
 import 'package:Facebook_cnpm/src/models/user.dart';
+import 'package:Facebook_cnpm/src/models/comment.dart';
 
 class PostModel {
   VideoPost video;
-  List<LikePost> comment_list;
+  List<CommentModel> comment_list;
   List<LikePost> like_list;
   String id;
   String described;
@@ -149,66 +150,66 @@ List<PostModel> list_posts = [
   new PostModel(
       null,
       [
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
-        // new CommentModel(
-        //     "5fca1df25b91df034ccd66ea",
-        //     new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
-        //         "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
-        //     "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
-        //     "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
+        new CommentModel(
+            "5fca1df25b91df034ccd66ea",
+            new CommentPoster("5fb230dbef55b500173d348b", "Giang To Cong Tu",
+                "http://res.cloudinary.com/api-fakebook/image/upload/v1607105778/rsezumfmmy3uqzsu3jpj.jpg"),
+            "comment boasfmodddddddddddddddfff ffffffffffffffffffffffffff ffffffffff",
+            "2020-12-04T11:30:58.398Z"),
       ],
       [],
       "5fca01295010f800171b9887",

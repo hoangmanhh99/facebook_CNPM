@@ -8,12 +8,12 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 class FetchData {
   static String apiLink = "https://api-fakebook.herokuapp.com/it4788/";
 
-  Future<http.Response> signUpApi(
-      String phone, String password, String uuid) async {
+  static Future<http.Response> signUpApi(
+      String phone, String password, String username, String uuid) async {
     return await http.post(apiLink +
         'signup' +
         '/?' +
-        "phonenumber=$phone&password=$password&uuid=$uuid");
+        "phonenumber=$phone&password=$password&username=$username&uuid=$uuid");
   }
 
   static Future<http.Response> loginApi(

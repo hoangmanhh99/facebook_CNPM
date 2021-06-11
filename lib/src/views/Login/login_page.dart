@@ -127,51 +127,49 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        // onPressed: _phone.isEmpty || _password.isEmpty
-                        //     ? null
-                        //     : () async {
-                        //         try {
-                        //           Dialogs.showLoadingDialog(context, _keyLoader,
-                        //               "Login ..."); //invoking login
-                        //
-                        //           var result =
-                        //               await loginController.onSubmitLogIn(
-                        //                   phone: _phone, password: _password);
-                        //
-                        //           Navigator.of(_keyLoader.currentContext,
-                        //                   rootNavigator: true)
-                        //               .pop(); //close the dialoge
-                        //
-                        //           if (result != '') {
-                        //             Navigator.pushNamedAndRemoveUntil(
-                        //                 context,
-                        //                 result,
-                        //                 (Route<dynamic> route) => false);
-                        //             //loginController.dispose();
-                        //           } else {
-                        //             showDialog(
-                        //                 context: context,
-                        //                 builder: (BuildContext context) {
-                        //                   return AlertDialog(
-                        //                     title: Text(
-                        //                         "Đăng nhập không thành công"),
-                        //                     content:
-                        //                         Text(loginController.error),
-                        //                     actions: [
-                        //                       FlatButton(
-                        //                           onPressed: () {
-                        //                             Navigator.pop(context);
-                        //                           },
-                        //                           child: Text("OK"))
-                        //                     ],
-                        //                   );
-                        //                 });
-                        //           }
-                        //         } catch (error) {
-                        //           print(error);
-                        //         }
-                        //       }
-                                  ),
+                        onPressed: _phone.isEmpty || _password.isEmpty
+                            ? null
+                            : () async {
+                                try {
+                                  Dialogs.showLoadingDialog(context, _keyLoader,
+                                      "Login ..."); //invoking login
+
+                                  var result =
+                                      await loginController.onSubmitLogin(
+                                          phone: _phone, password: _password);
+
+                                  Navigator.of(_keyLoader.currentContext,
+                                          rootNavigator: true)
+                                      .pop(); //close the dialoge
+
+                                  if (result != '') {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        result,
+                                        (Route<dynamic> route) => false);
+                                    //loginController.dispose();
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text("Login failed"),
+                                            content:
+                                                Text(loginController.error),
+                                            actions: [
+                                              FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("OK"))
+                                            ],
+                                          );
+                                        });
+                                  }
+                                } catch (error) {
+                                  print(error);
+                                }
+                              }),
                   )),
               WidgetsBinding.instance.window.viewInsets.bottom > 0.0
                   ? Container(
@@ -194,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
                 child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width / 2 - 50,
