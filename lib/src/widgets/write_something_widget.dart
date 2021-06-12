@@ -16,7 +16,7 @@ class WriteSomethingWidget extends StatelessWidget {
                 GestureDetector(
                   child: CircleAvatar(
                     radius: 28.0,
-                    backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                    backgroundImage: AssetImage('assets/avatar.jpg'),
                   ),
 
                 ),

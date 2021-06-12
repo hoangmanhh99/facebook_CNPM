@@ -18,7 +18,7 @@ class _SignupPageState extends State<SignupPage> {
     Future.delayed(Duration.zero, () {
       dataReturn = ModalRoute.of(context).settings.arguments;
       if (ModalRoute.of(context).settings.arguments != null) {
-        if (dataReturn == "Sign up Successful, you can start sign in") {
+        if (dataReturn == "Sign up Successful, you can start log in") {
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -91,7 +91,7 @@ class _SignupPageState extends State<SignupPage> {
                 height: MediaQuery.of(context).size.height / 1.5,
                 width: MediaQuery.of(context).size.width / 1.5,
                 padding: EdgeInsets.fromLTRB(15, 40, 15, 15),
-                child: Image.asset('assets/images/image_signup.png'),
+                child: Image.asset('assets/image_signup.png'),
               ),
             ),
             Text(

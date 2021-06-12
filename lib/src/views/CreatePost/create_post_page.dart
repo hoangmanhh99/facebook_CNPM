@@ -401,7 +401,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         backgroundColor: kColorGrey,
                         radius: 28.0,
                         backgroundImage: avatar == null
-                            ? AssetImage('assets/images/avatar.jpg')
+                            ? AssetImage('assets/avatar.jpg')
                             : NetworkImage(avatar),
                       ),
                     ),

@@ -390,7 +390,7 @@ class _CommentWidgetState extends State<CommentWidget>
                   backgroundColor: kColorGrey,
                   radius: 25.0,
                   backgroundImage: item.poster.avatar == null
-                      ? AssetImage('assets/images/avatar.jpg')
+                      ? AssetImage('assets/avatar.jpg')
                       : NetworkImage(item.poster.avatar),
                 ),
               ),
@@ -463,7 +463,7 @@ class _CommentWidgetState extends State<CommentWidget>
                 backgroundColor: kColorGrey,
                 radius: 25.0,
                 backgroundImage: avatar == null
-                    ? AssetImage('assets/images/avatar.jpg')
+                    ? AssetImage('assets/avatar.jpg')
                     : NetworkImage(avatar),
               ),
             ),

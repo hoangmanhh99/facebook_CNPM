@@ -36,7 +36,7 @@ class _HeaderPostState extends State<HeaderPost> {
             backgroundColor: kColorGrey,
             radius: 20.0,
             backgroundImage: widget.post.author.avatar == null
-                ? AssetImage('assets/images/avatar.jpg')
+                ? AssetImage('assets/avatar.jpg')
                 : NetworkImage(widget.post.author.avatar),
           ),
           SizedBox(width: 7.0),

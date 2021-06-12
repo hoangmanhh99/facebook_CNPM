@@ -1,3 +1,6 @@
+import 'package:Facebook_cnpm/src/views/CreatePost/add_status_page.dart';
+import 'package:Facebook_cnpm/src/views/CreatePost/create_post_page.dart';
+import 'package:Facebook_cnpm/src/views/HomePage/home_page.dart';
 import 'package:Facebook_cnpm/src/views/splash_screen.dart';
 import 'package:Facebook_cnpm/src/views/Login/login_page.dart';
 import 'package:Facebook_cnpm/src/views/Signup/signup_page.dart';
@@ -25,4 +28,14 @@ var routes = {
   'signup_phone': (context) => SignupPhone(),
   'signup_password': (context) => SignupPassword(),
   'signup_privacy': (context) => SignupPrivacy(),
+
+  // HOME VIEW
+  'home_screen': (context) => HomePage(),
+
+  // CREATE_POST
+  'create_post': (context) => CreatePostPage(),
+  'add_status': (context) => StatusPage(),
+
+  // PROFILE
+  // 'profile_page': (context) => ProfilePage(),
 };
