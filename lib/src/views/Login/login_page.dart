@@ -38,14 +38,14 @@ class _LoginPageState extends State<LoginPage> {
                   ? Container(
                       padding: EdgeInsets.only(top: 50, bottom: 10),
                       child: Image.asset(
-                        'assets/images/facebook_logo.png',
+                        'assets/facebook_logo.png',
                         height: 80,
                         fit: BoxFit.contain,
                       ),
                     )
                   : Container(
                       child: Image.asset(
-                        'assets/images/top_background.jpg',
+                        'assets/top_background.jpg',
                         height: 260,
                         fit: BoxFit.contain,
                       ),
