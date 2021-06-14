@@ -13,9 +13,9 @@ class SinglePost extends StatefulWidget {
   PostModel post;
   PostController controller;
   String username;
-  
+
   SinglePost(this.post, this.controller, this.username);
-  
+
   @override
   _SinglePostState createState() => _SinglePostState();
 }
@@ -25,8 +25,7 @@ class _SinglePostState extends State<SinglePost> {
   void initState() {
     super.initState();
   }
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,23 +51,43 @@ class _SinglePostState extends State<SinglePost> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChewieDemo(widget.post, widget.controller, widget.username)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ImageView(widget.post,
+                                        widget.controller, widget.username)));
                           },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Image.network(widget.post.video.thumb),
-                              Icon(
-                                Icons.play_circle_filled_rounded,
-                                color: kColorWhite,
-                                size: 120,
-                              )
-                            ],
-                          ),
+                          child: Image.network(image.url),
                         ),
-                        FooterPost(widget.post, widget.controller, widget.username)
+                        FooterPost(
+                            widget.post, widget.controller, widget.username)
                       ],
-                    )
+                    ),
+                if (widget.post.video != null)
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChewieDemo(widget.post,
+                                      widget.controller, widget.username)));
+                        },
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.network(widget.post.video.thumb),
+                            Icon(
+                              Icons.play_circle_filled_rounded,
+                              color: kColorWhite,
+                              size: 120,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  )
               ],
             ),
           ),
