@@ -69,7 +69,7 @@ class LoginController {
                 result = 'home_screen';
 
               } else {
-                error = "Does not exist user or invalid password, pleas try again";
+                error = "Does not exist user or invalid password, please try again";
               }
             } else {
               error = "Server Error";
@@ -81,5 +81,6 @@ class LoginController {
         error = "Please connect internet to log in";
       }
     }
+    return result;
   }
 }

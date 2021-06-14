@@ -244,7 +244,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
           children: [
             Image.memory(video_thumbnail),
             Icon(
-              Icons.play_circle_fill_rounded,
+              Icons.play_circle_filled_rounded,
               color: kColorWhite,
               size: 120,
             )
@@ -303,11 +303,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
           selectedAssets: images,
           cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
           materialOptions: MaterialOptions(
-              actionBarColor: "#000",
+              actionBarColor: "#000000",
               actionBarTitle: "Choose photos",
               allViewTitle: "All photos",
               useDetailsView: false,
-              selectCircleStrokeColor: "#000"));
+              selectCircleStrokeColor: "#000000"));
       setState(() {
         asset_type = 'image';
       });
@@ -448,7 +448,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                         color: Colors.grey,
                                         size: 18,
                                       ),
-                                      Text('Public'),
+                                      SizedBox(width: 4,),
+                                      Text('Public', style: TextStyle(
+                                          fontWeight: FontWeight.w600, color: Colors.grey)),
                                       Icon(
                                         Icons.arrow_drop_down,
                                         color: Colors.grey,
@@ -473,7 +475,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                         Icons.add,
                                         color: Colors.grey,
                                       ),
-                                      Text("Album"),
+                                      Text("Album", style: TextStyle(
+                                          fontWeight: FontWeight.w600, color: Colors.grey)),
                                       Icon(
                                         Icons.arrow_drop_down,
                                         color: Colors.grey,
@@ -495,6 +498,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   controller: _controller,
                   decoration: InputDecoration(
                       border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: 10),
                       hintText: "What do you think now?",
                       hintStyle: TextStyle(
                           color: Colors.grey, fontWeight: FontWeight.w300)),

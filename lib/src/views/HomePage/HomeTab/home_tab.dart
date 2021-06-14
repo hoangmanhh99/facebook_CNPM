@@ -82,9 +82,9 @@ class _HomeTabState extends State<HomeTab>
             itemBuilder: (context, index) {
               //postController[index] = new PostController();
               return PostWidget(
-                listPostModel[index],
-                new PostController(),
-                username,
+                post: listPostModel[index],
+                controller: new PostController(),
+                username: username,
               );
             });
   }
@@ -412,9 +412,9 @@ class _HeaderHomeState extends State<HeaderHome> {
                 return Column(
                   children: [
                     PostWidget(
-                      snapshot.data,
-                      new PostController(),
-                      username,
+                      post: snapshot.data,
+                      controller: new PostController(),
+                      username: username,
                     ),
                   ],
                 );

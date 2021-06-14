@@ -94,9 +94,9 @@ class _WatchTabState extends State<WatchTab>
             itemBuilder: (context, index) {
               //postController[index] = new PostController();
               return PostWidget(
-                listPostModel[index],
-                new PostController(),
-                username,
+                post: listPostModel[index],
+                controller: new PostController(),
+                username: username,
               );
             });
   }

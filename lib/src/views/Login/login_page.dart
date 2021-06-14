@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                             : () async {
                                 try {
                                   Dialogs.showLoadingDialog(context, _keyLoader,
-                                      "Login ..."); //invoking login
+                                      "Logging in ..."); //invoking login
 
                                   var result =
                                       await loginController.onSubmitLogin(
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
 
                                   Navigator.of(_keyLoader.currentContext,
                                           rootNavigator: true)
-                                      .pop(); //close the dialoge
+                                      .pop(); //close the dialog
 
                                   if (result != '') {
                                     Navigator.pushNamedAndRemoveUntil(
@@ -195,13 +195,13 @@ class _LoginPageState extends State<LoginPage> {
                     //mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width / 2 - 50,
+                        width: MediaQuery.of(context).size.width / 2 - 45,
                         height: 1,
                         color: Colors.grey,
                       ),
                       Text("OR"),
                       Container(
-                        width: MediaQuery.of(context).size.width / 2 - 50,
+                        width: MediaQuery.of(context).size.width / 2 - 45,
                         height: 1,
                         color: Colors.grey,
                       ),

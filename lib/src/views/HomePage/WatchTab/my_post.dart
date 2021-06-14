@@ -104,7 +104,7 @@ class _ProfilePostState extends State<ProfilePost>
             itemCount: listPostModel.length,
             itemBuilder: (context, index) {
               return PostWidget(
-                  listPostModel[index], new PostController(), username);
+                  post: listPostModel[index], controller: new PostController(), username: username);
             });
   }
 
@@ -190,7 +190,7 @@ class _ProfilePostState extends State<ProfilePost>
           Column(
             children: [
               for (var i in widget.list)
-                PostWidget(i, new PostController(), username)
+                PostWidget(post: i, controller: new PostController(), username: username)
             ],
           )
         ],

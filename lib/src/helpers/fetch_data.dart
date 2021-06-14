@@ -52,9 +52,9 @@ class FetchData {
     return await http.post(apiLink + 'get_list_posts' + '/?' + "token=$token");
   }
 
-   static Future<http.Response> getMyPost(String token, String userId) async {
+  static Future<http.Response> getMyPost(String token, String userId) async {
     return await http.post(
-        apiLink + 'get_list_posts' + '/?' + "token=$token&user_Id=$userId");
+        apiLink + 'get_list_posts' + '/?' + "token=$token&user_id=$userId");
   }
 
   static Future<http.Response> getListVideo(String token) async {
@@ -63,32 +63,40 @@ class FetchData {
 
   static Future<http.Response> getUserInfo(String token, String userId) async {
     return await http.post(
-        apiLink + 'get_user_info' + '/?' + "token=$token&user_Id=$userId");
+        apiLink + 'get_user_info' + '/?' + "token=$token&user_id=$userId");
   }
 
-  static Future<http.Response> getUserFriends(String token, String index, String count) async {
-    return await http.post(
-        apiLink + 'get_user_friends' + '/?' + "token=$token&index=$index&count=$count");
+  static Future<http.Response> getUserFriends(
+      String token, String index, String count) async {
+    return await http.post(apiLink +
+        'get_user_friends' +
+        '/?' +
+        "token=$token&index=$index&count=$count");
   }
 
-  static Future<http.Response> getUserFriendsOther(String token, String index, String count, String userId) async {
-    return await http.post(
-        apiLink + 'get_user_friends' + '/?' + "token=$token&index=$index&count=$count&user_id=$userId");
+  static Future<http.Response> getUserFriendsOther(
+      String token, String index, String count, String userId) async {
+    return await http.post(apiLink +
+        'get_user_friends' +
+        '/?' +
+        "token=$token&index=$index&count=$count&user_id=$userId");
   }
 
   static Future<http.Response> getPost(String token, String postId) async {
-    return await http.post(
-        apiLink + 'get_post' + '/?' + "token=$token&id=$postId");
+    return await http
+        .post(apiLink + 'get_post' + '/?' + "token=$token&id=$postId");
   }
 
   static Future<http.Response> likeApi(String token, String postId) async {
-    return await http.post(
-        apiLink + 'like' + '/?' + "token=$token&id=$postId");
+    return await http.post(apiLink + 'like' + '/?' + "token=$token&id=$postId");
   }
 
-  static Future<http.Response> setCommentApi(String token, String postId, String comment) async {
-    return await http.post(
-        apiLink + 'set_comment' + '/?' + "token=$token&id=$postId&comment=$comment&index=0&count=1000");
+  static Future<http.Response> setCommentApi(
+      String token, String postId, String comment) async {
+    return await http.post(apiLink +
+        'set_comment' +
+        '/?' +
+        "token=$token&id=$postId&comment=$comment&index=0&count=1000");
   }
 
   // Fetch Post
@@ -101,6 +109,4 @@ class FetchData {
       throw Exception("Failed to fetch Post");
     }
   }
-
-
 }

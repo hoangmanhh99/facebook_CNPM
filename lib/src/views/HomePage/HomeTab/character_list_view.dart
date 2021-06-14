@@ -77,12 +77,6 @@ class _CharacterListViewState extends State<CharacterListView>
   }
 
   @override
-  void dispose() {
-    _pagingController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) => RefreshIndicator(
         onRefresh: () async {
           refreshKey.currentState?.show(atTop: false);
@@ -103,7 +97,7 @@ class _CharacterListViewState extends State<CharacterListView>
                 pagingController: _pagingController,
                 builderDelegate: PagedChildBuilderDelegate<PostModel>(
                   itemBuilder: (context, item, index) {
-                    return PostWidget(item, new PostController(), username);
+                    return PostWidget(post: item, controller: new PostController(), username: username);
                   },
                   firstPageProgressIndicatorBuilder: (_) => LoadingNewFeed(),
                   // newPageProgressIndicatorBuilder: (_) => NewPageProgressIndicator(),
@@ -143,7 +137,7 @@ class _CharacterListViewState extends State<CharacterListView>
           ),
           FlatButton(
             padding: EdgeInsets.only(
-                right: MediaQuery.of(context).size.width / 3, left: 30),
+                right: MediaQuery.of(context).size.width / 4, left: 30),
             shape: RoundedRectangleBorder(
                 side: BorderSide(
                   color: Colors.grey,
@@ -153,7 +147,7 @@ class _CharacterListViewState extends State<CharacterListView>
                 borderRadius: BorderRadius.circular(50)),
             child: Text(
               "What do you think now?",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.grey),
             ),
             onPressed: () {
               Navigator.pushNamed(context, "create_post").then((value) async {
@@ -171,11 +165,11 @@ class _CharacterListViewState extends State<CharacterListView>
                           state: postReturn["state"],
                           can_edit: postReturn["can_edit"],
                           asset_type: postReturn["asset_type"])
-                      .then((val) => {
+                      .then((val) {
                             setState(() {
                               isLoading = false;
                               list.insert(0, val);
-                            })
+                            });
                           });
                 }
               });
@@ -253,7 +247,7 @@ class _CharacterListViewState extends State<CharacterListView>
             ),
           Column(
             children: [
-              for (var i in list) PostWidget(i, new PostController(), username)
+              for (var i in list) PostWidget(post: i, controller: new PostController(), username: username)
             ],
           )
         ],

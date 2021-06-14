@@ -19,7 +19,7 @@ class PostWidget extends StatefulWidget {
   PostController controller;
   String username;
 
-  PostWidget(this.post, this.controller, this.username);
+  PostWidget({this.post, this.controller, this.username});
 
   @override
   _PostWidgetState createState() => _PostWidgetState();
@@ -47,6 +47,7 @@ class _PostWidgetState extends State<PostWidget> {
       child: Column(
         children: <Widget>[
           FlatButton(
+            padding: EdgeInsets.all(0),
               onPressed: () {
                 Navigator.push(
                     context,

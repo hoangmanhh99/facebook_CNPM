@@ -88,10 +88,10 @@ class _SignupPageState extends State<SignupPage> {
           children: [
             Center(
               child: Container(
-                height: MediaQuery.of(context).size.height / 1.5,
+                height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width / 1.5,
                 padding: EdgeInsets.fromLTRB(15, 40, 15, 15),
-                child: Image.asset('assets/image_signup.png'),
+                child: Image.asset('assets/image_signup.png', fit: BoxFit.contain,),
               ),
             ),
             Text(
@@ -110,6 +110,7 @@ class _SignupPageState extends State<SignupPage> {
                     Text(
                       "We will help you to create a new account after a few steps",
                       style: TextStyle(fontSize: 14, color: Colors.grey),
+                      textAlign: TextAlign.center,
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -141,7 +142,7 @@ class _SignupPageState extends State<SignupPage> {
               child: SizedBox(),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: FlatButton(
                 onPressed: () {
                   print("ok");

@@ -636,7 +636,7 @@ class _MenuTabState extends State<MenuTab> {
               ),
               child: FlatButton(
                 onPressed: () async {
-                  Dialogs.showLoadingDialog(context, _keyLoader, "logging out");
+                  Dialogs.showLoadingDialog(context, _keyLoader, "Logging out");
 
                   await Future.delayed(Duration(seconds: 2));
                   StorageUtil.setIsLogging(false);

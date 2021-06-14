@@ -41,7 +41,7 @@ class _SignupPasswordState extends State<SignupPassword> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 45, 0, 45),
                 child: Text(
-                  "Type password",
+                  "Enter password",
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -55,6 +55,7 @@ class _SignupPasswordState extends State<SignupPassword> {
                   });
                 },
                 controller: _passController,
+                enableSuggestions: false,
                 autofocus: true,
                 style: TextStyle(fontSize: 18, color: Colors.black),
                 obscureText: !showPass,

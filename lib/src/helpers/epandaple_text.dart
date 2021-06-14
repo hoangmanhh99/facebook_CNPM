@@ -35,7 +35,7 @@ class _ExpandableTextState extends State<ExpandableText> {
           TextSpan(children: linkify(text.trim())),
           if (canExpand)
             TextSpan(
-              text: isExpand ? '\n\n thu gọn' : ' ... xem thêm',
+              text: isExpand ? '\n\n Collapse' : ' ... see more',
               style: TextStyle(color: kColorGrey),
               recognizer: TapGestureRecognizer(debugOwner: true)
                 ..onTap = () {
