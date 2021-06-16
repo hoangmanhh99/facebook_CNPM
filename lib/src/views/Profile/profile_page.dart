@@ -289,11 +289,12 @@ class _ProfilePageState extends State<ProfilePage>
           ),
           child: Row(
             children: [
-              Icon(Icons.search),
+              Icon(Icons.search, color: Colors.grey,),
               Text(
                 'Search in posts, photos ...',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
+                  style: TextStyle(color: Colors.grey),
               ),
             ],
           ),

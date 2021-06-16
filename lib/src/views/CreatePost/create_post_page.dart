@@ -120,7 +120,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         width: MediaQuery.of(context).size.width,
                         height: 75,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.popUntil(context, ModalRoute.withName('home_screen'));
+                          },
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Row(
@@ -139,7 +141,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         width: MediaQuery.of(context).size.width,
                         height: 75,
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Row(
