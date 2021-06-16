@@ -94,10 +94,10 @@ class _StatusPageState extends State<StatusPage> with TickerProviderStateMixin {
       labelColor: Colors.blueAccent,
       tabs: [
         new Tab(
-          text: "CẢM XÚC",
+          text: "STATUS",
         ),
         new Tab(
-          text: "HOẠT ĐỘNG",
+          text: "ACTIVATE",
         ),
       ],
       controller: tabController,
@@ -195,7 +195,7 @@ class _StatusPageState extends State<StatusPage> with TickerProviderStateMixin {
             },
           ),
           title: new Text(
-            "Bạn đang cảm thấy thế nào?",
+            "How do you feeling now?",
             style: TextStyle(color: kColorBlack),
           ),
           bottom: tabBarItem,

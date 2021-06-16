@@ -97,7 +97,10 @@ class _CharacterListViewState extends State<CharacterListView>
                 pagingController: _pagingController,
                 builderDelegate: PagedChildBuilderDelegate<PostModel>(
                   itemBuilder: (context, item, index) {
-                    return PostWidget(post: item, controller: new PostController(), username: username);
+                    return PostWidget(
+                        post: item,
+                        controller: new PostController(),
+                        username: username);
                   },
                   firstPageProgressIndicatorBuilder: (_) => LoadingNewFeed(),
                   // newPageProgressIndicatorBuilder: (_) => NewPageProgressIndicator(),
@@ -166,11 +169,11 @@ class _CharacterListViewState extends State<CharacterListView>
                           can_edit: postReturn["can_edit"],
                           asset_type: postReturn["asset_type"])
                       .then((val) {
-                            setState(() {
-                              isLoading = false;
-                              list.insert(0, val);
-                            });
-                          });
+                    setState(() {
+                      isLoading = false;
+                      list.insert(0, val);
+                    });
+                  });
                 }
               });
             },
@@ -247,7 +250,11 @@ class _CharacterListViewState extends State<CharacterListView>
             ),
           Column(
             children: [
-              for (var i in list) PostWidget(post: i, controller: new PostController(), username: username)
+              for (var i in list)
+                PostWidget(
+                    post: i,
+                    controller: new PostController(),
+                    username: username)
             ],
           )
         ],

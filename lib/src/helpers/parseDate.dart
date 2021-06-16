@@ -25,9 +25,9 @@ class ParseDate {
       createdTemp = a.inDays.toString() + " days";
     } else {
       createdTemp = b.day.toString() +
-          "  " +
+          "/" +
           b.month.toString() +
-          ", " +
+          "/" +
           b.year.toString();
     }
     return createdTemp;
@@ -52,9 +52,9 @@ class ParseDate {
           minute +
           " " +
           b.day.toString() +
-          "  " +
+          "/" +
           b.month.toString() +
-          ", " +
+          "/" +
           b.year.toString();
     }
     return createdTemp;

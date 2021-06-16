@@ -348,7 +348,7 @@ class _HeaderHomeState extends State<HeaderHome> {
               borderRadius: BorderRadius.circular(50),
             ),
             child: Text(
-              'Bạn đang nghĩ gì?',
+              'What do you think now?',
               style: TextStyle(
                 color: Colors.black,
               ),

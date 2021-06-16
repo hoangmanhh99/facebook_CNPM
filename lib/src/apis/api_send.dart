@@ -56,11 +56,11 @@ class ApiService {
         "/?" +
         "token=$token&described=$described&status=$status&state=$state&can_edit=$can_edit";
 
-    print(images.length);
+    print("Image length: " + images.length.toString());
     print(video);
     FormData image_form = new FormData.fromMap({'images': images});
     FormData video_form = new FormData.fromMap({'video': video});
-    FormData formData = asset_type == "images" ? image_form : video_form;
+    FormData formData = asset_type == "image" ? image_form : video_form;
     print(asset_type);
 
     try {

@@ -28,7 +28,7 @@ class CreatePostController {
     PostModel post;
     try {
       await ApiService.createPost(await StorageUtil.getToken(), images, video,
-          described, status, state, can_edit, asset_type)
+              described, status, state, can_edit, asset_type)
           .then((val) async {
         if (val["code"] == 1000) {
           var json = await val["data"];

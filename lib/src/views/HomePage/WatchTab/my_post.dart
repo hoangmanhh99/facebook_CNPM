@@ -199,5 +199,5 @@ class _ProfilePostState extends State<ProfilePost>
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => throw UnimplementedError();
+  bool get wantKeepAlive => true;
 }

@@ -87,10 +87,6 @@ class _ProfilePageState extends State<ProfilePage>
 
   final usernameTextFieldController = TextEditingController();
 
-
-
-
-
   bool isLoadingParent = false;
   List<PostModel> listPostReturn = new List();
 
@@ -104,22 +100,22 @@ class _ProfilePageState extends State<ProfilePage>
     });
 
     StorageUtil.getUserInfo().then((value) => setState(() {
-      myProfile = value;
-    }));
+          myProfile = value;
+        }));
 
     StorageUtil.getUid().then((value) => setState(() {
-      user_id = value;
-    }));
+          user_id = value;
+        }));
 
     StorageUtil.getUsername().then((value) => setState(() {
-      username = value != null ? value : "Người dùng Fakebook";
-    }));
+          username = value != null ? value : "Facebook User";
+        }));
     StorageUtil.getAvatar().then((value) => setState(() {
-      avatar = value;
-    }));
+          avatar = value;
+        }));
     StorageUtil.getCoverImage().then((value) => setState(() {
-      cover_image = value;
-    }));
+          cover_image = value;
+        }));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
       setState(() => isLoading = true);
@@ -167,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage>
       {Function(dynamic) onSuccess, Function(String) onError}) async {
     try {
       await FetchData.getUserInfo(
-          await StorageUtil.getToken(), await StorageUtil.getUid())
+              await StorageUtil.getToken(), await StorageUtil.getUid())
           .then((value) {
         if (value.statusCode == 200) {
           var val = jsonDecode(value.body);
@@ -236,7 +232,7 @@ class _ProfilePageState extends State<ProfilePage>
             });
             await StorageUtil.setAvatar(responseJson["data"]["avatar"]);
             Flushbar(
-              message: "Thay đổi ảnh thành công",
+              message: "Change photo successful",
               duration: Duration(seconds: 3),
             )..show(context);
           }
@@ -248,7 +244,7 @@ class _ProfilePageState extends State<ProfilePage>
             await StorageUtil.setCoverImage(
                 responseJson["data"]["cover_image"]);
             Flushbar(
-              message: "Thay đổi ảnh thành công",
+              message: "Change photo successful",
               duration: Duration(seconds: 3),
             )..show(context);
           }
@@ -295,7 +291,7 @@ class _ProfilePageState extends State<ProfilePage>
             children: [
               Icon(Icons.search),
               Text(
-                'Tìm kiếm trong bài viết, ảnh ...',
+                'Search in posts, photos ...',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
@@ -359,31 +355,31 @@ class _ProfilePageState extends State<ProfilePage>
                                                           MaterialButton(
                                                             onPressed: () {},
                                                             color:
-                                                            Color.fromARGB(
-                                                                255,
-                                                                224,
-                                                                228,
-                                                                228),
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    224,
+                                                                    228,
+                                                                    228),
                                                             textColor:
-                                                            Colors.white,
+                                                                Colors.white,
                                                             child: Icon(
                                                               Icons
                                                                   .image_rounded,
                                                               size: 18,
                                                               color:
-                                                              Colors.black,
+                                                                  Colors.black,
                                                             ),
                                                             // padding: EdgeInsets.all(10.0),
                                                             shape:
-                                                            CircleBorder(),
+                                                                CircleBorder(),
                                                           ),
-                                                          Text('Xem ảnh bìa',
+                                                          Text('View cover image',
                                                               style: TextStyle(
                                                                   fontSize:
-                                                                  16.0,
+                                                                      16.0,
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
+                                                                      FontWeight
+                                                                          .bold)),
                                                         ],
                                                       ),
                                                       onPressed: () {
@@ -408,31 +404,31 @@ class _ProfilePageState extends State<ProfilePage>
                                                           MaterialButton(
                                                             onPressed: () {},
                                                             color:
-                                                            Color.fromARGB(
-                                                                255,
-                                                                224,
-                                                                228,
-                                                                228),
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    224,
+                                                                    228,
+                                                                    228),
                                                             textColor:
-                                                            Colors.white,
+                                                                Colors.white,
                                                             child: Icon(
                                                               Icons
                                                                   .upload_rounded,
                                                               size: 28,
                                                               color:
-                                                              Colors.black,
+                                                                  Colors.black,
                                                             ),
                                                             // padding: EdgeInsets.all(0.0),
                                                             shape:
-                                                            CircleBorder(),
+                                                                CircleBorder(),
                                                           ),
-                                                          Text('Tải ảnh lên',
+                                                          Text('Upload photo',
                                                               style: TextStyle(
                                                                   fontSize:
-                                                                  16.0,
+                                                                      16.0,
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
+                                                                      FontWeight
+                                                                          .bold)),
                                                         ],
                                                       ),
                                                       onPressed: () async {
@@ -507,15 +503,15 @@ class _ProfilePageState extends State<ProfilePage>
                                                     // padding: EdgeInsets.all(10.0),
                                                     shape: CircleBorder(),
                                                   ),
-                                                  Text('Xem ảnh đại diện',
+                                                  Text('View avatar',
                                                       style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight:
-                                                          FontWeight.bold)),
+                                                              FontWeight.bold)),
                                                 ],
                                               ),
                                               onPressed: () {
-                                                if(avatar!="")
+                                                if (avatar != "")
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -547,11 +543,11 @@ class _ProfilePageState extends State<ProfilePage>
                                                     // padding: EdgeInsets.all(0.0),
                                                     shape: CircleBorder(),
                                                   ),
-                                                  Text('Chọn ảnh đại diện',
+                                                  Text('Choose avatar',
                                                       style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight:
-                                                          FontWeight.bold)),
+                                                              FontWeight.bold)),
                                                 ],
                                               ),
                                               onPressed: () async {
@@ -577,7 +573,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       ? NetworkImage(avatar)
                                       : AssetImage("assets/avatar.jpg")),
                               border:
-                              Border.all(color: Colors.white, width: 6.0)),
+                                  Border.all(color: Colors.white, width: 6.0)),
                         ),
                       ),
                       Container(
@@ -625,12 +621,12 @@ class _ProfilePageState extends State<ProfilePage>
                                                       // padding: EdgeInsets.all(10.0),
                                                       shape: CircleBorder(),
                                                     ),
-                                                    Text('Xem ảnh đại diện',
+                                                    Text('View avatar',
                                                         style: TextStyle(
                                                             fontSize: 16.0,
                                                             fontWeight:
-                                                            FontWeight
-                                                                .bold)),
+                                                                FontWeight
+                                                                    .bold)),
                                                   ],
                                                 ),
                                                 onPressed: () {
@@ -665,12 +661,12 @@ class _ProfilePageState extends State<ProfilePage>
                                                       // padding: EdgeInsets.all(0.0),
                                                       shape: CircleBorder(),
                                                     ),
-                                                    Text('Chọn ảnh đại diện',
+                                                    Text('Choose avatar',
                                                         style: TextStyle(
                                                             fontSize: 16.0,
                                                             fontWeight:
-                                                            FontWeight
-                                                                .bold)),
+                                                                FontWeight
+                                                                    .bold)),
                                                   ],
                                                 ),
                                                 onPressed: () async {
@@ -701,7 +697,7 @@ class _ProfilePageState extends State<ProfilePage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  username ?? "Người dùng Fakebook",
+                  username ?? "Fakebook user",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 )
               ],
@@ -723,9 +719,9 @@ class _ProfilePageState extends State<ProfilePage>
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(5.0))),
+                                BorderRadius.all(Radius.circular(5.0))),
                         label: Text(
-                          'Thêm vào tin',
+                          'Add to story',
                           style: TextStyle(color: Colors.white),
                         ),
                         icon: Icon(
@@ -747,7 +743,7 @@ class _ProfilePageState extends State<ProfilePage>
                         height: 39.0,
                         shape: RoundedRectangleBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(5.0))),
+                                BorderRadius.all(Radius.circular(5.0))),
                         onPressed: () => {_personalPageSetting()},
                         color: Colors.black12,
                         child: Column(
@@ -773,80 +769,80 @@ class _ProfilePageState extends State<ProfilePage>
               children: <Widget>[
                 nghenghiep != null
                     ? Row(
-                  children: <Widget>[
-                    Icon(Icons.work),
-                    SizedBox(width: 12.0),
-                    Text(
-                      'Nghề nghiệp ',
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    Text(
-                      nghenghiep,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
+                        children: <Widget>[
+                          Icon(Icons.work),
+                          SizedBox(width: 12.0),
+                          Text(
+                            'Job ',
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                          Text(
+                            nghenghiep,
+                            style: TextStyle(
+                                fontSize: 14.0, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
                     : SizedBox.shrink(),
                 SizedBox(
                   height: 10.0,
                 ),
                 songtai != null
                     ? Row(
-                  children: <Widget>[
-                    Icon(Icons.house),
-                    SizedBox(width: 12.0),
-                    Text(
-                      'Sống tại ',
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    Text(
-                      songtai,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
+                        children: <Widget>[
+                          Icon(Icons.house),
+                          SizedBox(width: 12.0),
+                          Text(
+                            'Live at ',
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                          Text(
+                            songtai,
+                            style: TextStyle(
+                                fontSize: 14.0, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
                     : SizedBox.shrink(),
                 SizedBox(
                   height: 10.0,
                 ),
                 hoctai != null
                     ? Row(
-                  children: <Widget>[
-                    Icon(Icons.school),
-                    SizedBox(width: 12.0),
-                    Text(
-                      'Học tại ',
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    Text(
-                      hoctai,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
+                        children: <Widget>[
+                          Icon(Icons.school),
+                          SizedBox(width: 12.0),
+                          Text(
+                            'Study at ',
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                          Text(
+                            hoctai,
+                            style: TextStyle(
+                                fontSize: 14.0, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
                     : SizedBox.shrink(),
                 SizedBox(
                   height: 10.0,
                 ),
                 dentu != null
                     ? Row(
-                  children: <Widget>[
-                    Icon(Icons.location_on),
-                    SizedBox(width: 12.0),
-                    Text(
-                      'Đến từ ',
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    Text(
-                      dentu,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
+                        children: <Widget>[
+                          Icon(Icons.location_on),
+                          SizedBox(width: 12.0),
+                          Text(
+                            'Come from ',
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                          Text(
+                            dentu,
+                            style: TextStyle(
+                                fontSize: 14.0, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
                     : SizedBox.shrink(),
                 SizedBox(
                   height: 10.0,
@@ -856,7 +852,7 @@ class _ProfilePageState extends State<ProfilePage>
                     Icon(Icons.more_horiz),
                     SizedBox(width: 12.0),
                     Text(
-                      'Xem thông tin giới thiệu của bạn ',
+                      'View your referral information',
                       style: TextStyle(fontSize: 14.0),
                     ),
                   ],
@@ -870,7 +866,7 @@ class _ProfilePageState extends State<ProfilePage>
                       child: FlatButton(
                         height: 37.0,
                         child: Text(
-                          'Chỉnh sửa chi tiết công khai',
+                          'Edit public details',
                           style: TextStyle(color: Colors.blue),
                         ),
                         color: Color.fromARGB(205, 200, 223, 247),
@@ -899,7 +895,7 @@ class _ProfilePageState extends State<ProfilePage>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Bạn bè',
+                      'Friends',
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
@@ -909,9 +905,9 @@ class _ProfilePageState extends State<ProfilePage>
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       child: Text(
-                        'Tìm bạn bè',
+                        'Find friend',
                         style:
-                        TextStyle(fontSize: 15.0, color: Colors.blueAccent),
+                            TextStyle(fontSize: 15.0, color: Colors.blueAccent),
                       ),
                       onPressed: () {
                         _FriendsRequest();
@@ -923,8 +919,8 @@ class _ProfilePageState extends State<ProfilePage>
                   children: <Widget>[
                     Text(
                       numberOfFriends != null
-                          ? numberOfFriends + ' người bạn'
-                          : '0 người bạn',
+                          ? numberOfFriends + ' friends'
+                          : '0 friend',
                       style: TextStyle(fontSize: 16.0, color: Colors.black54),
                     ),
                   ],
@@ -966,7 +962,7 @@ class _ProfilePageState extends State<ProfilePage>
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),
               minWidth: MediaQuery.of(context).size.width * 0.91,
-              child: Text('Xem tất cả bạn bè'),
+              child: Text('View all friends'),
               onPressed: () {
                 _ViewAllFriends();
               },
@@ -989,7 +985,7 @@ class _ProfilePageState extends State<ProfilePage>
                       width: 15.0,
                     ),
                     Text(
-                      'Bài viết',
+                      'Posts',
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     )
@@ -1014,16 +1010,18 @@ class _ProfilePageState extends State<ProfilePage>
                                     ? NetworkImage(avatar)
                                     : AssetImage("assets/avatar.jpg")),
                             border:
-                            Border.all(color: Colors.white, width: 1.0)),
+                                Border.all(color: Colors.white, width: 1.0)),
                       ),
-                      Text('Bạn đang nghĩ gì?',
+                      Text('What do you think now?',
                           style:
-                          TextStyle(fontSize: 14.0, color: Colors.black54)),
+                              TextStyle(fontSize: 14.0, color: Colors.black54)),
                     ],
                   ),
                   onPressed: () {
-                    CreatePostController createPostController = new CreatePostController();
-                    Navigator.pushNamed(context, "create_post").then((value) async {
+                    CreatePostController createPostController =
+                        new CreatePostController();
+                    Navigator.pushNamed(context, "create_post")
+                        .then((value) async {
                       if (value != null) {
                         setState(() {
                           isLoading = true;
@@ -1031,13 +1029,13 @@ class _ProfilePageState extends State<ProfilePage>
                         Map<String, dynamic> postReturn = value;
                         createPostController
                             .onSubmitCreatePost(
-                            images: postReturn["images"],
-                            video: postReturn["video"],
-                            described: postReturn["described"],
-                            status: postReturn["status"],
-                            state: postReturn["state"],
-                            can_edit: postReturn["can_edit"],
-                            asset_type: postReturn["asset_type"])
+                                images: postReturn["images"],
+                                video: postReturn["video"],
+                                described: postReturn["described"],
+                                status: postReturn["status"],
+                                state: postReturn["state"],
+                                can_edit: postReturn["can_edit"],
+                                asset_type: postReturn["asset_type"])
                             .then((val) {
                           setState(() {
                             isLoadingParent = false;
@@ -1061,7 +1059,10 @@ class _ProfilePageState extends State<ProfilePage>
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10.0, 0, 20.0),
-            child: new ProfilePost(list: listPostReturn, isLoadingParent: isLoadingParent,),
+            child: new ProfilePost(
+              list: listPostReturn,
+              isLoadingParent: isLoadingParent,
+            ),
           )
         ],
       ),
@@ -1080,7 +1081,7 @@ class _ProfilePageState extends State<ProfilePage>
                   color: Colors.black,
                 ),
                 title: new Text(
-                  'Cài đặt trang cá nhân',
+                  'Setting profile',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 21.0,
@@ -1105,7 +1106,7 @@ class _ProfilePageState extends State<ProfilePage>
                           width: 10.0,
                         ),
                         Text(
-                          'Chỉnh sửa trang cá nhân',
+                          'Edit profile',
                           style: TextStyle(fontSize: 16.0),
                         )
                       ],
@@ -1126,7 +1127,7 @@ class _ProfilePageState extends State<ProfilePage>
                           width: 10.0,
                         ),
                         Text(
-                          'Tìm kiếm trên trang cá nhân',
+                          'Search on personal page',
                           style: TextStyle(fontSize: 16.0),
                         )
                       ],
@@ -1141,7 +1142,7 @@ class _ProfilePageState extends State<ProfilePage>
                     alignment: Alignment.topLeft,
                     margin: EdgeInsets.only(left: 17.0, top: 10.0),
                     child: Text(
-                      'Liên kết đến trang cá nhân của bạn',
+                      'Your own link on Facebook.',
                       style: TextStyle(
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
@@ -1149,7 +1150,7 @@ class _ProfilePageState extends State<ProfilePage>
                   Container(
                     alignment: Alignment.topLeft,
                     margin: EdgeInsets.only(left: 17.0, top: 10.0, bottom: 5.0),
-                    child: Text('Liên kết của riêng bạn trên FaceBook.'),
+                    child: Text('Your own link on Facebook.'),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 5.0, right: 5.0),
@@ -1175,7 +1176,7 @@ class _ProfilePageState extends State<ProfilePage>
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             side: BorderSide(color: Colors.black)),
-                        child: Text('Sao chép liên kết'),
+                        child: Text('Copy link'),
                       )),
                 ],
               ),
@@ -1194,7 +1195,7 @@ class _ProfilePageState extends State<ProfilePage>
                   color: Colors.black,
                 ),
                 title: new Text(
-                  'Chỉnh sửa trang cá nhân',
+                  'Edit profile',
                   style: TextStyle(color: Colors.black, fontSize: 19.0),
                 ),
                 backgroundColor: Colors.white,
@@ -1209,7 +1210,7 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Ảnh đại diện',
+                              'Avatar',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
@@ -1218,7 +1219,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 pickImage("avatar");
                               },
                               child: Text(
-                                'Chỉnh sửa',
+                                'Edit',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1248,7 +1249,7 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Ảnh bìa',
+                              'Cover image',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
@@ -1257,7 +1258,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 pickImage("cover_image");
                               },
                               child: Text(
-                                'Chỉnh sửa',
+                                'Edit',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1269,7 +1270,7 @@ class _ProfilePageState extends State<ProfilePage>
                           height: 200.0,
                           decoration: BoxDecoration(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
+                                  BorderRadius.all(Radius.circular(10.0)),
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: cover_image != null
@@ -1288,13 +1289,13 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Thông tin cá nhân',
+                              'Personal information',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
                             FlatButton(
                               onPressed: () async {
-                                print("chỉnh sửa chi tiết");
+                                print("Edit detail");
                                 var token = await StorageUtil.getToken();
                                 Response response;
                                 Dio dio = new Dio();
@@ -1314,7 +1315,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 }
                               },
                               child: Text(
-                                'Chỉnh sửa',
+                                'Edit',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1330,7 +1331,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.work),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Tên hiển thị:',
+                                    'Display name:',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1361,13 +1362,13 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Bảo mật',
+                              'Security',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
                             FlatButton(
                               onPressed: () async {
-                                print("thay đổi password");
+                                print("Change password");
                                 var token = await StorageUtil.getToken();
                                 Response response;
                                 Dio dio = new Dio();
@@ -1383,19 +1384,19 @@ class _ProfilePageState extends State<ProfilePage>
                                 print(response);
                                 if (response.data["code"] == 1000) {
                                   Flushbar(
-                                    message: "Thay đổi mật khẩu thành công",
+                                    message: "Password change successful",
                                     duration: Duration(seconds: 3),
                                   )..show(context);
                                 } else {
                                   Flushbar(
                                     message:
-                                    "Thay đổi mật khẩu không thành công",
+                                        "Password change failed",
                                     duration: Duration(seconds: 3),
                                   )..show(context);
                                 }
                               },
                               child: Text(
-                                'Chỉnh sửa',
+                                'Edit',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1411,7 +1412,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.house),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Mật khẩu cũ',
+                                    'Old password',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1423,7 +1424,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     fontSize: 18, color: Colors.black),
                                 obscureText: !_showPass,
                                 decoration: InputDecoration(
-                                  hintText: "Mật khẩu cũ",
+                                  hintText: "Old password",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   prefixIcon: Icon(Icons.lock_outline,
                                       color: Color(0xff888888)),
@@ -1458,7 +1459,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.house),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Mật khẩu mới',
+                                    'New password',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1470,7 +1471,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     fontSize: 18, color: Colors.black),
                                 obscureText: !_showPass,
                                 decoration: InputDecoration(
-                                  hintText: "Mật khẩu mới",
+                                  hintText: "New password",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   prefixIcon: Icon(Icons.lock_outline,
                                       color: Color(0xff888888)),
@@ -1505,7 +1506,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.house),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Nhắc lại mật khẩu',
+                                    'Confirm password',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1517,7 +1518,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     fontSize: 18, color: Colors.black),
                                 obscureText: !_showPass,
                                 decoration: InputDecoration(
-                                  hintText: "Nhắc lại mật khẩu",
+                                  hintText: "Confirm password",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   prefixIcon: Icon(Icons.lock_outline,
                                       color: Color(0xff888888)),
@@ -1561,13 +1562,13 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Chi tiết',
+                              'Detail',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
                             FlatButton(
                               onPressed: () async {
-                                print("chỉnh sửa chi tiết");
+                                print("Edit detail");
                                 var token = await StorageUtil.getToken();
                                 Response response;
                                 Dio dio = new Dio();
@@ -1590,7 +1591,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 }
                               },
                               child: Text(
-                                'Chỉnh sửa',
+                                'Edit',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1606,7 +1607,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.work),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Nghề nghiệp:',
+                                    'Job:',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1615,7 +1616,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 controller: ngheNghiepTextFieldController
                                   ..text = nghenghiep ?? "",
                                 decoration: InputDecoration(
-                                  hintText: 'Bác sĩ',
+                                  hintText: 'Doctor',
                                 ),
                                 // onChanged: (text) => {
                                 //   setState(() {
@@ -1628,7 +1629,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.house),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Sống tại:',
+                                    'Live at:',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1650,7 +1651,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.school),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Học tại:',
+                                    'Study at:',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1672,7 +1673,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   Icon(Icons.location_on),
                                   SizedBox(width: 12.0),
                                   Text(
-                                    'Đến từ:',
+                                    'Come from:',
                                     style: TextStyle(fontSize: 14.0),
                                   ),
                                 ],
@@ -1703,14 +1704,14 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Sở thích',
+                              'Hobbies',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
                             FlatButton(
                               onPressed: () {},
                               child: Text(
-                                'Thêm',
+                                'Add',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1728,14 +1729,14 @@ class _ProfilePageState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Liên kết',
+                              'Link',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
                             FlatButton(
                               onPressed: () {},
                               child: Text(
-                                'Thêm',
+                                'Add',
                                 style: TextStyle(
                                     color: Colors.blue, fontSize: 16.0),
                               ),
@@ -1755,13 +1756,13 @@ class _ProfilePageState extends State<ProfilePage>
                           child: RaisedButton.icon(
                             elevation: 0,
                             onPressed: () {
-                              print('Click chỉnh sửa thông tin giới thiệu');
+                              print('Click to edit referral information');
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(5.0))),
+                                    BorderRadius.all(Radius.circular(5.0))),
                             label: Text(
-                              'Chỉnh sửa thông tin giới thiệu',
+                              'Edit referral information',
                               style: TextStyle(color: Colors.blue),
                             ),
                             icon: Icon(
@@ -1820,7 +1821,7 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                   Center(
                     child: Text(
-                      'Bạn đang tìm gì à?',
+                      'What are you looking for?',
                       style: TextStyle(
                           fontSize: 17.0, fontWeight: FontWeight.bold),
                     ),
@@ -1828,7 +1829,7 @@ class _ProfilePageState extends State<ProfilePage>
                   Container(
                     margin: EdgeInsets.only(right: 65.0, left: 65.0, top: 20.0),
                     child: Text(
-                      'Tìm kiếm trên trang cá nhân của THE MATRIX để xem bài viết, ảnh và các hoạt động hiển thị khác.',
+                      '''Search THE MATRIX's profile for articles, photos and other display activities.''',
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -1892,7 +1893,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 children: [
                                   FlatButton(
                                     child: Text(
-                                      'Tất cả',
+                                      'All',
                                       style: TextStyle(color: Colors.blue),
                                     ),
                                     onPressed: () {
@@ -1916,7 +1917,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 children: [
                                   FlatButton(
                                     child: Text(
-                                      'Gần đây',
+                                      'Recent',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     onPressed: () {
@@ -1946,7 +1947,7 @@ class _ProfilePageState extends State<ProfilePage>
                             child: TextField(
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(fontSize: 14),
-                                hintText: 'Tìm kiếm bạn bè',
+                                hintText: 'Find friends',
                                 prefixIcon: Icon(Icons.search),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
@@ -1963,8 +1964,8 @@ class _ProfilePageState extends State<ProfilePage>
                             children: [
                               Text(
                                 numberOfFriends != null
-                                    ? numberOfFriends + ' người bạn'
-                                    : '0 người bạn',
+                                    ? numberOfFriends + ' friends'
+                                    : '0 friend',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 19.0),
@@ -1976,17 +1977,17 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                     Expanded(
                       child: GridView(
-                        // children: friends
-                        //     .map((eachFriend) => FriendItemViewAll(
-                        //     friend_item_ViewAll: eachFriend))
-                        //     .toList(),
-                        // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        //     maxCrossAxisExtent:
-                        //     MediaQuery.of(context).size.width * 1,
-                        //     childAspectRatio: 8 / 2,
-                        //     crossAxisSpacing: 10,
-                        //     mainAxisSpacing: 10),
-                      ),
+                          // children: friends
+                          //     .map((eachFriend) => FriendItemViewAll(
+                          //     friend_item_ViewAll: eachFriend))
+                          //     .toList(),
+                          // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          //     maxCrossAxisExtent:
+                          //     MediaQuery.of(context).size.width * 1,
+                          //     childAspectRatio: 8 / 2,
+                          //     crossAxisSpacing: 10,
+                          //     mainAxisSpacing: 10),
+                          ),
                     )
                   ],
                 ))));
@@ -2004,7 +2005,7 @@ class _ProfilePageState extends State<ProfilePage>
                     color: Colors.black,
                   ),
                   title: Text(
-                    'Lời mời kết bạn',
+                    'Friend request',
                     style: TextStyle(color: Colors.black, fontSize: 18.0),
                   ),
                   centerTitle: true,
@@ -2041,12 +2042,12 @@ class _ProfilePageState extends State<ProfilePage>
                                                   ),
                                                   Container(
                                                     width:
-                                                    MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                        0.75,
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.75,
                                                     child: Text(
-                                                        'Xem lời mời đã gửi',
+                                                        'View sent requests',
                                                         style: TextStyle(
                                                             fontSize: 16.0)),
                                                   )
@@ -2070,14 +2071,14 @@ class _ProfilePageState extends State<ProfilePage>
                   children: [
                     Container(
                       margin:
-                      EdgeInsets.only(left: 15.0, top: 12.0, bottom: 15.0),
+                          EdgeInsets.only(left: 15.0, top: 12.0, bottom: 15.0),
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Lời mời kết bạn',
+                                'Friend request',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0),
@@ -2113,15 +2114,15 @@ class _ProfilePageState extends State<ProfilePage>
                                                             ),
                                                             Container(
                                                               width: MediaQuery.of(
-                                                                  context)
-                                                                  .size
-                                                                  .width *
+                                                                          context)
+                                                                      .size
+                                                                      .width *
                                                                   0.75,
                                                               child: Text(
-                                                                  'Mặc định',
+                                                                  'Default',
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                      16.0)),
+                                                                          16.0)),
                                                             )
                                                           ],
                                                         ),
@@ -2147,15 +2148,15 @@ class _ProfilePageState extends State<ProfilePage>
                                                             ),
                                                             Container(
                                                               width: MediaQuery.of(
-                                                                  context)
-                                                                  .size
-                                                                  .width *
+                                                                          context)
+                                                                      .size
+                                                                      .width *
                                                                   0.75,
                                                               child: Text(
-                                                                  'Lời mời mới nhất trước tiên',
+                                                                  'Latest Invitation First',
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                      16.0)),
+                                                                          16.0)),
                                                             )
                                                           ],
                                                         ),
@@ -2181,15 +2182,15 @@ class _ProfilePageState extends State<ProfilePage>
                                                             ),
                                                             Container(
                                                               width: MediaQuery.of(
-                                                                  context)
-                                                                  .size
-                                                                  .width *
+                                                                          context)
+                                                                      .size
+                                                                      .width *
                                                                   0.75,
                                                               child: Text(
-                                                                  'Lời mời cũ nhất trước tiên',
+                                                                  'Oldest Invitation First',
                                                                   style: TextStyle(
                                                                       fontSize:
-                                                                      16.0)),
+                                                                          16.0)),
                                                             )
                                                           ],
                                                         ),
@@ -2203,7 +2204,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       });
                                 },
                                 child: Text(
-                                  'Sắp xếp',
+                                  'Sort',
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 16.0),
                                 ),
@@ -2215,21 +2216,21 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                     requestedFriends != null && requestedFriends.length > 0
                         ? Expanded(
-                      child: GridView(
-                        // children: requestedFriends
-                        //     .map((eachFriend) => FriendRequestItem(
-                        //     friend_request_item: eachFriend))
-                        //     .toList(),
-                        // gridDelegate:
-                        // SliverGridDelegateWithMaxCrossAxisExtent(
-                        //     maxCrossAxisExtent:
-                        //     MediaQuery.of(context).size.width * 1,
-                        //     childAspectRatio: 8 / 2.2,
-                        //     crossAxisSpacing: 10,
-                        //     mainAxisSpacing: 10),
-                      ),
-                    )
-                        : Text("Hiện chưa có lời mời kết bạn nào")
+                            child: GridView(
+                                // children: requestedFriends
+                                //     .map((eachFriend) => FriendRequestItem(
+                                //     friend_request_item: eachFriend))
+                                //     .toList(),
+                                // gridDelegate:
+                                // SliverGridDelegateWithMaxCrossAxisExtent(
+                                //     maxCrossAxisExtent:
+                                //     MediaQuery.of(context).size.width * 1,
+                                //     childAspectRatio: 8 / 2.2,
+                                //     crossAxisSpacing: 10,
+                                //     mainAxisSpacing: 10),
+                                ),
+                          )
+                        : Text("There are currently no friend requests")
                   ],
                 ))));
   }

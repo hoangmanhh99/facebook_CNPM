@@ -391,7 +391,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
           Expanded(
               child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -408,6 +408,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     Flexible(
                         fit: FlexFit.loose,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RichText(
                                 text: TextSpan(
@@ -448,9 +449,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                         color: Colors.grey,
                                         size: 18,
                                       ),
-                                      SizedBox(width: 4,),
-                                      Text('Public', style: TextStyle(
-                                          fontWeight: FontWeight.w600, color: Colors.grey)),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text('Public',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey)),
                                       Icon(
                                         Icons.arrow_drop_down,
                                         color: Colors.grey,
@@ -475,8 +480,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                         Icons.add,
                                         color: Colors.grey,
                                       ),
-                                      Text("Album", style: TextStyle(
-                                          fontWeight: FontWeight.w600, color: Colors.grey)),
+                                      Text("Album",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey)),
                                       Icon(
                                         Icons.arrow_drop_down,
                                         color: Colors.grey,
@@ -578,7 +585,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   Widget build(BuildContext context) {
-    return can_post ? WillPopScope(child: Body(), onWillPop: _onBackPressed) : Body();
+    return can_post
+        ? WillPopScope(child: Body(), onWillPop: _onBackPressed)
+        : Body();
   }
 
   List<File> image_file = List<File>();
@@ -591,7 +600,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
   convertImageToString() async {
     for (int i = 0; i < images.length; i++) {
-      var path_image = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
+      var path_image =
+          await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
       var file = await getImageFileFromAsset(path_image);
       var base64Image = base64Encode(file.readAsBytesSync());
       images_convert_string.add(base64Image);
