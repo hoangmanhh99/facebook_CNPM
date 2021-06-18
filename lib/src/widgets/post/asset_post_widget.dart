@@ -2,6 +2,7 @@ import 'package:Facebook_cnpm/src/helpers/colors_constant.dart';
 import 'package:Facebook_cnpm/src/helpers/screen.dart';
 import 'package:Facebook_cnpm/src/models/post.dart';
 import 'package:Facebook_cnpm/src/views/HomePage/HomeTab/post_widget_controller.dart';
+import 'package:Facebook_cnpm/src/widgets/post/video_player.dart';
 import 'package:flutter/material.dart';
 
 class AssetPost extends StatefulWidget {
@@ -9,7 +10,7 @@ class AssetPost extends StatefulWidget {
   PostController controller;
   String username;
 
-  AssetPost(this.post, this.controller, this.username);
+  AssetPost({this.post, this.controller, this.username});
 
   @override
   _AssetPostState createState() => _AssetPostState();

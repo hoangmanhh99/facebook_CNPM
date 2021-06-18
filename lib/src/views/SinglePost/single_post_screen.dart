@@ -5,6 +5,7 @@ import 'package:Facebook_cnpm/src/views/HomePage/HomeTab/post_widget_controller.
 import 'package:Facebook_cnpm/src/widgets/post/footer_post_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/header_post_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/image_view.dart';
+import 'package:Facebook_cnpm/src/widgets/post/video_player.dart';
 import 'package:Facebook_cnpm/src/widgets/post/video_pro_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,7 +15,7 @@ class SinglePost extends StatefulWidget {
   PostController controller;
   String username;
 
-  SinglePost(this.post, this.controller, this.username);
+  SinglePost({this.post, this.controller, this.username});
 
   @override
   _SinglePostState createState() => _SinglePostState();
@@ -64,35 +65,50 @@ class _SinglePostState extends State<SinglePost> {
                       ],
                     ),
                 if (widget.post.video != null)
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChewieDemo(widget.post,
-                                      widget.controller, widget.username)));
-                        },
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Image.network(widget.post.video.thumb),
-                            Icon(
-                              Icons.play_circle_filled_rounded,
-                              color: kColorWhite,
-                              size: 120,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  )
+                  Column(children: [
+                    //     GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => ChewieDemo(widget.post,
+                    //                     widget.controller, widget.username)));
+                    //       },
+                    //       child: Stack(
+                    //         alignment: Alignment.center,
+                    //         children: [
+                    //           Image.network(widget.post.video.thumb),
+                    //           Icon(
+                    //             Icons.play_circle_filled_rounded,
+                    //             color: kColorWhite,
+                    //             size: 120,
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     )
+                    //   ],
+                    // )
+                    buildVideos(context),
+                    FooterPost(widget.post, widget.controller, widget.username)
+                  ])
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Visibility buildVideos(BuildContext context) {
+    bool isVisible = widget.post.video.url.isNotEmpty;
+    if (isVisible)
+      return Visibility(
+        visible: isVisible,
+        child: VideoPlayerWidget(widget.post.video.url),
+      );
+    return Visibility(
+      child: Container(),
+      visible: isVisible,
     );
   }
 }

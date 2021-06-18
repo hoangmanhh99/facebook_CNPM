@@ -53,7 +53,7 @@ class _PostWidgetState extends State<PostWidget> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SinglePost(
-                            widget.post, widget.controller, widget.username)));
+                            post: widget.post, controller: widget.controller, username: widget.username)));
               },
               child: HeaderPost(widget.post, widget.username)),
           Container(
@@ -69,9 +69,10 @@ class _PostWidgetState extends State<PostWidget> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SinglePost(
-                          widget.post, widget.controller, widget.username)));
+                          post: widget.post, controller: widget.controller, username: widget.username)));
+              print(widget.post.video.url);
             },
-            child: AssetPost(widget.post, widget.controller, widget.username),
+            child: AssetPost(post: widget.post, controller: widget.controller, username: widget.username),
           ),
           FooterPost(widget.post, widget.controller, widget.username)
         ],

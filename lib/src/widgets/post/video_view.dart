@@ -49,6 +49,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
+            print("tap play");
             if (_controller.value.isPlaying) {
               _controller.pause();
             } else {

@@ -4,6 +4,7 @@ import 'dart:core';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:Facebook_cnpm/src/widgets/post/video_player.dart';
 import 'package:dio/dio.dart';
 import 'package:Facebook_cnpm/src/helpers/colors_constant.dart';
 import 'package:Facebook_cnpm/src/helpers/screen.dart';
@@ -28,7 +29,7 @@ class CreatePostPage extends StatefulWidget {
 class _CreatePostPageState extends State<CreatePostPage> {
   FeelingAndActivity status;
   TextEditingController _controller;
-  List<Asset> images = List<Asset>();
+  var images = <Asset>[];
   File video;
   String video_convert_string = '';
   var video_thumbnail;
@@ -38,6 +39,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
   String avatar;
   String asset_type = '';
   bool can_post = false;
+  String pathVideo;
 
   void initState() {
     super.initState();
@@ -296,11 +298,14 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   // TODO: Load multi image
-  List<MultipartFile> image_list = new List<MultipartFile>();
+  var image_list = <MultipartFile>[];
 
   Future<void> loadAssets() async {
-    List<Asset> resultList = List<Asset>();
+    var resultList = <Asset>[];
     try {
+      resultList.clear();
+      image_list.clear();
+      images.clear();
       resultList = await MultiImagePicker.pickImages(
           maxImages: 4,
           enableCamera: true,
