@@ -10,7 +10,7 @@ class AssetPost extends StatefulWidget {
   PostController controller;
   String username;
 
-  AssetPost({this.post, this.controller, this.username});
+  AssetPost(this.post, this.controller, this.username);
 
   @override
   _AssetPostState createState() => _AssetPostState();

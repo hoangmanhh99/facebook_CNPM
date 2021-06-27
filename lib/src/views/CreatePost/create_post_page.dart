@@ -42,7 +42,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   String pathVideo;
 
   void initState() {
-    super.initState();
     _controller = TextEditingController();
     hintText = "What do you think now?";
     StorageUtil.getUsername().then((value) => setState(() {
@@ -51,6 +50,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     StorageUtil.getAvatar().then((value) => setState(() {
           avatar = value;
         }));
+    super.initState();
   }
 
   @override
@@ -123,7 +123,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         height: 75,
                         child: FlatButton(
                           onPressed: () {
-                            Navigator.popUntil(context, ModalRoute.withName('home_screen'));
+                            Navigator.popUntil(
+                                context, ModalRoute.withName('home_screen'));
                           },
                           child: Align(
                             alignment: Alignment.centerLeft,

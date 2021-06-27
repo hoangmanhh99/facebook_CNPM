@@ -15,7 +15,7 @@ class PostModel {
   String created;
   String modified;
   String like;
-  bool is_liked;
+  bool is_liked = false;
   String comment;
   AuthorPost author;
   List<ImagePost> image;

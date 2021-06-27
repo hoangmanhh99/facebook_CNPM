@@ -47,13 +47,13 @@ class _PostWidgetState extends State<PostWidget> {
       child: Column(
         children: <Widget>[
           FlatButton(
-            padding: EdgeInsets.all(0),
+              padding: EdgeInsets.all(0),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => SinglePost(
-                            post: widget.post, controller: widget.controller, username: widget.username)));
+                            widget.post, widget.controller, widget.username)));
               },
               child: HeaderPost(widget.post, widget.username)),
           Container(
@@ -69,10 +69,10 @@ class _PostWidgetState extends State<PostWidget> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SinglePost(
-                          post: widget.post, controller: widget.controller, username: widget.username)));
+                          widget.post, widget.controller, widget.username)));
               print(widget.post.video.url);
             },
-            child: AssetPost(post: widget.post, controller: widget.controller, username: widget.username),
+            child: AssetPost(widget.post, widget.controller, widget.username),
           ),
           FooterPost(widget.post, widget.controller, widget.username)
         ],

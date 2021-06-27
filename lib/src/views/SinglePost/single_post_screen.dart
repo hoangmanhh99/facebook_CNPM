@@ -15,7 +15,7 @@ class SinglePost extends StatefulWidget {
   PostController controller;
   String username;
 
-  SinglePost({this.post, this.controller, this.username});
+  SinglePost(this.post, this.controller, this.username);
 
   @override
   _SinglePostState createState() => _SinglePostState();
