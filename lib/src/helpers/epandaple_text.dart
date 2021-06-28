@@ -15,7 +15,7 @@ class ExpandableText extends StatefulWidget {
 }
 
 class _ExpandableTextState extends State<ExpandableText> {
-  String text;
+  late String text;
   bool canExpand = false;
   bool isExpand = false;
 
@@ -51,7 +51,7 @@ class _ExpandableTextState extends State<ExpandableText> {
   }
 }
 
-Text buildTextWithLinks(String textToLink, {String text}) =>
+Text buildTextWithLinks(String textToLink, {String? text}) =>
     Text.rich(TextSpan(children: linkify(textToLink)));
 
 Future<void> openUrl(String url) async {
@@ -84,7 +84,7 @@ WidgetSpan buildLinkComponent(String text, String linkToOpen) => WidgetSpan(
 
 List<InlineSpan> linkify(String text) {
   final List<InlineSpan> list = <InlineSpan>[];
-  final RegExpMatch match = linkRegExp.firstMatch(text);
+  final RegExpMatch? match = linkRegExp.firstMatch(text);
   if (match == null) {
     list.add(TextSpan(text: text));
     return list;
@@ -94,8 +94,8 @@ List<InlineSpan> linkify(String text) {
     list.add(TextSpan(text: text.substring(0, match.start)));
   }
 
-  final String linkText = match.group(0);
-  if (linkText.contains(RegExp(urlPattern, caseSensitive: false))) {
+  final String? linkText = match.group(0);
+  if (linkText!.contains(RegExp(urlPattern, caseSensitive: false))) {
     list.add(buildLinkComponent(linkText, linkText));
   } else if (linkText.contains(RegExp(emailPattern, caseSensitive: false))) {
     list.add(buildLinkComponent(linkText, 'mailto:$linkText'));

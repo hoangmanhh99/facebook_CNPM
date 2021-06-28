@@ -18,12 +18,12 @@ class WatchTab extends StatefulWidget {
 
 class _WatchTabState extends State<WatchTab>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  String username;
-  String avatar;
+  late String username;
+  String? avatar;
 
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
-  List<PostModel> listPostModel = new List();
+  List<PostModel> listPostModel = [];
   bool isLoading = false;
   NewFeedController newFeedController = new NewFeedController();
 
@@ -39,7 +39,7 @@ class _WatchTabState extends State<WatchTab>
           avatar = value;
         }));
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
       if (!mounted) return;
       setState(() => isLoading = true);
       await newFeedController.getListVideo(onSuccess: (values) {

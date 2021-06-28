@@ -10,7 +10,8 @@ class SignupPrivacy extends StatelessWidget {
 
     SignupController signupController = new SignupController();
 
-    UserModel userInput = ModalRoute.of(context).settings.arguments;
+    UserModel userInput =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -45,13 +46,13 @@ class SignupPrivacy extends StatelessWidget {
                   height: 56,
                   child: RaisedButton(
                     onPressed: () async {
-                      print(userInput.phone + " " + userInput.password);
+                      print(userInput.phone.toString() + " " + userInput.password!);
                       Dialogs.showLoadingDialog(
                           context, _keyLoader, "Registering");
                       var result = await signupController.onSubmitSignup(
                           user: userInput);
-                      Navigator.of(_keyLoader.currentContext,
-                          rootNavigator: true)
+                      Navigator.of(_keyLoader.currentContext as BuildContext,
+                              rootNavigator: true)
                           .pop();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           'signup_screen', ModalRoute.withName('login_screen'),

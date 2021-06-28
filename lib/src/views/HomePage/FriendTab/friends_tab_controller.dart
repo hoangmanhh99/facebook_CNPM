@@ -5,8 +5,8 @@ import 'package:Facebook_cnpm/src/helpers/shared_preferences.dart';
 
 class FriendController {
   Future<void> getFriendRequest(
-      {Function(List<dynamic>, List<dynamic>) onSuccess,
-        Function(String, String) onError}) async {
+      {required Function(List<dynamic>, List<dynamic>) onSuccess,
+        required Function(String, String) onError}) async {
     var requestedFriends = [];
     var suggestFriends = [];
     String token = await StorageUtil.getToken();

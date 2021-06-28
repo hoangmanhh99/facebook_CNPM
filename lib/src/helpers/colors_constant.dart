@@ -17,7 +17,7 @@ const Color kColorCyan = Color(0xff00AFF0);
 const Color kColorGreen = Color(0xff05A75B);
 
 class ColorInfo {
-  ColorInfo({this.id, this.color});
+  ColorInfo({required this.id, required this.color});
   int id;
   Color color;
 }

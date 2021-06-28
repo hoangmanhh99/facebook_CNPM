@@ -15,17 +15,17 @@ class CreatePostController {
   StreamController _addPost = new StreamController.broadcast();
   Stream get addPostStream => _addPost.stream;
 
-  String error;
+  late String error;
 
   Future<PostModel> onSubmitCreatePost(
-      {@required List<MultipartFile> images,
-      @required MultipartFile video,
-      @required String described,
-      @required String status,
-      @required String state,
-      @required bool can_edit,
-      @required String asset_type}) async {
-    PostModel post;
+      {required List<MultipartFile> images,
+      required MultipartFile video,
+      required String described,
+      required String status,
+      required String state,
+      required bool can_edit,
+      required String asset_type}) async {
+    PostModel? post;
     try {
       await ApiService.createPost(await StorageUtil.getToken(), images, video,
               described, status, state, can_edit, asset_type)
@@ -56,7 +56,7 @@ class CreatePostController {
     } catch (e) {
       print(e.toString());
     }
-    return post;
+    return post!;
   }
 
   void dispose() {

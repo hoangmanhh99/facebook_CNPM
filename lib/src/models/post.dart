@@ -5,20 +5,20 @@ import 'package:Facebook_cnpm/src/models/user.dart';
 import 'package:Facebook_cnpm/src/models/comment.dart';
 
 class PostModel {
-  VideoPost video;
-  List<CommentModel> comment_list;
-  List<LikePost> like_list;
-  String id;
-  String described;
-  String state;
-  String status;
-  String created;
-  String modified;
-  String like;
-  bool is_liked = false;
-  String comment;
-  AuthorPost author;
-  List<ImagePost> image;
+  VideoPost? video;
+  List<CommentModel>? comment_list;
+  List<LikePost>? like_list;
+  String? id;
+  String? described;
+  String? state;
+  String? status;
+  String? created;
+  String? modified;
+  String? like;
+  bool? is_liked = false;
+  String? comment;
+  AuthorPost? author;
+  List<ImagePost>? image;
 
   PostModel.empty();
 
@@ -58,11 +58,11 @@ class PostModel {
   }
 
   Map toJson() {
-    Map video = this.video != null ? this.video.toJson() : null;
-    Map author = this.author.toJson();
-    List<Map> comment_list = this.comment_list.map((i) => i.toJson()).toList();
-    List<Map> like_list = this.like_list.map((i) => i.toJson()).toList();
-    List<Map> image = this.image.map((i) => i.toJson()).toList();
+    Map? video = this.video != null ? this.video?.toJson() : null;
+    Map? author = this.author?.toJson();
+    List<Map> comment_list = this.comment_list!.map((i) => i.toJson()).toList();
+    List<Map> like_list = this.like_list!.map((i) => i.toJson()).toList();
+    List<Map> image = this.image!.map((i) => i.toJson()).toList();
 
     return {
       'video': video,

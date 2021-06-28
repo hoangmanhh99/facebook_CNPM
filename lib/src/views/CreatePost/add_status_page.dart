@@ -16,7 +16,7 @@ class StatusPage extends StatefulWidget {
 }
 
 class _StatusPageState extends State<StatusPage> with TickerProviderStateMixin {
-  TabController tabController;
+  late TabController tabController;
 
   List<FeelingAndActivity> list = [
     new FeelingAndActivity("hạnh phúc", "🙂"),
@@ -84,7 +84,7 @@ class _StatusPageState extends State<StatusPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    FeelingAndActivity status = ModalRoute.of(context).settings.arguments;
+    FeelingAndActivity? status = ModalRoute.of(context)?.settings.arguments as FeelingAndActivity?;
 
     tabController = new TabController(length: 2, vsync: this);
 

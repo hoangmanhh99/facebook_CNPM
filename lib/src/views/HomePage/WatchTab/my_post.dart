@@ -11,10 +11,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfilePost extends StatefulWidget {
   final userId;
-  final List<PostModel> list;
-  final bool isLoadingParent;
+  final List<PostModel>? list;
+  final bool? isLoadingParent;
 
-  const ProfilePost({Key key, this.userId, this.list, this.isLoadingParent})
+  const ProfilePost({Key? key, this.userId, this.list, this.isLoadingParent})
       : super(key: key);
 
   @override
@@ -23,12 +23,12 @@ class ProfilePost extends StatefulWidget {
 
 class _ProfilePostState extends State<ProfilePost>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  String username;
-  String avatar;
-  String uid;
+  late String username;
+  String? avatar;
+  String? uid;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
-  List<PostModel> listPostModel = new List();
+  List<PostModel> listPostModel = [];
   bool isLoading = false;
   NewFeedController newFeedController = new NewFeedController();
 
@@ -45,7 +45,7 @@ class _ProfilePostState extends State<ProfilePost>
           uid = value;
         }));
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
       var uid = await StorageUtil.getUid();
       if (!mounted) return;
       setState(() => isLoading = true);
@@ -104,7 +104,9 @@ class _ProfilePostState extends State<ProfilePost>
             itemCount: listPostModel.length,
             itemBuilder: (context, index) {
               return PostWidget(
-                  post: listPostModel[index], controller: new PostController(), username: username);
+                  post: listPostModel[index],
+                  controller: new PostController(),
+                  username: username);
             });
   }
 
@@ -116,7 +118,7 @@ class _ProfilePostState extends State<ProfilePost>
         child: SingleChildScrollView(
           child: Column(
             children: [
-              if (widget.userId == uid) buildPostReturn(),
+              if (widget.userId == uid) buildPostReturn()!,
               buildDemo()
             ],
           ),
@@ -124,11 +126,11 @@ class _ProfilePostState extends State<ProfilePost>
         onRefresh: _refresh);
   }
 
-  Widget buildPostReturn() {
+  Widget? buildPostReturn() {
     print(widget.isLoadingParent);
-    if (widget.list.isEmpty) {
+    if (widget.list!.isEmpty) {
       print(isLoading.toString() + "empty");
-      if (widget.isLoadingParent) {
+      if (widget.isLoadingParent!) {
         if (widget.isLoadingParent == true)
           return Container(
             margin: EdgeInsets.only(top: 8),
@@ -141,7 +143,7 @@ class _ProfilePostState extends State<ProfilePost>
                   radius: 20.0,
                   backgroundImage: avatar == null
                       ? AssetImage("assets/avatar.jpg")
-                      : NetworkImage(avatar),
+                      : NetworkImage(avatar!) as ImageProvider,
                 ),
                 SizedBox(
                   width: 7,
@@ -158,7 +160,7 @@ class _ProfilePostState extends State<ProfilePost>
       } else {
         return SizedBox.shrink();
       }
-    } else 
+    } else
       return Column(
         children: [
           if (widget.isLoadingParent == true)
@@ -173,7 +175,7 @@ class _ProfilePostState extends State<ProfilePost>
                     radius: 20.0,
                     backgroundImage: avatar == null
                         ? AssetImage("assets/avatar.jpg")
-                        : NetworkImage(avatar),
+                        : NetworkImage(avatar!) as ImageProvider,
                   ),
                   SizedBox(
                     width: 7,
@@ -189,8 +191,11 @@ class _ProfilePostState extends State<ProfilePost>
             ),
           Column(
             children: [
-              for (var i in widget.list)
-                PostWidget(post: i, controller: new PostController(), username: username)
+              for (var i in widget.list!)
+                PostWidget(
+                    post: i,
+                    controller: new PostController(),
+                    username: username)
             ],
           )
         ],

@@ -20,10 +20,10 @@ class MenuTab extends StatefulWidget {
 
 class _MenuTabState extends State<MenuTab> {
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
-  TabController _tabController;
+  late TabController _tabController;
   String username = '';
-  String avatar;
-  String uid;
+  String? avatar;
+  String? uid;
 
   @override
   void initState() {
@@ -89,14 +89,14 @@ class _MenuTabState extends State<MenuTab> {
                     radius: 25.0,
                     backgroundImage: avatar == null
                         ? AssetImage('assets/avatar.jpg')
-                        : NetworkImage(avatar),
+                        : NetworkImage(avatar!) as ImageProvider,
                   ),
                   SizedBox(width: 20.0),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(username ?? "",
+                      Text(username,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18.0)),
                       SizedBox(height: 5.0),
@@ -129,8 +129,8 @@ class _MenuTabState extends State<MenuTab> {
                       height: 85.0,
                       padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 1.0, color: Colors.grey[300]),
+                          border: Border.all(
+                              width: 1.0, color: Colors.grey[300] as Color),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -149,8 +149,8 @@ class _MenuTabState extends State<MenuTab> {
                       height: 85.0,
                       padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 1.0, color: Colors.grey[300]),
+                          border: Border.all(
+                              width: 1.0, color: Colors.grey[300] as Color),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -184,8 +184,8 @@ class _MenuTabState extends State<MenuTab> {
                       height: 85.0,
                       padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 1.0, color: Colors.grey[300]),
+                          border: Border.all(
+                              width: 1.0, color: Colors.grey[300] as Color),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -204,8 +204,8 @@ class _MenuTabState extends State<MenuTab> {
                       height: 85.0,
                       padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 1.0, color: Colors.grey[300]),
+                          border: Border.all(
+                              width: 1.0, color: Colors.grey[300] as Color),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -238,8 +238,8 @@ class _MenuTabState extends State<MenuTab> {
                       height: 85.0,
                       padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 1.0, color: Colors.grey[300]),
+                          border: Border.all(
+                              width: 1.0, color: Colors.grey[300] as Color),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -258,8 +258,8 @@ class _MenuTabState extends State<MenuTab> {
                       height: 85.0,
                       padding: EdgeInsets.only(left: 20.0),
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 1.0, color: Colors.grey[300]),
+                          border: Border.all(
+                              width: 1.0, color: Colors.grey[300] as Color),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -287,7 +287,8 @@ class _MenuTabState extends State<MenuTab> {
                     height: 85.0,
                     padding: EdgeInsets.only(left: 20.0),
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1.0, color: Colors.grey[300]),
+                        border: Border.all(
+                            width: 1.0, color: Colors.grey[300] as Color),
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -307,7 +308,8 @@ class _MenuTabState extends State<MenuTab> {
                     height: 85.0,
                     padding: EdgeInsets.only(left: 20.0),
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1.0, color: Colors.grey[300]),
+                        border: Border.all(
+                            width: 1.0, color: Colors.grey[300] as Color),
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -794,9 +796,9 @@ class _MenuTabState extends State<MenuTab> {
 }
 
 class SettingAndSupport extends StatelessWidget {
-  IconData icon_title;
-  String text_title;
-  List<Widget> children;
+  late IconData icon_title;
+  late String text_title;
+  late List<Widget> children;
 
   @override
   Widget build(BuildContext context) {

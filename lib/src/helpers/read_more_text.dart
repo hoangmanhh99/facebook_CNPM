@@ -9,19 +9,19 @@ enum TrimMode {
 class ReadMoreText1 extends StatefulWidget {
   const ReadMoreText1(
       this.data, {
-        Key key,
+        Key? key,
         this.trimExpandedText = ' read less',
         this.trimCollapsedText = ' ...read more',
-        this.colorClickableText,
+        required this.colorClickableText,
         this.trimLength = 240,
         this.trimLines = 2,
         this.trimMode = TrimMode.Length,
-        this.style,
-        this.textAlign,
-        this.textDirection,
-        this.locale,
-        this.textScaleFactor,
-        this.semanticsLabel,
+        required this.style,
+        required this.textAlign,
+        required this.textDirection,
+        required this.locale,
+        required this.textScaleFactor,
+        required this.semanticsLabel,
       })  : assert(data != null),
         super(key: key);
 
@@ -63,16 +63,16 @@ class ReadMoreTextState extends State<ReadMoreText1> {
     }
 
     final textAlign =
-        widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start;
-    final textDirection = widget.textDirection ?? Directionality.of(context);
+        widget.textAlign;
+    final textDirection = widget.textDirection;
     final textScaleFactor =
-        widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
+        widget.textScaleFactor;
     final overflow = defaultTextStyle.overflow;
     final locale =
-        widget.locale ?? Localizations.maybeLocaleOf(context);
+        widget.locale;
 
     final colorClickableText =
-        widget.colorClickableText ?? Theme.of(context).accentColor;
+        widget.colorClickableText;
 
     TextSpan link = TextSpan(
       text: _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
@@ -122,7 +122,7 @@ class ReadMoreTextState extends State<ReadMoreText1> {
             textSize.width - linkSize.width,
             textSize.height,
           ));
-          endIndex = textPainter.getOffsetBefore(pos.offset);
+          endIndex = textPainter.getOffsetBefore(pos.offset)!;
         }
         else {
           var pos = textPainter.getPositionForOffset(

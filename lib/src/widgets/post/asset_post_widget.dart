@@ -24,17 +24,17 @@ class _AssetPostState extends State<AssetPost> {
 
   @override
   Widget build(BuildContext context) {
-    return assetView();
+    return assetView()!;
   }
 
-  Widget assetView() {
+  Widget? assetView() {
     if (widget.post.video != null)
       return Padding(
         padding: EdgeInsets.all(ConstScreen.sizeDefault),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.network(widget.post.video.thumb),
+            Image.network(widget.post.video!.thumb),
             Icon(
               Icons.play_circle_fill_rounded,
               color: kColorWhite,
@@ -43,13 +43,13 @@ class _AssetPostState extends State<AssetPost> {
           ],
         ),
       );
-    if (widget.post.image.length != 0) {
-      switch (widget.post.image.length) {
+    if (widget.post.image?.length != 0) {
+      switch (widget.post.image!.length) {
         case 1:
           return Padding(
             padding: EdgeInsets.all(0),
             child: Image.network(
-              widget.post.image[0].url,
+              widget.post.image![0].url,
               fit: BoxFit.contain,
             ),
           );
@@ -59,11 +59,14 @@ class _AssetPostState extends State<AssetPost> {
             padding: EdgeInsets.all(0),
             shrinkWrap: true,
             physics: ScrollPhysics(),
-            children: List.generate(widget.post.image.length, (index) {
-              String asset = widget.post.image[index].url;
+            children: List.generate(widget.post.image!.length, (index) {
+              String asset = widget.post.image![index].url;
               return Padding(
-                padding: EdgeInsets.all(0),
-                child: Image.network(asset),
+                padding: EdgeInsets.all(3),
+                child: Image.network(
+                  asset,
+                  fit: BoxFit.fill,
+                ),
               );
             }),
           );
@@ -73,22 +76,30 @@ class _AssetPostState extends State<AssetPost> {
             child: Row(
               children: [
                 Container(
-                  height: 400,
+                  height: MediaQuery.of(context).size.width / 2.10 * 2 + 5,
                   width: MediaQuery.of(context).size.width / 2.15,
                   child: Image.network(
-                    widget.post.image[0].url,
-                    fit: BoxFit.contain,
+                    widget.post.image![0].url,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
                 SizedBox(
-                  width: 7,
+                  width: 5,
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width / 2.15,
+                  // height: MediaQuery.of(context).size.width / 2.15 * 2,
                   child: Column(
                     children: [
-                      Image.network(widget.post.image[1].url),
-                      Image.network(widget.post.image[2].url)
+                      Image.network(widget.post.image![1].url,
+                          fit: BoxFit.fitHeight,
+                          height: MediaQuery.of(context).size.width / 2.10),
+                      SizedBox(height: 5,),
+                      Image.network(
+                        widget.post.image![2].url,
+                        fit: BoxFit.fitHeight,
+                        height: MediaQuery.of(context).size.width / 2.10,
+                      )
                     ],
                   ),
                 )
@@ -101,14 +112,20 @@ class _AssetPostState extends State<AssetPost> {
             shrinkWrap: true,
             physics: ScrollPhysics(),
             padding: EdgeInsets.all(0),
-            children: List.generate(widget.post.image.length, (index) {
-              String asset = widget.post.image[index].url;
-              return Image.network(asset);
+            children: List.generate(widget.post.image!.length, (index) {
+              String asset = widget.post.image![index].url;
+              return Padding(
+                padding: EdgeInsets.all(3),
+                child: Image.network(
+                  asset,
+                  fit: BoxFit.fill,
+                ),
+              );
             }),
           );
       }
     }
-    if (widget.post.image.length == 0 && widget.post.video == null)
+    if (widget.post.image!.length == 0 && widget.post.video == null)
       return SizedBox.shrink();
   }
 }

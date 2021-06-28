@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<T> _showAlert<T>({BuildContext context, Widget child}) => showDialog<T>(
-  context: context,
-  barrierDismissible: false,
-  builder: (BuildContext context) => child,
-);
+Future<T?> _showAlert<T>(
+        {required BuildContext context, required Widget child}) =>
+    showDialog<T>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => child,
+    );
 
-
-Future<bool> showAlert(BuildContext context,
-    {String title,
-      String negativeText = "Cancel",
-      String positiveText = "Confirm",
-      bool onlyPositive = false}) =>
+Future<bool?> showAlert(BuildContext context,
+        {required String title,
+        String negativeText = "Cancel",
+        String positiveText = "Confirm",
+        bool onlyPositive = false}) =>
     _showAlert<bool>(
       context: context,
       child: CupertinoAlertDialog(
@@ -63,35 +64,34 @@ List<Widget> _buildAlertActions(BuildContext context, bool onlyPositive,
   }
 }
 
-
 Future _showLoadingDialog(BuildContext c, LoadingDialog loading,
-    {bool cancelable = true}) =>
+        {bool cancelable = true}) =>
     showDialog(
         context: c,
         barrierDismissible: cancelable,
         builder: (BuildContext c) => loading);
 
 class LoadingDialog extends CupertinoAlertDialog {
-  BuildContext parentContext;
-  BuildContext currentContext;
-  bool showing;
+  late BuildContext parentContext;
+  late BuildContext currentContext;
+  late bool showing;
   show(BuildContext context) {
     parentContext = context;
     showing = true;
-    _showLoadingDialog(context, this).then((_){
-      showing=false;
+    _showLoadingDialog(context, this).then((_) {
+      showing = false;
     });
   }
 
   hide() {
-    if(showing) {
-      Navigator.removeRoute(parentContext, ModalRoute.of(currentContext));
+    if (showing) {
+      Navigator.removeRoute(parentContext, ModalRoute.of(currentContext) as Route);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    currentContext= context;
+    currentContext = context;
     return WillPopScope(
       onWillPop: () => Future.value(true),
       child: LayoutBuilder(

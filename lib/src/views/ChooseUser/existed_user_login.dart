@@ -17,8 +17,8 @@ class _ExistUserLoginState extends State<ExistUserLogin> {
   LoginController loginController = new LoginController();
 
   bool isKeyboardOpen = false;
-  String username;
-  String avatar;
+  late String username;
+  String? avatar;
   String password = '';
   bool showPass = false;
 
@@ -54,7 +54,7 @@ class _ExistUserLoginState extends State<ExistUserLogin> {
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                WidgetsBinding.instance.window.viewInsets.bottom > 0.0
+                WidgetsBinding.instance!.window.viewInsets.bottom > 0.0
                     ? SizedBox.shrink()
                     : SizedBox(height: 180),
                 CircleAvatar(
@@ -62,12 +62,12 @@ class _ExistUserLoginState extends State<ExistUserLogin> {
                   radius: 45.0,
                   backgroundImage: avatar == null
                       ? AssetImage('assets/avatar.jpg')
-                      : NetworkImage(avatar),
+                      : NetworkImage(avatar!) as ImageProvider,
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Text(username ?? "hihi"),
+                Text(username),
                 SizedBox(
                   height: 30,
                 ),
@@ -118,7 +118,7 @@ class _ExistUserLoginState extends State<ExistUserLogin> {
                         var result = await loginController.onSubmitLogin(
                             phone: await StorageUtil.getPhone(), password: textController.text);
 
-                        Navigator.of(_keyLoader.currentContext,
+                        Navigator.of(_keyLoader.currentContext as BuildContext,
                             rootNavigator: true)
                             .pop(); //close the dialoge
 

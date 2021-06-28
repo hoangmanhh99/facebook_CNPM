@@ -18,11 +18,11 @@ class _LoggedUserState extends State<LoggedUser> with RouteAware {
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   LoginController loginController = new LoginController();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  ScaffoldState scaffold;
+  late ScaffoldState scaffold;
 
-  String username;
-  String avatar;
-  String password;
+  late String username;
+  String? avatar;
+  late String password;
 
   @override
   void initState() {
@@ -35,11 +35,11 @@ class _LoggedUserState extends State<LoggedUser> with RouteAware {
       avatar = value;
     }));
 
-    WidgetsBinding.instance.addPostFrameCallback(
-            (_) => routeObserver.subscribe(this, ModalRoute.of(context)));
+    WidgetsBinding.instance?.addPostFrameCallback(
+            (_) => routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute));
 
     Future.delayed(Duration.zero, () {
-      if (ModalRoute.of(context).settings.arguments == "home_screen") {
+      if (ModalRoute.of(context)?.settings.arguments == "home_screen") {
         Flushbar(
           message: "Log out successful",
           duration: Duration(seconds: 3),
@@ -79,7 +79,7 @@ class _LoggedUserState extends State<LoggedUser> with RouteAware {
                       var result = await loginController.onSubmitLogin(
                           phone: await StorageUtil.getPhone(),
                           password: await StorageUtil.getPassword());
-                      Navigator.of(_keyLoader.currentContext,
+                      Navigator.of(_keyLoader.currentContext as BuildContext,
                           rootNavigator: true)
                           .pop();
                       if (result != '') {
@@ -119,14 +119,14 @@ class _LoggedUserState extends State<LoggedUser> with RouteAware {
                         radius: 35.0,
                         backgroundImage: avatar == null
                             ? AssetImage('assets/avatar.jpg')
-                            : NetworkImage(avatar),
+                            : NetworkImage(avatar!) as ImageProvider,
                       ),
                       SizedBox(
                         width: 20,
                       ),
                       Expanded(
                           child: Text(
-                            username ?? "Facebook users",
+                            username,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           )),

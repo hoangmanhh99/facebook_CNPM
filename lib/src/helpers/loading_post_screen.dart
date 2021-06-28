@@ -8,8 +8,8 @@ class LoadingPost extends StatefulWidget {
 
 class _LoadingPostState extends State<LoadingPost>
     with TickerProviderStateMixin {
-  AnimationController animation;
-  Animation<double> _fadeInFadeOut;
+  late AnimationController animation;
+  late Animation<double> _fadeInFadeOut;
 
   @override
   void initState() {
@@ -167,7 +167,7 @@ class _LoadingPostState extends State<LoadingPost>
                       //value: 1,
                       strokeWidth: 0.8,
                       valueColor:
-                      new AlwaysStoppedAnimation<Color>(Colors.grey[400]),
+                      new AlwaysStoppedAnimation<Color>(Colors.grey[400] as Color),
                     )),
               )),
         ),
@@ -181,7 +181,7 @@ class _LoadingPostState extends State<LoadingPost>
                   height: 5,
                   child: CircularProgressIndicator(
                     valueColor:
-                    new AlwaysStoppedAnimation<Color>(Colors.grey[400]),
+                    new AlwaysStoppedAnimation<Color>(Colors.grey[400] as Color),
                   )),
             )),
       ],

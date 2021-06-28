@@ -42,23 +42,23 @@ class _CommentWidgetState extends State<CommentWidget>
 
   var myComment = "";
 
-  String username;
-  String avatar;
-  var myListComment = new List<CommentModel>();
+  late String username;
+  String? avatar;
+  var myListComment = <CommentModel>[];
 
   static const _pageSize = 2;
 
   final PagingController<int, CommentModel> _pagingController =
-  PagingController(firstPageKey: 0, invisibleItemsThreshold: 1);
+      PagingController(firstPageKey: 0, invisibleItemsThreshold: 1);
 
   @override
   void initState() {
     StorageUtil.getUsername().then((value) => setState(() {
-      username = value;
-    }));
+          username = value;
+        }));
     StorageUtil.getAvatar().then((value) => setState(() {
-      avatar = value;
-    }));
+          avatar = value;
+        }));
 
     _pagingController.addPageRequestListener((pageKey) {
       _fetchComment(pageKey);
@@ -67,20 +67,20 @@ class _CommentWidgetState extends State<CommentWidget>
   }
 
   List<CommentModel> parseComment(Map<String, dynamic> json) {
-    List<CommentModel> temp;
+    List<CommentModel>? temp;
     try {
       temp =
           (json['data'] as List).map((x) => CommentModel.fromJson(x)).toList();
     } catch (e) {
       print(e.toString());
     }
-    return temp;
+    return temp!;
   }
 
   Future<void> _fetchComment(int pageKey) async {
     try {
       await ApiService.getComment(
-          await StorageUtil.getToken(), widget.post.id, pageKey, _pageSize)
+              await StorageUtil.getToken(), widget.post.id!, pageKey, _pageSize)
           .then((val) {
         if (val["code"] == 1000) {
           final newItems = parseComment(val);
@@ -111,31 +111,40 @@ class _CommentWidgetState extends State<CommentWidget>
         // resizeToAvoidBottomPadding: true,
         body: widget.post.comment == "0"
             ? Column(
-          children: [
-            if (widget.post.like != "0") bottomSheetHeader(),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(top: 100),
-                child: Column(
-                  children: [
-                    Icon(Icons.mode_comment, size: 150, color: Colors.grey[200],),
-                    Text(
-                      "No comments", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: kColorGrey),),
-                    Text("Be the first to comment"),
-                  ],
-                ),
-              ),
-            ),
-            bottomSheetFooter(),
-          ],
-        )
+                children: [
+                  if (widget.post.like != "0") bottomSheetHeader(),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 100),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.mode_comment,
+                            size: 150,
+                            color: Colors.grey[200],
+                          ),
+                          Text(
+                            "No comments",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 20,
+                                color: kColorGrey),
+                          ),
+                          Text("Be the first to comment"),
+                        ],
+                      ),
+                    ),
+                  ),
+                  bottomSheetFooter(),
+                ],
+              )
             : Column(
-          children: [
-            bottomSheetHeader(),
-            Expanded(child: bottomSheetComment(context)),
-            bottomSheetFooter(),
-          ],
-        ),
+                children: [
+                  bottomSheetHeader(),
+                  Expanded(child: bottomSheetComment(context)),
+                  bottomSheetFooter(),
+                ],
+              ),
         //bottomSheet: bottomSheetFooter(),
       ),
     );
@@ -170,26 +179,26 @@ class _CommentWidgetState extends State<CommentWidget>
                             SizedBox(
                               width: 2,
                             ),
-                            data1
+                            data1 != null
                                 ? data2 == "1"
-                                ? Text(
-                              widget.username,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: kColorBlack),
-                            )
-                                : Text(
-                              "You and " +
-                                  "${int.parse(data2) - 1}" +
-                                  " other people",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: kColorBlack),
-                            )
-                                : Text(data2,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    color: kColorBlack)),
+                                    ? Text(
+                                        widget.username,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            color: kColorBlack),
+                                      )
+                                    : Text(
+                                        "You and " +
+                                            "${int.parse(data2.toString()) - 1}" +
+                                            " other people",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            color: kColorBlack),
+                                      )
+                                : Text(data2.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        color: kColorBlack)),
                             SizedBox(
                               width: 8,
                             ),
@@ -201,20 +210,20 @@ class _CommentWidgetState extends State<CommentWidget>
                         ),
                         IconButton(
                             onPressed: () {
-                              widget.controller
-                                  .likeBehavior(!data1, data2, widget.post.id);
+                              widget.controller.likeBehavior(!(data1 != null),
+                                  data2.toString(), widget.post.id!);
                             },
-                            icon: data1
+                            icon: data1 != null
                                 ? Icon(
-                              FontAwesomeIcons.solidThumbsUp,
-                              size: 20.0,
-                              color: kColorBlue,
-                            )
+                                    FontAwesomeIcons.solidThumbsUp,
+                                    size: 20.0,
+                                    color: kColorBlue,
+                                  )
                                 : Icon(
-                              FontAwesomeIcons.thumbsUp,
-                              size: 20.0,
-                              color: kColorBlack,
-                            )),
+                                    FontAwesomeIcons.thumbsUp,
+                                    size: 20.0,
+                                    color: kColorBlack,
+                                  )),
                       ],
                     ),
                   ),
@@ -321,13 +330,13 @@ class _CommentWidgetState extends State<CommentWidget>
                                     curve: Curves.fastOutSlowIn,
                                   );
                                 await widget.controller
-                                    .setComment(widget.post.id, myComment,
-                                    widget.post.comment)
+                                    .setComment(widget.post.id!, myComment,
+                                        widget.post.comment!)
                                     .then((value) async {
                                   if (value == "ok") {
                                     setState(() {
                                       widget.post.comment =
-                                      "${int.parse(widget.post.comment) + 1}";
+                                          "${int.parse(widget.post.comment.toString()) + 1}";
                                       isLoading = false;
                                     });
                                     myListComment.clear();
@@ -381,7 +390,7 @@ class _CommentWidgetState extends State<CommentWidget>
               leading: GestureDetector(
                 onTap: () async {
                   var myId = await StorageUtil.getUid();
-                  if (item.poster.id == myId) {
+                  if (item.poster?.id == myId) {
                     Navigator.pushNamed(context, 'profile_page',
                         arguments: myId);
                   }
@@ -389,9 +398,9 @@ class _CommentWidgetState extends State<CommentWidget>
                 child: CircleAvatar(
                   backgroundColor: kColorGrey,
                   radius: 25.0,
-                  backgroundImage: item.poster.avatar == null
+                  backgroundImage: item.poster?.avatar == null
                       ? AssetImage('assets/avatar.jpg')
-                      : NetworkImage(item.poster.avatar),
+                      : NetworkImage(item.poster!.avatar) as ImageProvider,
                 ),
               ),
               title: Column(
@@ -408,7 +417,7 @@ class _CommentWidgetState extends State<CommentWidget>
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            item.poster.username,
+                            item.poster!.username,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 14),
                           ),
@@ -416,7 +425,7 @@ class _CommentWidgetState extends State<CommentWidget>
                         Align(
                           alignment: Alignment.centerLeft,
                           child: ExpandableText(
-                            item.comment,
+                            item.comment.toString(),
                           ),
                         ),
                       ],
@@ -424,7 +433,7 @@ class _CommentWidgetState extends State<CommentWidget>
                   ),
                   Row(
                     children: [
-                      Text(ParseDate.parse(item.created)),
+                      Text(ParseDate.parse(item.created.toString())),
                       FlatButton(
                         minWidth: 10,
                         height: 5,
@@ -464,7 +473,7 @@ class _CommentWidgetState extends State<CommentWidget>
                 radius: 25.0,
                 backgroundImage: avatar == null
                     ? AssetImage('assets/avatar.jpg')
-                    : NetworkImage(avatar),
+                    : NetworkImage(avatar!) as ImageProvider,
               ),
             ),
             title: Column(

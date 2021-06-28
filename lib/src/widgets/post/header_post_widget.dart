@@ -35,9 +35,9 @@ class _HeaderPostState extends State<HeaderPost> {
           CircleAvatar(
             backgroundColor: kColorGrey,
             radius: 20.0,
-            backgroundImage: widget.post.author.avatar == null
+            backgroundImage: widget.post.author?.avatar == null
                 ? AssetImage('assets/avatar.jpg')
-                : NetworkImage(widget.post.author.avatar),
+                : NetworkImage(widget.post.author!.avatar) as ImageProvider,
           ),
           SizedBox(width: 7.0),
           Expanded(
@@ -49,10 +49,10 @@ class _HeaderPostState extends State<HeaderPost> {
                   maxLines: 2,
                   text: TextSpan(
                       style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1.color),
+                          color: Theme.of(context).textTheme.bodyText1?.color),
                       children: [
                         TextSpan(
-                          text: widget.post.author.username,
+                          text: widget.post.author?.username,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17.0,
@@ -60,7 +60,7 @@ class _HeaderPostState extends State<HeaderPost> {
                           ),
                           recognizer: TapGestureRecognizer(debugOwner: true)
                             ..onTap = () async {
-                              print(widget.post.author.username);
+                              print(widget.post.author?.username);
                               var uid = await StorageUtil.getUid();
                               // if (uid == widget.post.author.id) {
                               //   Navigator.push(
@@ -79,15 +79,15 @@ class _HeaderPostState extends State<HeaderPost> {
                         ),
                         TextSpan(
                           text: widget.post.status != null
-                              ? widget.post.status.length == 0
-                              ? ""
-                              : " " + widget.post.status + "."
+                              ? widget.post.status?.length == 0
+                                  ? ""
+                                  : " " + widget.post.status! + "."
                               : "",
                         ),
                       ]),
                 ),
                 //SizedBox(height: 0.0),
-                Text(widget.post.created)
+                Text(widget.post.created!, style: TextStyle(color: Colors.grey),)
               ],
             ),
           ),
@@ -96,7 +96,7 @@ class _HeaderPostState extends State<HeaderPost> {
             padding: EdgeInsets.all(0),
             icon: Icon(Icons.more_horiz),
             onPressed: () {
-              widget.username != widget.post.author.username
+              widget.username != widget.post.author!.username
                   ? showMoreOthers(context)
                   : showMoreYourself(context);
             },

@@ -20,9 +20,9 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:Facebook_cnpm/src/views/Profile/friend_item_ViewAll.dart';
 
 class FriendProfile extends StatefulWidget {
-  final String friendId;
+  final String? friendId;
 
-  const FriendProfile({Key key, this.friendId}) : super(key: key);
+  const FriendProfile({Key? key, this.friendId}) : super(key: key);
 
   @override
   _FriendProfileState createState() => _FriendProfileState();
@@ -59,7 +59,7 @@ class _FriendProfileState extends State<FriendProfile>
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration.zero, () {
-      user_id = ModalRoute.of(context).settings.arguments;
+      user_id = ModalRoute.of(context)!.settings.arguments.toString();
     });
 
     getUserInfo(user_id);
@@ -68,7 +68,7 @@ class _FriendProfileState extends State<FriendProfile>
   Future<void> getUserInfo(String uid) async {
     String token = await StorageUtil.getToken();
     if (await InternetConnection.isConnect()) {
-      var res = await FetchData.getUserInfo(token, widget.friendId);
+      var res = await FetchData.getUserInfo(token, widget.friendId!);
       var data = await jsonDecode(res.body);
       print(data);
       if (res.statusCode == 200) {
@@ -183,6 +183,7 @@ class _FriendProfileState extends State<FriendProfile>
                                   fit: BoxFit.cover,
                                   image: cover_image != null
                                       ? NetworkImage(cover_image)
+                                          as ImageProvider
                                       : AssetImage(
                                           "assets/top_background.jpg"))),
                         ),
@@ -211,7 +212,7 @@ class _FriendProfileState extends State<FriendProfile>
                               image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: avatar != null
-                                      ? NetworkImage(avatar)
+                                      ? NetworkImage(avatar) as ImageProvider
                                       : AssetImage("assets/avatar.jpg")),
                               border:
                                   Border.all(color: Colors.white, width: 6.0)),
@@ -586,7 +587,7 @@ class _FriendProfileState extends State<FriendProfile>
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: avatar != null
-                                    ? NetworkImage(avatar)
+                                    ? NetworkImage(avatar) as ImageProvider
                                     : AssetImage("assets/avatar.jpg")),
                             border:
                                 Border.all(color: Colors.white, width: 1.0)),
@@ -1120,7 +1121,7 @@ class _FriendProfileState extends State<FriendProfile>
       String token = await StorageUtil.getToken();
 
       var resGetUserFriends = await FetchData.getUserFriendsOther(
-          token, "0", "20", widget.friendId);
+          token, "0", "20", widget.friendId!);
       var dataGetUserFriends = await jsonDecode(resGetUserFriends.body);
       if (resGetUserFriends.statusCode == 200) {
         // setState(() {
@@ -1252,17 +1253,17 @@ class _FriendProfileState extends State<FriendProfile>
                     ),
                     Expanded(
                       child: GridView(
-                          // children: friends
-                          //     .map((eachFriend) => new FriendItemViewAll(
-                          //     friend_item_ViewAll: eachFriend))
-                          //     .toList(),
-                          // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          //     maxCrossAxisExtent:
-                          //     MediaQuery.of(context).size.width * 1,
-                          //     childAspectRatio: 8 / 2,
-                          //     crossAxisSpacing: 10,
-                          //     mainAxisSpacing: 10),
-                          ),
+                        // children: friends
+                        //     .map((eachFriend) => new FriendItemViewAll(
+                        //     friend_item_ViewAll: eachFriend))
+                        //     .toList(),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent:
+                                MediaQuery.of(context).size.width * 1,
+                            childAspectRatio: 8 / 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                      ),
                     )
                   ],
                 ))));
@@ -1491,18 +1492,18 @@ class _FriendProfileState extends State<FriendProfile>
                     ),
                     Expanded(
                       child: GridView(
-                      //   children: requestedFriends
-                      //       .map((eachFriend) => FriendRequestItem(
-                      //           friend_request_item: eachFriend))
-                      //       .toList(),
-                      //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      //       maxCrossAxisExtent:
-                      //           MediaQuery.of(context).size.width * 1,
-                      //       childAspectRatio: 8 / 2.2,
-                      //       crossAxisSpacing: 10,
-                      //       mainAxisSpacing: 10),
-                      // ),
-                    ))
+                        //   children: requestedFriends
+                        //       .map((eachFriend) => FriendRequestItem(
+                        //           friend_request_item: eachFriend))
+                        //       .toList(),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent:
+                                MediaQuery.of(context).size.width * 1,
+                            childAspectRatio: 8 / 2.2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                      ),
+                    )
                   ],
                 ))));
   }

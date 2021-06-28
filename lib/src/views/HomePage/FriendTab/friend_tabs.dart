@@ -31,7 +31,7 @@ class _FriendsTabState extends State<FriendsTab>
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
       if (!mounted) return;
       setState(() => isLoading = true);
       await friendController.getFriendRequest(onSuccess: (value1, value2) {
@@ -206,7 +206,7 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
       return <Widget>[
         CircleAvatar(
           backgroundImage: requestedFriendItem["avatar"] != null
-              ? NetworkImage(requestedFriendItem["avatar"])
+              ? NetworkImage(requestedFriendItem["avatar"]) as ImageProvider
               : AssetImage('assets/avatar.jpg'),
           radius: 40.0,
         ),
@@ -312,7 +312,7 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
       return <Widget>[
         CircleAvatar(
           backgroundImage: requestedFriendItem["avatar"] != null
-              ? NetworkImage(requestedFriendItem["avatar"])
+              ? NetworkImage(requestedFriendItem["avatar"]) as ImageProvider
               : AssetImage('assets/avatar.jpg'),
           radius: 40.0,
         ),
@@ -411,7 +411,7 @@ class SuggestedFriendItem extends StatefulWidget {
 class SuggestedFriendItemState extends State<SuggestedFriendItem> {
   var suggestedFriendItem;
 
-  String addFriend;
+  late String addFriend;
 
   var statusAddFriend;
   @override
@@ -430,7 +430,7 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
       return <Widget>[
         CircleAvatar(
           backgroundImage: suggestedFriendItem["avatar"] != null
-              ? NetworkImage(suggestedFriendItem["avatar"])
+              ? NetworkImage(suggestedFriendItem["avatar"]) as ImageProvider
               : AssetImage('assets/avatar.jpg'),
           radius: 40.0,
         ),
@@ -533,7 +533,7 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
       return <Widget>[
         CircleAvatar(
           backgroundImage: suggestedFriendItem["avatar"] != null
-              ? NetworkImage(suggestedFriendItem["avatar"])
+              ? NetworkImage(suggestedFriendItem["avatar"]) as ImageProvider
               : AssetImage('assets/avatar.jpg'),
           radius: 40.0,
         ),

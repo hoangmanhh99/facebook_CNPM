@@ -19,8 +19,8 @@ class CharacterListView extends StatefulWidget {
 
 class _CharacterListViewState extends State<CharacterListView>
     with AutomaticKeepAliveClientMixin {
-  String username;
-  String avatar;
+  late String username;
+  String? avatar;
 
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
@@ -32,7 +32,7 @@ class _CharacterListViewState extends State<CharacterListView>
   @override
   void initState() {
     super.initState();
-    postController = new List();
+    postController = [];
     StorageUtil.getUsername().then((value) => setState(() {
           username = value;
         }));
@@ -45,13 +45,13 @@ class _CharacterListViewState extends State<CharacterListView>
   }
 
   List<PostModel> parsePosts(Map<String, dynamic> json) {
-    List<PostModel> temp;
+    List<PostModel>? temp;
     try {
       temp = (json['posts'] as List).map((x) => PostModel.fromJson(x)).toList();
     } catch (e) {
       print(e.toString());
     }
-    return temp;
+    return temp!;
   }
 
   Future<void> _fetchPage(int pageKey) async {
@@ -90,7 +90,7 @@ class _CharacterListViewState extends State<CharacterListView>
           slivers: [
             SliverToBoxAdapter(
               child: Column(
-                children: [buildCreatePost(), buildPostReturn()],
+                children: [buildCreatePost(), buildPostReturn()!],
               ),
             ),
             PagedSliverList<int, PostModel>(
@@ -114,7 +114,7 @@ class _CharacterListViewState extends State<CharacterListView>
   bool get wantKeepAlive => true;
 
   bool isLoading = false;
-  List<PostModel> list = new List();
+  List<PostModel> list = [];
   CreatePostController createPostController = new CreatePostController();
 
   Widget buildCreatePost() {
@@ -132,7 +132,7 @@ class _CharacterListViewState extends State<CharacterListView>
               radius: 28,
               backgroundImage: avatar == null
                   ? AssetImage('assets/avatar.jpg')
-                  : NetworkImage(avatar),
+                  : NetworkImage(avatar!) as ImageProvider,
             ),
           ),
           SizedBox(
@@ -158,7 +158,7 @@ class _CharacterListViewState extends State<CharacterListView>
                   setState(() {
                     isLoading = true;
                   });
-                  Map<String, dynamic> postReturn = value;
+                  Map<String, dynamic> postReturn = value as Map<String, dynamic>;
                   createPostController
                       .onSubmitCreatePost(
                           images: postReturn["images"],
@@ -183,7 +183,7 @@ class _CharacterListViewState extends State<CharacterListView>
     );
   }
 
-  Widget buildPostReturn() {
+  Widget? buildPostReturn() {
     print(isLoading);
     if (list.isEmpty) {
       print(isLoading.toString() + "empty");
@@ -201,7 +201,7 @@ class _CharacterListViewState extends State<CharacterListView>
                   radius: 20.0,
                   backgroundImage: avatar == null
                       ? AssetImage('assets/avatar.jpg')
-                      : NetworkImage(avatar),
+                      : NetworkImage(avatar!) as ImageProvider,
                 ),
                 SizedBox(
                   width: 7,
@@ -234,7 +234,7 @@ class _CharacterListViewState extends State<CharacterListView>
                     radius: 20.0,
                     backgroundImage: avatar == null
                         ? AssetImage('assets/avatar.jpg')
-                        : NetworkImage(avatar),
+                        : NetworkImage(avatar!) as ImageProvider,
                   ),
                   SizedBox(
                     width: 7,

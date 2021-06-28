@@ -135,7 +135,7 @@ class StorageUtil {
   }
 
   //TODO: get List Post
-  static Future<List<PostModel>> getListPost() async {
+  static Future<List<PostModel>?> getListPost() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var json = jsonDecode(preferences.getString('ListPost')) as List;
     if (json == null) return null;
@@ -145,7 +145,7 @@ class StorageUtil {
   }
 
   //TODO: Set User info
-  static Future<void> setUserInfo(UserModel user) async {
+  static Future<bool> setUserInfo(UserModel user) async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
     return _preferences.setString('UserInfo', jsonEncode(user.toJson()));
   }

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
 class SignupController {
-  String _error;
+  late String _error;
 
   String get error => _error;
 
@@ -17,7 +17,7 @@ class SignupController {
   }
 
   Future<String> onSubmitSignup({
-    @required UserModel user,
+    required UserModel user,
   }) async {
     String result = '';
     error = "";
@@ -25,7 +25,7 @@ class SignupController {
     try {
       if (await InternetConnection.isConnect()) {
         // TODO: Signup
-        await FetchData.signUpApi(user.phone, user.password, user.username,
+        await FetchData.signUpApi(user.phone.toString(), user.password.toString(), user.username.toString(),
                 await PlatformDeviceId.getDeviceId)
             .then((value) async {
           if (value.statusCode == 200) {

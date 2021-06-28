@@ -25,7 +25,7 @@ class FriendItem extends StatelessWidget {
                   fit: BoxFit.cover,
                   image: friends["avatar"] == null
                       ? AssetImage("assets/avatar.jpg")
-                      : NetworkImage(friends["avatar"]))),
+                      : NetworkImage(friends["avatar"]) as ImageProvider)),
           child: FlatButton(
             onPressed: () async {
               print(this.friends["username"]);
@@ -40,7 +40,7 @@ class FriendItem extends StatelessWidget {
                         builder: (context) =>
                             FriendProfile(friendId: this.friends["_id"])));
               }
-            },
+            }, child: Text(""),
           ),
         ),
         Container(

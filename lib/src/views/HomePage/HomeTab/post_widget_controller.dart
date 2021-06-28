@@ -45,7 +45,7 @@ class PostController {
     }
   }
 
-  Future<String> setComment(
+  Future<String?> setComment(
       String postId, String comment, String numberOfComment) async {
     String result;
     try {
@@ -81,4 +81,4 @@ class PostController {
   }
 }
 
-List<PostController> postController;
+List<PostController>? postController;

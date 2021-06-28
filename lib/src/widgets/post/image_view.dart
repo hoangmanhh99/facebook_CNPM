@@ -47,7 +47,7 @@ class _ImageViewState extends State<ImageView> {
                       builder: (BuildContext context, int index) {
                         return PhotoViewGalleryPageOptions(
                             imageProvider:
-                                NetworkImage(widget.post.image[index].url),
+                                NetworkImage(widget.post.image![index].url),
                             minScale: PhotoViewComputedScale.contained * 0.9,
                             maxScale: PhotoViewComputedScale.contained * 2,
                             initialScale:
@@ -55,7 +55,7 @@ class _ImageViewState extends State<ImageView> {
                             heroAttributes:
                                 PhotoViewHeroAttributes(tag: index));
                       },
-                      itemCount: widget.post.image.length,
+                      itemCount: widget.post.image?.length,
                       loadingBuilder: (context, event) => Center(
                         child: Container(
                           width: 20.0,
@@ -64,7 +64,7 @@ class _ImageViewState extends State<ImageView> {
                             value: event == null
                                 ? 0
                                 : event.cumulativeBytesLoaded /
-                                    event.expectedTotalBytes,
+                                    event.expectedTotalBytes!,
                           ),
                         ),
                       ),
@@ -87,11 +87,11 @@ class _ImageViewState extends State<ImageView> {
                                 children: [
                                   Align(
                                     alignment: Alignment.bottomLeft,
-                                    child: Text(widget.post.author.username),
+                                    child: Text(widget.post.author!.username),
                                   ),
                                   Align(
                                     alignment: Alignment.bottomLeft,
-                                    child: Text(widget.post.described),
+                                    child: Text(widget.post.described!),
                                   )
                                 ],
                               ),

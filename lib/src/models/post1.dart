@@ -1,11 +1,11 @@
 class Post {
-  final String profileImageUrl;
-  final String username;
-  final String time;
-  final String content;
-  final String likes;
-  final String comments;
-  final String shares;
+  final String? profileImageUrl;
+  final String? username;
+  final String? time;
+  final String? content;
+  final String? likes;
+  final String? comments;
+  final String? shares;
 
   Post(
       {this.profileImageUrl,

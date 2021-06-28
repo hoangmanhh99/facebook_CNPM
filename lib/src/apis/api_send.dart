@@ -18,6 +18,7 @@ class ApiService {
         if (code == 200) {
           return true;
         }
+        return false;
       });
   static Dio dio = Dio(options);
 

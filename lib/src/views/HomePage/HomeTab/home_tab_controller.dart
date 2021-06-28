@@ -13,30 +13,30 @@ import 'package:flutter/material.dart';
 
 class NewFeedController {
   List<PostModel> parsePosts(Map<String, dynamic> json) {
-    List<PostModel> temp;
+    List<PostModel>? temp;
     try {
       temp = (json['posts'] as List).map((x) => PostModel.fromJson(x)).toList();
     } catch (e) {
       print(e.toString());
     }
-    return temp;
+    return temp!;
   }
 
   List<PostModel> parseVideo(var json) {
-    List<PostModel> temp;
+    List<PostModel>? temp;
     try {
       temp = json.map((x, index) => PostModel.fromJson(json[index])).toList();
     } catch (e) {
       print(e.toString());
     }
-    return temp;
+    return temp!;
   }
 
   Future<void> getMyPost(
-      {Function(List<PostModel>) onSuccess,
-        Function(String) onError,
-        String userId}) async {
-    List<PostModel> list = List();
+      {required Function(List<PostModel>) onSuccess,
+      required Function(String) onError,
+      required String userId}) async {
+    List<PostModel> list = [];
     try {
       await FetchData.getMyPost(await StorageUtil.getToken(), userId)
           .then((value) {
@@ -61,8 +61,9 @@ class NewFeedController {
   }
 
   Future<void> getListPost(
-      {Function(List<PostModel>) onSuccess, Function(String) onError}) async {
-    List<PostModel> list = List();
+      {required Function(List<PostModel>) onSuccess,
+      required Function(String) onError}) async {
+    List<PostModel> list = [];
     try {
       await FetchData.getListPostApi(await StorageUtil.getToken())
           .then((value) {
@@ -85,8 +86,9 @@ class NewFeedController {
   }
 
   Future<void> getListVideo(
-      {Function(List<PostModel>) onSuccess, Function(String) onError}) async {
-    List<PostModel> list = List();
+      {required Function(List<PostModel>) onSuccess,
+      required Function(String) onError}) async {
+    List<PostModel> list = [];
     try {
       await FetchData.getListVideo(await StorageUtil.getToken()).then((value) {
         if (value.statusCode == 200) {
@@ -117,24 +119,26 @@ class HomeController {
 
   Stream get loadPostStream => _loadPost.stream;
 
-  Map<String, dynamic> postReturn;
+  Map<String, dynamic>? postReturn;
   CreatePostController createPostController = new CreatePostController();
 
   List<PostModel> parsePosts(Map<String, dynamic> json) {
-    List<PostModel> temp;
+    List<PostModel>? temp;
     try {
       temp = (json['posts'] as List).map((x) => PostModel.fromJson(x)).toList();
     } catch (e) {
       print(e.toString());
     }
-    return temp;
+    return temp!;
   }
 
-  String error;
-  List<PostModel> list;
+  late String error;
+  late List<PostModel> list;
   Future<void> fetchListPost() async {
     error = "";
-    await _loadPost.sink.add("");
+    await _loadPost.stream.listen((event) {
+      _loadPost.add("");
+    });
     _addPost.close();
     try {
       await FetchData.getListPostApi(await StorageUtil.getToken())
@@ -168,21 +172,23 @@ class HomeController {
   StreamController _addPost = new StreamController.broadcast();
   Stream get addPostStream => _addPost.stream;
 
-  PostModel post;
+  late PostModel post;
 
   Future<PostModel> onSubmitCreatePost(
-      {@required List<MultipartFile> images,
-        @required MultipartFile video,
-        @required String described,
-        @required String status,
-        @required String state,
-        @required bool can_edit,
-        @required String asset_type}) async {
+      {required List<MultipartFile> images,
+      required MultipartFile video,
+      required String described,
+      required String status,
+      required String state,
+      required bool can_edit,
+      required String asset_type}) async {
     error = "";
-    await _addPost.sink.add("");
+    await _loadPost.stream.listen((event) {
+      _loadPost.add("");
+    });
     try {
       await ApiService.createPost(await StorageUtil.getToken(), images, video,
-          described, status, state, can_edit, asset_type)
+              described, status, state, can_edit, asset_type)
           .then((val) async {
         if (val["code"] == 1000) {
           error = "Post status successful";

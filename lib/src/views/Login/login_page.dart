@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: <Widget>[
-              WidgetsBinding.instance.window.viewInsets.bottom > 0.0
+              WidgetsBinding.instance!.window.viewInsets.bottom > 0.0
                   ? Container(
                       padding: EdgeInsets.only(top: 50, bottom: 10),
                       child: Image.asset(
@@ -138,7 +138,9 @@ class _LoginPageState extends State<LoginPage> {
                                       await loginController.onSubmitLogin(
                                           phone: _phone, password: _password);
 
-                                  Navigator.of(_keyLoader.currentContext,
+                                  Navigator.of(
+                                          _keyLoader.currentContext
+                                              as BuildContext,
                                           rootNavigator: true)
                                       .pop(); //close the dialog
 
@@ -171,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               }),
                   )),
-              WidgetsBinding.instance.window.viewInsets.bottom > 0.0
+              WidgetsBinding.instance!.window.viewInsets.bottom > 0.0
                   ? Container(
                       padding: EdgeInsets.only(bottom: 30),
                       child: FlatButton(

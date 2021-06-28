@@ -16,15 +16,15 @@ class _SignupPageState extends State<SignupPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      dataReturn = ModalRoute.of(context).settings.arguments;
-      if (ModalRoute.of(context).settings.arguments != null) {
+      dataReturn = ModalRoute.of(context)!.settings.arguments.toString();
+      if (ModalRoute.of(context)?.settings.arguments != null) {
         if (dataReturn == "Sign up Successful, you can start log in") {
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text('Sign up Successful'),
-                  content: Text(dataReturn ?? "haha"),
+                  content: Text(dataReturn),
                   actions: [
                     FlatButton(
                         onPressed: () {
@@ -40,7 +40,7 @@ class _SignupPageState extends State<SignupPage> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text('Sign up Failed'),
-                  content: Text(dataReturn ?? "haha"),
+                  content: Text(dataReturn),
                   actions: [
                     FlatButton(
                         onPressed: () {
@@ -91,7 +91,10 @@ class _SignupPageState extends State<SignupPage> {
                 height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width / 1.5,
                 padding: EdgeInsets.fromLTRB(15, 40, 15, 15),
-                child: Image.asset('assets/image_signup.png', fit: BoxFit.contain,),
+                child: Image.asset(
+                  'assets/image_signup.png',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
             Text(

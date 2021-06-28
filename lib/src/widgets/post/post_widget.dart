@@ -19,7 +19,7 @@ class PostWidget extends StatefulWidget {
   PostController controller;
   String username;
 
-  PostWidget({this.post, this.controller, this.username});
+  PostWidget({required this.post, required this.controller, required this.username});
 
   @override
   _PostWidgetState createState() => _PostWidgetState();
@@ -29,7 +29,7 @@ class _PostWidgetState extends State<PostWidget> {
   @override
   void initState() {
     widget.controller
-        .init(widget.post.is_liked, widget.post.like, widget.post.comment);
+        .init(widget.post.is_liked!, widget.post.like!, widget.post.comment!);
     super.initState();
   }
 
@@ -60,7 +60,7 @@ class _PostWidgetState extends State<PostWidget> {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: ExpandableText(widget.post.described),
+              child: ExpandableText(widget.post.described.toString()),
             ),
           ),
           GestureDetector(
@@ -70,7 +70,7 @@ class _PostWidgetState extends State<PostWidget> {
                   MaterialPageRoute(
                       builder: (context) => SinglePost(
                           widget.post, widget.controller, widget.username)));
-              print(widget.post.video.url);
+              print(widget.post.video!.url.toString());
             },
             child: AssetPost(widget.post, widget.controller, widget.username),
           ),

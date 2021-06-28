@@ -43,11 +43,11 @@ class _SinglePostState extends State<SinglePost> {
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: buildTextWithLinks(widget.post.described),
+                  child: buildTextWithLinks(widget.post.described.toString()),
                 ),
                 FooterPost(widget.post, widget.controller, widget.username),
-                if (widget.post.image.length != 0)
-                  for (var image in widget.post.image)
+                if (widget.post.image?.length != 0)
+                  for (var image in widget.post.image!)
                     Column(
                       children: [
                         GestureDetector(
@@ -100,11 +100,11 @@ class _SinglePostState extends State<SinglePost> {
   }
 
   Visibility buildVideos(BuildContext context) {
-    bool isVisible = widget.post.video.url.isNotEmpty;
+    bool isVisible = widget.post.video!.url.isNotEmpty;
     if (isVisible)
       return Visibility(
         visible: isVisible,
-        child: VideoPlayerWidget(widget.post.video.url),
+        child: VideoPlayerWidget(widget.post.video!.url),
       );
     return Visibility(
       child: Container(),

@@ -27,19 +27,19 @@ class CreatePostPage extends StatefulWidget {
 }
 
 class _CreatePostPageState extends State<CreatePostPage> {
-  FeelingAndActivity status;
-  TextEditingController _controller;
+  FeelingAndActivity? status;
+  late TextEditingController _controller;
   var images = <Asset>[];
-  File video;
+  File? video;
   String video_convert_string = '';
   var video_thumbnail;
-  String hintText;
+  late String hintText;
   CreatePostController createPostController = new CreatePostController();
   String username = '';
-  String avatar;
+  String? avatar;
   String asset_type = '';
   bool can_post = false;
-  String pathVideo;
+  String? pathVideo;
 
   void initState() {
     _controller = TextEditingController();
@@ -67,8 +67,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
     super.dispose();
   }
 
-  Future<bool> _onBackPressed() {
-    return showModalBottomSheet(
+  Future<bool>? _onBackPressed(BuildContext context) {
+    showModalBottomSheet(
             context: context,
             builder: (context) => new SizedBox(
                   height: 300,
@@ -166,11 +166,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       )
                     ],
                   ),
-                )) ??
-        false;
+                ));
   }
 
-  Widget showImage() {
+  Widget? showImage() {
     switch (images.length) {
       case 0:
         return SizedBox.shrink();
@@ -262,7 +261,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
       return SizedBox();
   }
 
-  MultipartFile video_upload;
+  MultipartFile? video_upload;
 
   Future getVideo() async {
     final _picker = ImagePicker();
@@ -278,12 +277,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
         video = File(pickedFile.path);
       });
       MultipartFile multipartFile = MultipartFile.fromBytes(
-          video.readAsBytesSync(),
-          filename: video.path.split('/').last,
+          video?.readAsBytesSync(),
+          filename: video?.path.split('/').last,
           contentType: MediaType("video", "mp4"));
       video_upload = multipartFile;
       final thumb = await VideoThumbnail.thumbnailData(
-          video: video.path,
+          video: video?.path,
           imageFormat: ImageFormat.PNG,
           maxWidth: 500,
           quality: 25);
@@ -375,7 +374,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                           "described": _controller.text,
                           "status": status == null
                               ? ""
-                              : " " + status.icon + " feeling " + status.status,
+                              : " " + status!.icon + " feeling " + status!.status,
                           "state": 'alo',
                           "can_edit": true,
                           "asset_type": asset_type
@@ -412,7 +411,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         radius: 28.0,
                         backgroundImage: avatar == null
                             ? AssetImage('assets/avatar.jpg')
-                            : NetworkImage(avatar),
+                            : NetworkImage(avatar!) as ImageProvider,
                       ),
                     ),
                     Flexible(
@@ -425,7 +424,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                     style: TextStyle(color: kColorBlack),
                                     children: [
                                   TextSpan(
-                                      text: username ?? "Facebook User",
+                                      text: username,
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w900)),
@@ -433,11 +432,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                     TextSpan(children: [
                                       TextSpan(
                                           text:
-                                              " - " + status.icon + " feeling ",
+                                              " - " + status!.icon + " feeling ",
                                           style: TextStyle(
                                               fontFamily: 'NotoEmoji')),
                                       TextSpan(
-                                          text: status.status,
+                                          text: status!.status,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w900))
                                     ])
@@ -581,7 +580,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                             arguments: status)
                         .then((value) {
                       setState(() {
-                        if (value != null) status = value;
+                        if (value != null) status = value as FeelingAndActivity;
                       });
                     });
                   },
@@ -596,12 +595,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
   Widget build(BuildContext context) {
     return can_post
-        ? WillPopScope(child: Body(), onWillPop: _onBackPressed)
+        ? WillPopScope(child: Body(), onWillPop: () => _onBackPressed(context)!)
         : Body();
   }
 
-  List<File> image_file = List<File>();
-  List<String> images_convert_string = new List<String>();
+  var image_file = <File>[];
+  var images_convert_string = <String>[];
 
   getImageFileFromAsset(String path) async {
     final file = File(path);
@@ -619,6 +618,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   convertVideoToString() async {
-    video_convert_string = base64Encode(video.readAsBytesSync());
+    video_convert_string = base64Encode(video!.readAsBytesSync());
   }
 }

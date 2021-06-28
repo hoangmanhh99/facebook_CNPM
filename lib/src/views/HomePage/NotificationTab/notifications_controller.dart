@@ -6,7 +6,7 @@ import 'dart:async';
 
 class NotificationController {
   Future<void> getNotification(
-      {Function(List<dynamic>) onSuccess, Function(String) onError}) async {
+      {required Function(List<dynamic>) onSuccess, required Function(String) onError}) async {
     try {
 
     } catch (e) {

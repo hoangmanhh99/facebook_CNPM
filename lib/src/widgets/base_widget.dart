@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 RaisedButton buildButton(Function onPress, Widget child) {
   return RaisedButton(
-    onPressed: onPress,
+    onPressed: onPress(),
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all((Radius.circular(8)))),
     color: Colors.blue,

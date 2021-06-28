@@ -34,9 +34,9 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with AutomaticKeepAliveClientMixin {
-  UserModel myProfile;
+  late UserModel myProfile;
 
-  UserModel yourProfile;
+  late UserModel yourProfile;
 
   String username = '';
   String avatar = '';
@@ -53,13 +53,13 @@ class _ProfilePageState extends State<ProfilePage>
   var requestedFriends = [];
   var friends = [];
 
-  String asset_type;
+  late String asset_type;
 
-  File image;
+  File? image;
 
   bool isLoading = false;
 
-  MultipartFile image_upload;
+  MultipartFile? image_upload;
 
   var sothich;
 
@@ -88,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage>
   final usernameTextFieldController = TextEditingController();
 
   bool isLoadingParent = false;
-  List<PostModel> listPostReturn = new List();
+  List<PostModel> listPostReturn = [];
 
   @override
   void initState() {
@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage>
     super.initState();
     if (!mounted) return;
     Future.delayed(Duration.zero, () {
-      user_id = ModalRoute.of(context).settings.arguments;
+      user_id = ModalRoute.of(context)!.settings.arguments.toString();
     });
 
     StorageUtil.getUserInfo().then((value) => setState(() {
@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage>
     StorageUtil.getCoverImage().then((value) => setState(() {
           cover_image = value;
         }));
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
       if (!mounted) return;
       setState(() => isLoading = true);
       await getUserInfo(onSuccess: (data) {
@@ -160,7 +160,8 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Future<void> getUserInfo(
-      {Function(dynamic) onSuccess, Function(String) onError}) async {
+      {required Function(dynamic) onSuccess,
+      required Function(String) onError}) async {
     try {
       await FetchData.getUserInfo(
               await StorageUtil.getToken(), await StorageUtil.getUid())
@@ -195,6 +196,7 @@ class _ProfilePageState extends State<ProfilePage>
           if (code == 200) {
             return true;
           }
+          return false;
         });
     Dio dio = Dio(options);
     final _picker = ImagePicker();
@@ -210,8 +212,8 @@ class _ProfilePageState extends State<ProfilePage>
         image = File(pickedFile.path);
       });
       MultipartFile multipartFile = MultipartFile.fromBytes(
-        image.readAsBytesSync(),
-        filename: image.path.split('/').last,
+        image?.readAsBytesSync(),
+        filename: image?.path.split('/').last,
         contentType: MediaType("image", "jpg"),
       );
       // image_upload =
@@ -289,12 +291,15 @@ class _ProfilePageState extends State<ProfilePage>
           ),
           child: Row(
             children: [
-              Icon(Icons.search, color: Colors.grey,),
+              Icon(
+                Icons.search,
+                color: Colors.grey,
+              ),
               Text(
                 'Search in posts, photos ...',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
-                  style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: Colors.grey),
               ),
             ],
           ),
@@ -321,7 +326,7 @@ class _ProfilePageState extends State<ProfilePage>
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: cover_image != null
-                                    ? NetworkImage(cover_image)
+                                    ? NetworkImage(cover_image) as ImageProvider
                                     : AssetImage("assets/top_background.jpg"))),
                         child: Stack(
                           alignment: Alignment.bottomRight,
@@ -374,7 +379,8 @@ class _ProfilePageState extends State<ProfilePage>
                                                             shape:
                                                                 CircleBorder(),
                                                           ),
-                                                          Text('View cover image',
+                                                          Text(
+                                                              'View cover image',
                                                               style: TextStyle(
                                                                   fontSize:
                                                                       16.0,
@@ -571,7 +577,7 @@ class _ProfilePageState extends State<ProfilePage>
                               image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: avatar != null
-                                      ? NetworkImage(avatar)
+                                      ? NetworkImage(avatar) as ImageProvider
                                       : AssetImage("assets/avatar.jpg")),
                               border:
                                   Border.all(color: Colors.white, width: 6.0)),
@@ -698,7 +704,7 @@ class _ProfilePageState extends State<ProfilePage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  username ?? "Fakebook user",
+                  username,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 )
               ],
@@ -1008,7 +1014,7 @@ class _ProfilePageState extends State<ProfilePage>
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: avatar != null
-                                    ? NetworkImage(avatar)
+                                    ? NetworkImage(avatar) as ImageProvider
                                     : AssetImage("assets/avatar.jpg")),
                             border:
                                 Border.all(color: Colors.white, width: 1.0)),
@@ -1027,7 +1033,8 @@ class _ProfilePageState extends State<ProfilePage>
                         setState(() {
                           isLoading = true;
                         });
-                        Map<String, dynamic> postReturn = value;
+                        Map<String, dynamic> postReturn =
+                            value as Map<String, dynamic>;
                         createPostController
                             .onSubmitCreatePost(
                                 images: postReturn["images"],
@@ -1235,7 +1242,7 @@ class _ProfilePageState extends State<ProfilePage>
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: avatar != null
-                                    ? NetworkImage(avatar)
+                                    ? NetworkImage(avatar) as ImageProvider
                                     : AssetImage("assets/avatar.jpg"),
                               )),
                         ),
@@ -1275,7 +1282,7 @@ class _ProfilePageState extends State<ProfilePage>
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: cover_image != null
-                                    ? NetworkImage(cover_image)
+                                    ? NetworkImage(cover_image) as ImageProvider
                                     : AssetImage("assets/top_background.jpg"),
                               )),
                         ),
@@ -1339,7 +1346,7 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                               TextField(
                                 controller: usernameTextFieldController
-                                  ..text = username ?? "",
+                                  ..text = username,
                                 decoration: InputDecoration(
                                   hintText: 'Ngô Bá Khá',
                                 ),
@@ -1390,8 +1397,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   )..show(context);
                                 } else {
                                   Flushbar(
-                                    message:
-                                        "Password change failed",
+                                    message: "Password change failed",
                                     duration: Duration(seconds: 3),
                                   )..show(context);
                                 }
@@ -1813,7 +1819,7 @@ class _ProfilePageState extends State<ProfilePage>
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           image: avatar != null
-                              ? NetworkImage(avatar)
+                              ? NetworkImage(avatar) as ImageProvider
                               : AssetImage("assets/avatar.jpg")),
                     ),
                   ),
@@ -1978,17 +1984,17 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                     Expanded(
                       child: GridView(
-                          // children: friends
-                          //     .map((eachFriend) => FriendItemViewAll(
-                          //     friend_item_ViewAll: eachFriend))
-                          //     .toList(),
-                          // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          //     maxCrossAxisExtent:
-                          //     MediaQuery.of(context).size.width * 1,
-                          //     childAspectRatio: 8 / 2,
-                          //     crossAxisSpacing: 10,
-                          //     mainAxisSpacing: 10),
-                          ),
+                        // children: friends
+                        //     .map((eachFriend) => FriendItemViewAll(
+                        //     friend_item_ViewAll: eachFriend))
+                        //     .toList(),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent:
+                                MediaQuery.of(context).size.width * 1,
+                            childAspectRatio: 8 / 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                      ),
                     )
                   ],
                 ))));
@@ -2218,18 +2224,18 @@ class _ProfilePageState extends State<ProfilePage>
                     requestedFriends != null && requestedFriends.length > 0
                         ? Expanded(
                             child: GridView(
-                                // children: requestedFriends
-                                //     .map((eachFriend) => FriendRequestItem(
-                                //     friend_request_item: eachFriend))
-                                //     .toList(),
-                                // gridDelegate:
-                                // SliverGridDelegateWithMaxCrossAxisExtent(
-                                //     maxCrossAxisExtent:
-                                //     MediaQuery.of(context).size.width * 1,
-                                //     childAspectRatio: 8 / 2.2,
-                                //     crossAxisSpacing: 10,
-                                //     mainAxisSpacing: 10),
-                                ),
+                              // children: requestedFriends
+                              //     .map((eachFriend) => FriendRequestItem(
+                              //     friend_request_item: eachFriend))
+                              //     .toList(),
+                              gridDelegate:
+                                  SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent:
+                                          MediaQuery.of(context).size.width * 1,
+                                      childAspectRatio: 8 / 2.2,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10),
+                            ),
                           )
                         : Text("There are currently no friend requests")
                   ],

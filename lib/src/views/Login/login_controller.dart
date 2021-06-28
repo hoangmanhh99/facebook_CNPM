@@ -20,8 +20,8 @@ class LoginController {
   }
 
   Future<String> onSubmitLogin({
-    @required String phone,
-    @required String password,
+    required String phone,
+    required String password,
   }) async {
     int countError = 0;
     String result = '';

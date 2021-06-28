@@ -52,10 +52,10 @@ class _FooterPostState extends State<FooterPost> {
                               else if (snapshot1.data == true &&
                                   snapshot2.data != "1")
                                 return Text("Bạn và " +
-                                    "${int.parse(snapshot2.data) - 1}" +
+                                    "${int.parse(snapshot2.data.toString()) - 1}" +
                                     " người khác");
                               else
-                                return Text("${int.parse(snapshot2.data)}");
+                                return Text("${int.parse(snapshot2.data.toString())}");
                             });
                       }),
                 ],
@@ -66,7 +66,7 @@ class _FooterPostState extends State<FooterPost> {
                     //initialData: widget.post.comment,
                       stream: widget.controller.commentNumberStream,
                       builder: (context, snapshot) {
-                        widget.post.comment = snapshot.data??widget.post.comment;
+                        widget.post.comment = (snapshot.data??widget.post.comment).toString();
                         return Text('${widget.post.comment} bình luận  •  ');
                       }),
                   Text('0 chia sẻ'),
@@ -86,24 +86,24 @@ class _FooterPostState extends State<FooterPost> {
                   stream: widget.controller.isLikedStream,
                   builder: (context, snapshot1) {
                     widget.post.is_liked =
-                        snapshot1.data ?? widget.post.is_liked;
+                        (snapshot1.data ?? widget.post.is_liked) as bool?;
                     return StreamBuilder(
                         stream: widget.controller.likeNumberStream,
                         builder: (context, snapshot2) {
-                          widget.post.like = snapshot2.data ?? widget.post.like;
+                          widget.post.like = (snapshot2.data ?? widget.post.like) as String?;
                           return FlatButton(
                             onPressed: () async {
                               await widget.controller.likeBehavior(
-                                  !widget.post.is_liked,
-                                  widget.post.like,
-                                  widget.post.id);
+                                  !widget.post.is_liked!,
+                                  widget.post.like!,
+                                  widget.post.id!);
 
                               /* get like ở đây*/
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                widget.post.is_liked
+                                widget.post.is_liked!
                                     ? Icon(
                                   FontAwesomeIcons.solidThumbsUp,
                                   size: 20.0,
@@ -136,7 +136,7 @@ class _FooterPostState extends State<FooterPost> {
                 ),
               ),
             ),
-            if (widget.username != widget.post.author.username)
+            if (widget.username != widget.post.author?.username)
               Expanded(
                 child: FlatButton(
                   onPressed: () {

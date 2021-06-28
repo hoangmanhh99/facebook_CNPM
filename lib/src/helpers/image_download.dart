@@ -18,7 +18,7 @@ class _HelloState extends State<Hello> {
   String _path = "";
   String _size = "";
   String _mimeType = "";
-  File _imageFile;
+  late File _imageFile;
   int _progress = 0;
 
   List<File> _mulitpleFiles = [];
@@ -58,7 +58,7 @@ class _HelloState extends State<Hello> {
                     onPressed: () async {
                       await ImageDownloader.open(_path).catchError((error) {
                         Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text((error as PlatformException).message),
+                          content: Text((error as PlatformException).message.toString()),
                         ));
                       });
                     },
@@ -174,7 +174,7 @@ class _HelloState extends State<Hello> {
     );
   }
 
-  Future<void> _downloadImage(String url, {AndroidDestinationType destination, bool whenError = false, String outputMimeType}) async {
+  Future<void> _downloadImage(String url, {AndroidDestinationType? destination, bool whenError = false, String? outputMimeType}) async {
     String fileName;
     String path;
     int size;
@@ -227,7 +227,7 @@ class _HelloState extends State<Hello> {
       mimeType = await ImageDownloader.findMimeType(imageId);
     } on PlatformException catch (error) {
       setState(() {
-        _message = error.message;
+        _message = error.message!;
       });
       return;
     }

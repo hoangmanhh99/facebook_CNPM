@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class Friends{
   // String _id;
-  String _id;
-  String username;
-  String avatar;
-  String getAvatar(){
+  String? _id;
+  String? username;
+  String? avatar;
+  String? getAvatar(){
     return this.avatar;
   }
-  String setId(_id){
+  String? setId(_id){
     return this._id;
   }
   String setUsername(username){

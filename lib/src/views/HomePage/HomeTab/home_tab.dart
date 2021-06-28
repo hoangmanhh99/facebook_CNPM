@@ -21,12 +21,12 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  String username;
-  String avatar;
+  late String username;
+  String? avatar;
 
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
-  List<PostModel> listPostModel = new List();
+  List<PostModel> listPostModel = [];
   bool isLoading = false;
   NewFeedController newFeedController = new NewFeedController();
 
@@ -41,13 +41,13 @@ class _HomeTabState extends State<HomeTab>
           avatar = value;
         }));
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
       setState(() => isLoading = true);
       await newFeedController.getListPost(onSuccess: (values) {
         setState(() {
           isLoading = false;
           listPostModel = values;
-          postController = new List(listPostModel.length);
+          postController = List.filled(listPostModel.length, values as PostController, growable: true);
         });
       }, onError: (msg) {
         setState(() => isLoading = false);
@@ -292,8 +292,8 @@ class HeaderHome extends StatefulWidget {
 }
 
 class _HeaderHomeState extends State<HeaderHome> {
-  String username;
-  String avatar;
+  late String username;
+  String? avatar;
 
   CreatePostController createPostController = new CreatePostController();
 
@@ -335,7 +335,7 @@ class _HeaderHomeState extends State<HeaderHome> {
               radius: 28.0,
               backgroundImage: avatar == null
                   ? AssetImage('assets/avatar.jpg')
-                  : NetworkImage(avatar),
+                  : NetworkImage(avatar!) as ImageProvider,
             ),
           ),
           SizedBox(width: 15.0),
@@ -357,7 +357,7 @@ class _HeaderHomeState extends State<HeaderHome> {
               await Navigator.pushNamed(context, "create_post")
                   .then((value) async {
                 if (value != null) {
-                  Map<String, dynamic> postReturn = value;
+                  Map<String, dynamic> postReturn = value as Map<String, dynamic>;
                   await createPostController.onSubmitCreatePost(
                       images: postReturn["images"],
                       video: postReturn["video"],
@@ -395,7 +395,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                         radius: 20.0,
                         backgroundImage: avatar == null
                             ? AssetImage('assets/avatar.jpg')
-                            : NetworkImage(avatar),
+                            : NetworkImage(avatar!) as ImageProvider,
                       ),
                       SizedBox(width: 7.0),
                       Text(username,
@@ -412,7 +412,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                 return Column(
                   children: [
                     PostWidget(
-                      post: snapshot.data,
+                      post: snapshot.data as PostModel,
                       controller: new PostController(),
                       username: username,
                     ),

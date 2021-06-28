@@ -18,7 +18,7 @@ class _NotificationTabState extends State<NotificationTab>
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   NotificationController notificationController = new NotificationController();
 
-  List<dynamic> notifications = new List();
+  List<dynamic> notifications = [];
 
   bool isLoading = false;
 
@@ -33,7 +33,7 @@ class _NotificationTabState extends State<NotificationTab>
       color: kColorWhite,
       child: RefreshIndicator(
         onRefresh: () async {
-          refreshKey.currentState.show(atTop: false);
+          refreshKey.currentState?.show(atTop: false);
           Future.sync(() => _pagingController.refresh());
           setState(() {
             isLoading = false;
@@ -54,9 +54,7 @@ class _NotificationTabState extends State<NotificationTab>
                     ),
                     Container(
                       decoration: new BoxDecoration(
-                        color: Colors.grey[200],
-                        shape: BoxShape.circle
-                      ),
+                          color: Colors.grey[200], shape: BoxShape.circle),
                       child: IconButton(
                         icon: const Icon(Icons.search),
                         color: Colors.black,
@@ -70,12 +68,13 @@ class _NotificationTabState extends State<NotificationTab>
                 ),
               ),
             ),
-            PagedSliverList(pagingController: _pagingController, builderDelegate: PagedChildBuilderDelegate<dynamic>(
-              itemBuilder: (context, item, index) {
-
-              },
-              firstPageProgressIndicatorBuilder: (_) => LoadingNewFeed()
-            ))
+            PagedSliverList(
+                pagingController: _pagingController,
+                builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                    itemBuilder: (context, item, index) {
+                      return null;
+                    },
+                    firstPageProgressIndicatorBuilder: (_) => LoadingNewFeed()))
           ],
         ),
       ),

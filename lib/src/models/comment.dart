@@ -2,10 +2,10 @@ import 'package:Facebook_cnpm/src/helpers/parseDate.dart';
 import 'package:Facebook_cnpm/src/models/user.dart';
 
 class CommentModel {
-  String id;
-  CommentPoster poster;
-  String comment;
-  String created;
+  String? id;
+  CommentPoster? poster;
+  String? comment;
+  String? created;
 
   CommentModel(this.id, this.poster, this.comment, this.created);
 
@@ -19,7 +19,7 @@ class CommentModel {
   Map toJson() {
     return {
       '_id': id,
-      'poster': poster.toJson(),
+      'poster': poster?.toJson(),
       'comment': comment,
       'created': created
     };

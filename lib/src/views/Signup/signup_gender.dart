@@ -2,7 +2,7 @@ import 'package:Facebook_cnpm/src/models/user.dart';
 import 'package:flutter/material.dart';
 
 class SignupGender extends StatefulWidget {
-  UserModel userInput;
+  late UserModel userInput;
 
   @override
   _SignupGenderState createState() => _SignupGenderState();
@@ -13,7 +13,8 @@ class _SignupGenderState extends State<SignupGender> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userInput = ModalRoute.of(context).settings.arguments;
+    UserModel userInput =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -64,9 +65,9 @@ class _SignupGenderState extends State<SignupGender> {
                 title: const Text('Male'),
                 value: "Male",
                 groupValue: _character,
-                onChanged: (String value) {
+                onChanged: (String? value) {
                   setState(() {
-                    _character = value;
+                    _character = value!;
                   });
                 },
               ),
@@ -79,9 +80,9 @@ class _SignupGenderState extends State<SignupGender> {
                 title: const Text('Female'),
                 value: "Female",
                 groupValue: _character,
-                onChanged: (String value) {
+                onChanged: (String? value) {
                   setState(() {
-                    _character = value;
+                    _character = value!;
                   });
                 },
               ),

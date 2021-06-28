@@ -16,6 +16,7 @@ class ApiUrl {
       receiveTimeout: 30000,
       validateStatus: (code) {
         if (code == 200) return true;
+        return false;
       });
   static Dio dio = Dio(options);
 }

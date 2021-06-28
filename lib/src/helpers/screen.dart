@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Size screenSize;
+Size? screenSize;
 const double defaultScreenWidth = 750;
 const double defaultScreenHeight = 1334;
 const double screenWidth = defaultScreenWidth;
@@ -43,11 +43,11 @@ class ConstScreen {
   static EdgeInsets spacingAllSmall = EdgeInsets.all(sizeSmall);
 
   static double setSizeHeight(double size) {
-    return ScreenUtil().setHeight(size);
+    return ScreenUtil().setHeight(size).toDouble();
   }
 
   static double setSizeWidth(double size) {
-    return ScreenUtil().setWidth(size);
+    return ScreenUtil().setWidth(size).toDouble();
   }
 
   static void setScreen(context) {
@@ -60,14 +60,14 @@ class ConstScreen {
 
     /*Padding & Margin Constants*/
 
-    sizeExtraSmall = ScreenUtil().setWidth(5.0);
-    sizeDefault = ScreenUtil().setWidth(8.0);
-    sizeSmall = ScreenUtil().setWidth(10.0);
-    sizeMedium = ScreenUtil().setWidth(15.0);
-    sizeLarge = ScreenUtil().setWidth(20.0);
-    sizeXL = ScreenUtil().setWidth(35.0);
-    sizeXXL = ScreenUtil().setWidth(40.0);
-    sizeXXXL = ScreenUtil().setWidth(50.0);
+    sizeExtraSmall = ScreenUtil().setWidth(5.0).toDouble();
+    sizeDefault = ScreenUtil().setWidth(8.0).toDouble();
+    sizeSmall = ScreenUtil().setWidth(10.0).toDouble();
+    sizeMedium = ScreenUtil().setWidth(15.0).toDouble();
+    sizeLarge = ScreenUtil().setWidth(20.0).toDouble();
+    sizeXL = ScreenUtil().setWidth(35.0).toDouble();
+    sizeXXL = ScreenUtil().setWidth(40.0).toDouble();
+    sizeXXXL = ScreenUtil().setWidth(50.0).toDouble();
 
     /*EdgeInsets*/
 
@@ -84,13 +84,13 @@ class ConstScreen {
 
     /*Image Dimensions*/
 
-    defaultIconSize = ScreenUtil().setWidth(80.0);
-    defaultImageHeight = ScreenUtil().setHeight(120.0);
-    snackBarHeight = ScreenUtil().setHeight(50.0);
-    texIconSize = ScreenUtil().setWidth(30.0);
+    defaultIconSize = ScreenUtil().setWidth(80.0).toDouble();
+    defaultImageHeight = ScreenUtil().setHeight(120.0).toDouble();
+    snackBarHeight = ScreenUtil().setHeight(50.0).toDouble();
+    texIconSize = ScreenUtil().setWidth(30.0).toDouble();
 
     /*Default Height&Width*/
-    defaultIndicatorHeight = ScreenUtil().setHeight(5.0);
+    defaultIndicatorHeight = ScreenUtil().setHeight(5.0).toDouble();
     defaultIndicatorWidth = screenWidthFourth;
   }
 }
@@ -123,34 +123,34 @@ class FontSize {
   static double s36 = 36.0;
 
   static double setTextSize(double size) {
-    return ScreenUtil().setSp(size);
+    return ScreenUtil().setSp(size).toDouble();
   }
 
   static setScreenAwareFontSize() {
-    s7 = ScreenUtil().setSp(7.0);
-    s8 = ScreenUtil().setSp(8.0);
-    s9 = ScreenUtil().setSp(9.0);
-    s10 = ScreenUtil().setSp(10.0);
-    s11 = ScreenUtil().setSp(11.0);
-    s12 = ScreenUtil().setSp(12.0);
-    s13 = ScreenUtil().setSp(13.0);
-    s14 = ScreenUtil().setSp(14.0);
-    s15 = ScreenUtil().setSp(15.0);
-    s16 = ScreenUtil().setSp(16.0);
-    s17 = ScreenUtil().setSp(17.0);
-    s18 = ScreenUtil().setSp(18.0);
-    s19 = ScreenUtil().setSp(19.0);
-    s20 = ScreenUtil().setSp(20.0);
-    s21 = ScreenUtil().setSp(21.0);
-    s22 = ScreenUtil().setSp(22.0);
-    s23 = ScreenUtil().setSp(23.0);
-    s24 = ScreenUtil().setSp(24.0);
-    s25 = ScreenUtil().setSp(25.0);
-    s26 = ScreenUtil().setSp(26.0);
-    s27 = ScreenUtil().setSp(27.0);
-    s28 = ScreenUtil().setSp(28.0);
-    s29 = ScreenUtil().setSp(29.0);
-    s30 = ScreenUtil().setSp(30.0);
-    s36 = ScreenUtil().setSp(36.0);
+    s7 = ScreenUtil().setSp(7.0).toDouble();
+    s8 = ScreenUtil().setSp(8.0).toDouble();
+    s9 = ScreenUtil().setSp(9.0).toDouble();
+    s10 = ScreenUtil().setSp(10.0).toDouble();
+    s11 = ScreenUtil().setSp(11.0).toDouble();
+    s12 = ScreenUtil().setSp(12.0).toDouble();
+    s13 = ScreenUtil().setSp(13.0).toDouble();
+    s14 = ScreenUtil().setSp(14.0).toDouble();
+    s15 = ScreenUtil().setSp(15.0).toDouble();
+    s16 = ScreenUtil().setSp(16.0).toDouble();
+    s17 = ScreenUtil().setSp(17.0).toDouble();
+    s18 = ScreenUtil().setSp(18.0).toDouble();
+    s19 = ScreenUtil().setSp(19.0).toDouble();
+    s20 = ScreenUtil().setSp(20.0).toDouble();
+    s21 = ScreenUtil().setSp(21.0).toDouble();
+    s22 = ScreenUtil().setSp(22.0).toDouble();
+    s23 = ScreenUtil().setSp(23.0).toDouble();
+    s24 = ScreenUtil().setSp(24.0).toDouble();
+    s25 = ScreenUtil().setSp(25.0).toDouble();
+    s26 = ScreenUtil().setSp(26.0).toDouble();
+    s27 = ScreenUtil().setSp(27.0).toDouble();
+    s28 = ScreenUtil().setSp(28.0).toDouble();
+    s29 = ScreenUtil().setSp(29.0).toDouble();
+    s30 = ScreenUtil().setSp(30.0).toDouble();
+    s36 = ScreenUtil().setSp(36.0).toDouble();
   }
 }

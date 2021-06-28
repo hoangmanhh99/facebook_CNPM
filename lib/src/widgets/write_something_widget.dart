@@ -31,7 +31,7 @@ class WriteSomethingWidget extends StatelessWidget {
                     height: 40.0,
                     width: MediaQuery.of(context).size.width / 1.4,
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1.0, color: Colors.grey[400]),
+                        border: Border.all(width: 1.0, color: Colors.grey[400] as Color),
                         borderRadius: BorderRadius.circular(30.0)),
                     child: Text(
                       'What do you think?',

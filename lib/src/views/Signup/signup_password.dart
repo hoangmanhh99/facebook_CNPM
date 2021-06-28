@@ -9,7 +9,7 @@ class SignupPassword extends StatefulWidget {
 
 class _SignupPasswordState extends State<SignupPassword> {
   var _isPassNull = null;
-  bool showPass;
+  late bool showPass;
   TextEditingController _passController = new TextEditingController();
 
   void initState() {
@@ -20,7 +20,8 @@ class _SignupPasswordState extends State<SignupPassword> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userInput = ModalRoute.of(context).settings.arguments;
+    UserModel userInput =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -62,7 +63,7 @@ class _SignupPasswordState extends State<SignupPassword> {
                 decoration: InputDecoration(
                     labelText: "Password",
                     errorText:
-                    !_isPassNull ? null : "Please type valid password",
+                        !_isPassNull ? null : "Please type valid password",
                     suffixIcon: Visibility(
                       visible: _passController.text.isNotEmpty ? true : false,
                       child: new GestureDetector(
@@ -76,7 +77,7 @@ class _SignupPasswordState extends State<SignupPassword> {
                       ),
                     ),
                     labelStyle:
-                    TextStyle(color: Color(0xff888888), fontSize: 15)),
+                        TextStyle(color: Color(0xff888888), fontSize: 15)),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),

@@ -2,14 +2,12 @@ import 'package:Facebook_cnpm/src/helpers/validator.dart';
 import 'package:Facebook_cnpm/src/models/user.dart';
 import 'package:flutter/material.dart';
 
-
 class SignupPhone extends StatefulWidget {
   @override
   _SignupPhoneState createState() => _SignupPhoneState();
 }
 
 class _SignupPhoneState extends State<SignupPhone> {
-
   var _isPhoneNull;
 
   TextEditingController _phoneController = new TextEditingController();
@@ -21,7 +19,8 @@ class _SignupPhoneState extends State<SignupPhone> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userInput = ModalRoute.of(context).settings.arguments;
+    UserModel userInput =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -78,7 +77,7 @@ class _SignupPhoneState extends State<SignupPhone> {
                       ),
                     ),
                     labelStyle:
-                    TextStyle(color: Color(0xff888888), fontSize: 15)),
+                        TextStyle(color: Color(0xff888888), fontSize: 15)),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
@@ -87,9 +86,9 @@ class _SignupPhoneState extends State<SignupPhone> {
                   height: 56,
                   child: RaisedButton(
                     onPressed: () {
-                      if(!Validators.isValidPhone(_phoneController.text)){
+                      if (!Validators.isValidPhone(_phoneController.text)) {
                         setState(() {
-                          _isPhoneNull=true;
+                          _isPhoneNull = true;
                         });
                       } else {
                         userInput.phone = _phoneController.text;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class ProgressLoading{
-  ProgressDialog _pr;
+  late ProgressDialog _pr;
   Future<void> showLoading(BuildContext context, String msg) async {
     _pr =  ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible: false, showLogs: false);
     _pr.style(

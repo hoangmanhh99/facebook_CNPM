@@ -6,7 +6,7 @@ import 'package:Facebook_cnpm/src/utils/time_ext.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class SignupBirthday extends StatefulWidget {
-  UserModel userInput;
+  late UserModel userInput;
 
   @override
   _SignupBirthdayState createState() => _SignupBirthdayState();
@@ -25,7 +25,7 @@ class _SignupBirthdayState extends State<SignupBirthday> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userInput = ModalRoute.of(context).settings.arguments;
+    UserModel userInput = ModalRoute.of(context)!.settings.arguments as UserModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

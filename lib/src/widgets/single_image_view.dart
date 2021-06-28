@@ -21,7 +21,7 @@ class _SingleImageViewState extends State<SingleImageView> {
             return PhotoViewGalleryPageOptions(
               imageProvider: widget.url == null
                   ? AssetImage("assets/avatar.jpg")
-                  : NetworkImage(widget.url),
+                  : NetworkImage(widget.url) as ImageProvider,
               heroAttributes: PhotoViewHeroAttributes(tag: "Avatar"),
               minScale: PhotoViewComputedScale.contained * 0.9,
               maxScale: PhotoViewComputedScale.contained * 2,
@@ -36,7 +36,7 @@ class _SingleImageViewState extends State<SingleImageView> {
               child: CircularProgressIndicator(
                 value: event == null
                     ? 0
-                    : event.cumulativeBytesLoaded / event.expectedTotalBytes,
+                    : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
               ),
             ),
           ),

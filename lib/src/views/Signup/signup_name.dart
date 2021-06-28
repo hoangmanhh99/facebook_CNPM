@@ -22,7 +22,8 @@ class _SignupNameState extends State<SignupName> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userInput = ModalRoute.of(context).settings.arguments;
+    UserModel userInput =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -65,7 +66,7 @@ class _SignupNameState extends State<SignupName> {
                         autofocus: true,
                         onChanged: (text) {
                           setState(() {
-                            if(text.isNotEmpty) _isFirstNull=false;
+                            if (text.isNotEmpty) _isFirstNull = false;
                           });
                         },
                         controller: _firstNameController,
@@ -74,19 +75,20 @@ class _SignupNameState extends State<SignupName> {
                         decoration: InputDecoration(
                             labelText: "Last name",
                             suffixIcon: Visibility(
-                              visible: _firstNameController.text.isNotEmpty ? true : false,
+                              visible: _firstNameController.text.isNotEmpty
+                                  ? true
+                                  : false,
                               child: new GestureDetector(
                                 onTap: () {
                                   setState(() {
                                     _firstNameController.text = '';
                                   });
-
                                 },
                                 child: new Icon(Icons.close),
                               ),
                             ),
                             errorText:
-                            !_isFirstNull ? null : "Please type last name",
+                                !_isFirstNull ? null : "Please type last name",
                             labelStyle: TextStyle(
                                 color: Color(0xff888888), fontSize: 15)),
                       ),
@@ -99,16 +101,17 @@ class _SignupNameState extends State<SignupName> {
                         controller: _lastNameController,
                         onChanged: (text) {
                           setState(() {
-                            if(text.isNotEmpty) _isSecondNull=false;
+                            if (text.isNotEmpty) _isSecondNull = false;
                           });
                         },
-                        textInputAction: TextInputAction.done ,
+                        textInputAction: TextInputAction.done,
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         decoration: InputDecoration(
                             labelText: "First Name",
                             suffixIcon: Visibility(
-                              visible:
-                              _lastNameController.text.isNotEmpty ? true : false,
+                              visible: _lastNameController.text.isNotEmpty
+                                  ? true
+                                  : false,
                               child: new GestureDetector(
                                 onTap: () {
                                   setState(() {
@@ -137,24 +140,24 @@ class _SignupNameState extends State<SignupName> {
                   height: 56,
                   child: RaisedButton(
                     onPressed: () {
-                      if(_firstNameController.text.isEmpty&&_lastNameController.text.isEmpty){
+                      if (_firstNameController.text.isEmpty &&
+                          _lastNameController.text.isEmpty) {
                         setState(() {
-                          _isFirstNull=true;
-                          _isSecondNull=true;
+                          _isFirstNull = true;
+                          _isSecondNull = true;
                         });
-                      }
-                      else if (_lastNameController.text.isEmpty) {
+                      } else if (_lastNameController.text.isEmpty) {
                         setState(() {
-                          _isSecondNull=true;
+                          _isSecondNull = true;
                         });
-                      }
-                      else if(_firstNameController.text.isEmpty){
+                      } else if (_firstNameController.text.isEmpty) {
                         setState(() {
-                          _isFirstNull=true;
+                          _isFirstNull = true;
                         });
-                      }
-                      else {
-                        userInput.username = _firstNameController.text+" "+_lastNameController.text;
+                      } else {
+                        userInput.username = _firstNameController.text +
+                            " " +
+                            _lastNameController.text;
                         Navigator.pushNamed(context, "signup_birthday",
                             arguments: userInput);
                       }
