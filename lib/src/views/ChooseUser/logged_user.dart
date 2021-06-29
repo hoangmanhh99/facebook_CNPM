@@ -188,10 +188,10 @@ class _LoggedUserState extends State<LoggedUser> with RouteAware {
                                 break;
                             }
                           },
-                          offset: Offset(500, 1000),
+                          offset: Offset(100, 70),
                           elevation: 3.2,
                           onCanceled: () {
-                            print('You have not chossed anything');
+                            print('You have not choosed anything');
                           },
                           tooltip: 'Add',
                           itemBuilder: (_) => <PopupMenuItem<String>>[

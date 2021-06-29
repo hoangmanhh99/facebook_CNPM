@@ -25,7 +25,7 @@ class _VideoAppState extends State<VideoPlayerWidget> {
     _controller.addListener(() {
       setState(() {});
     });
-    _controller.setLooping(false);
+    _controller.setLooping(true);
     _initializeVideoPlayerFuture = _controller.initialize();
   }
 

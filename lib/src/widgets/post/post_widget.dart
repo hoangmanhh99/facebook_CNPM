@@ -9,7 +9,6 @@ import 'package:Facebook_cnpm/src/widgets/post/comment_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/footer_post_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/header_post_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/image_view.dart';
-import 'package:Facebook_cnpm/src/widgets/post/video_view.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +69,7 @@ class _PostWidgetState extends State<PostWidget> {
                   MaterialPageRoute(
                       builder: (context) => SinglePost(
                           widget.post, widget.controller, widget.username)));
-              print(widget.post.video!.url.toString());
+              print(widget.post.video?.url.toString());
             },
             child: AssetPost(widget.post, widget.controller, widget.username),
           ),

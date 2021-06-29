@@ -54,7 +54,9 @@ dependencies:
   video_thumbnail: ^0.2.4
   line_icons: ^0.2.0
   dio: ^3.0.10
+  path: ^1.8.0
   path_provider: ^1.6.24
+  gallery_saver: ^2.0.3
   flutter_keyboard_visibility: ^4.0.0
   keyboard_visibility: ^0.5.6
   flushbar: ^1.10.4

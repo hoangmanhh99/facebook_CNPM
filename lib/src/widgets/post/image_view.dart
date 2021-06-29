@@ -1,7 +1,15 @@
+import 'dart:io';
+
 import 'package:Facebook_cnpm/src/helpers/colors_constant.dart';
+import 'package:Facebook_cnpm/src/helpers/epandaple_text.dart';
 import 'package:Facebook_cnpm/src/models/post.dart';
 import 'package:Facebook_cnpm/src/views/HomePage/HomeTab/post_widget_controller.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path/path.dart' as path;
+import 'package:gallery_saver/gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -18,6 +26,22 @@ class ImageView extends StatefulWidget {
 
 class _ImageViewState extends State<ImageView> {
   bool isShowContent = true;
+  late Directory _appDocsDir;
+  int indexImg = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void saveImage(String url) async {
+    String path = url;
+    GallerySaver.saveImage(path).then((bool success) {
+      setState(() {
+        print("Image is saved");
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +69,7 @@ class _ImageViewState extends State<ImageView> {
                   child: Container(
                     child: PhotoViewGallery.builder(
                       builder: (BuildContext context, int index) {
+                        indexImg = index;
                         return PhotoViewGalleryPageOptions(
                             imageProvider:
                                 NetworkImage(widget.post.image![index].url),
@@ -73,7 +98,7 @@ class _ImageViewState extends State<ImageView> {
                 ),
                 if (isShowContent)
                   Positioned.fill(
-                      top: MediaQuery.of(context).size.height * 0.7,
+                      top: MediaQuery.of(context).size.height * 0.1,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,11 +112,16 @@ class _ImageViewState extends State<ImageView> {
                                 children: [
                                   Align(
                                     alignment: Alignment.bottomLeft,
-                                    child: Text(widget.post.author!.username),
+                                    child: Text(
+                                      widget.post.author!.username,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                   Align(
                                     alignment: Alignment.bottomLeft,
-                                    child: Text(widget.post.described!),
+                                    child: buildTextWithLinks(
+                                        widget.post.described.toString()),
                                   )
                                 ],
                               ),
@@ -110,83 +140,107 @@ class _ImageViewState extends State<ImageView> {
                         alignment: Alignment.topRight,
                         child: GestureDetector(
                           onTap: () {
-                            showModalBottomSheet(context: context, builder: (_) {
-                              return SizedBox(
-                                height: 240,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 60,
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.save_alt),
-                                              SizedBox(width: 10,),
-                                              Text("Save to phone")
-                                            ],
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (_) {
+                                  return SizedBox(
+                                    height: 240,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 60,
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              saveImage(widget
+                                                  .post.image![indexImg].url);
+                                              Navigator.pop(context);
+                                              Flushbar(
+                                                message: "Image is saved",
+                                                duration: Duration(seconds: 3),
+                                              )..show(context);
+                                            },
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.save_alt),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text("Save to phone")
+                                                ],
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 60,
+                                          child: FlatButton(
+                                            onPressed: () {},
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.ac_unit_sharp),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text("Share to other")
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 60,
+                                          child: FlatButton(
+                                            onPressed: () {},
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.ac_unit_sharp),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text("Send by Messenger")
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 60,
+                                          child: FlatButton(
+                                            onPressed: () {},
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons
+                                                      .announcement_outlined),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                      "Find support or report photos")
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 60,
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.ac_unit_sharp),
-                                              SizedBox(width: 10,),
-                                              Text("Share to other")
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 60,
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.ac_unit_sharp),
-                                              SizedBox(width: 10,),
-                                              Text("Send by Messenger")
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 60,
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.announcement_outlined),
-                                              SizedBox(width: 10,),
-                                              Text("Find support or report photos")
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            });
+                                  );
+                                });
                           },
                           child: Icon(Icons.more_vert),
                         ),

@@ -47,6 +47,7 @@ class _CommentWidgetState extends State<CommentWidget>
   var myListComment = <CommentModel>[];
 
   static const _pageSize = 2;
+  late bool isShowStiker;
 
   final PagingController<int, CommentModel> _pagingController =
       PagingController(firstPageKey: 0, invisibleItemsThreshold: 1);
@@ -63,6 +64,7 @@ class _CommentWidgetState extends State<CommentWidget>
     _pagingController.addPageRequestListener((pageKey) {
       _fetchComment(pageKey);
     });
+    isShowStiker = false;
     super.initState();
   }
 
@@ -290,24 +292,27 @@ class _CommentWidgetState extends State<CommentWidget>
                         GestureDetector(
                           child: Icon(Icons.emoji_emotions_outlined),
                           onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (_) {
-                                  return SizedBox(
-                                    height: 235,
-                                    child: EmojiPicker(
-                                      rows: 3,
-                                      columns: 7,
-                                      buttonMode: ButtonMode.MATERIAL,
-                                      numRecommended: 10,
-                                      onEmojiSelected: (emoji, category) {
-                                        _textEditingController.text +=
-                                            emoji.emoji;
-                                        print(emoji.emoji);
-                                      },
-                                    ),
-                                  );
-                                });
+                            setState(() {
+                              isShowStiker = !isShowStiker;
+                            });
+                            // showModalBottomSheet(
+                            //     context: context,
+                            //     builder: (_) {
+                            //       return SizedBox(
+                            //         height: 235,
+                            //         child: EmojiPicker(
+                            //           rows: 3,
+                            //           columns: 7,
+                            //           buttonMode: ButtonMode.MATERIAL,
+                            //           numRecommended: 10,
+                            //           onEmojiSelected: (emoji, category) {
+                            //             _textEditingController.text +=
+                            //                 emoji.emoji;
+                            //             print(emoji.emoji);
+                            //           },
+                            //         ),
+                            //       );
+                            //     });
                           },
                         ),
                         SizedBox(
@@ -367,6 +372,7 @@ class _CommentWidgetState extends State<CommentWidget>
                       ],
                     ),
                   ),
+                  // (isShowStiker ? buildSticker() : Container()),
                 ],
               ),
             ),
@@ -374,6 +380,19 @@ class _CommentWidgetState extends State<CommentWidget>
         ),
       ),
     );
+  }
+
+  Widget buildSticker() {
+    return EmojiPicker(
+        rows: 3,
+        columns: 7,
+        buttonMode: ButtonMode.MATERIAL,
+        recommendKeywords: ["racing", "horse"],
+        numRecommended: 10,
+        onEmojiSelected: (emoji, category) {
+          _textEditingController.text += emoji.emoji;
+          print(emoji.emoji);
+        });
   }
 
   Widget bottomSheetComment(context) {

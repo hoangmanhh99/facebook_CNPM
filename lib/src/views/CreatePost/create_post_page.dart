@@ -508,7 +508,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 ),
                 TextField(
                   autofocus: true,
+                  autocorrect: false,
+                  enableSuggestions: false,
                   style: TextStyle(fontSize: 25),
+
                   cursorHeight: 36,
                   maxLines: null,
                   controller: _controller,

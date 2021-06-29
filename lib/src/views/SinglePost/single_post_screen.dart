@@ -6,7 +6,6 @@ import 'package:Facebook_cnpm/src/widgets/post/footer_post_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/header_post_widget.dart';
 import 'package:Facebook_cnpm/src/widgets/post/image_view.dart';
 import 'package:Facebook_cnpm/src/widgets/post/video_player.dart';
-import 'package:Facebook_cnpm/src/widgets/post/video_pro_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -22,6 +21,8 @@ class SinglePost extends StatefulWidget {
 }
 
 class _SinglePostState extends State<SinglePost> {
+  int index = 0;
+
   @override
   void initState() {
     super.initState();
@@ -55,8 +56,10 @@ class _SinglePostState extends State<SinglePost> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ImageView(widget.post,
-                                        widget.controller, widget.username)));
+                                    builder: (context) => ImageView(
+                                        widget.post,
+                                        widget.controller,
+                                        widget.username)));
                           },
                           child: Image.network(image.url),
                         ),
@@ -66,28 +69,6 @@ class _SinglePostState extends State<SinglePost> {
                     ),
                 if (widget.post.video != null)
                   Column(children: [
-                    //     GestureDetector(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //                 builder: (context) => ChewieDemo(widget.post,
-                    //                     widget.controller, widget.username)));
-                    //       },
-                    //       child: Stack(
-                    //         alignment: Alignment.center,
-                    //         children: [
-                    //           Image.network(widget.post.video.thumb),
-                    //           Icon(
-                    //             Icons.play_circle_filled_rounded,
-                    //             color: kColorWhite,
-                    //             size: 120,
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     )
-                    //   ],
-                    // )
                     buildVideos(context),
                     FooterPost(widget.post, widget.controller, widget.username)
                   ])

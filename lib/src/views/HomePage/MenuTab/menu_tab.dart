@@ -8,7 +8,6 @@ import 'package:Facebook_cnpm/src/helpers/loading_dialog.dart';
 import 'package:Facebook_cnpm/src/helpers/shared_preferences.dart';
 import 'package:Facebook_cnpm/src/views/HomePage/home_page.dart';
 import 'package:Facebook_cnpm/src/models/user.dart';
-import 'package:Facebook_cnpm/src/widgets/post/video_pro_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

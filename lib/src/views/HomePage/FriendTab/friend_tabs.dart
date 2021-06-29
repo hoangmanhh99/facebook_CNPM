@@ -70,108 +70,108 @@ class _FriendsTabState extends State<FriendsTab>
       body: isLoading
           ? LoadingNewFeed()
           : RefreshIndicator(
-        onRefresh: _refresh,
-        child: ListView(
-          children: [
-            SingleChildScrollView(
-              child: Container(
-                //width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('Bạn bè',
-                          style: TextStyle(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(height: 15.0),
-                      Row(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15.0, vertical: 10.0),
-                            decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius:
-                                BorderRadius.circular(30.0)),
-                            child: Text('Gợi ý',
+              onRefresh: _refresh,
+              child: ListView(
+                children: [
+                  SingleChildScrollView(
+                    child: Container(
+                        //width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 15.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Friends',
                                 style: TextStyle(
-                                    fontSize: 17.0,
+                                    fontSize: 25.0,
                                     fontWeight: FontWeight.bold)),
-                          ),
-                          SizedBox(width: 10.0),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15.0, vertical: 10.0),
-                            decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius:
-                                BorderRadius.circular(30.0)),
-                            child: Text('Tất cả bạn bè',
+                            SizedBox(height: 15.0),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15.0, vertical: 10.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius:
+                                          BorderRadius.circular(30.0)),
+                                  child: Text('Suggestions',
+                                      style: TextStyle(
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                SizedBox(width: 10.0),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15.0, vertical: 10.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius:
+                                          BorderRadius.circular(30.0)),
+                                  child: Text('All friends',
+                                      style: TextStyle(
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.bold)),
+                                )
+                              ],
+                            ),
+
+                            Divider(height: 30.0),
+
+                            Row(
+                              children: <Widget>[
+                                Text('Request Friend',
+                                    style: TextStyle(
+                                        fontSize: 21.0,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(width: 10.0),
+                                Text(
+                                    requestedFriends != null
+                                        ? requestedFriends.length.toString()
+                                        : "0",
+                                    style: TextStyle(
+                                        fontSize: 21.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red)),
+                              ],
+                            ),
+
+                            SizedBox(height: 20.0),
+                            // Expanded(
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: requestedFriends
+                                  .map((eachFriend) =>
+                                      RequestedFriendItem(eachFriend))
+                                  .toList(),
+                            ),
+                            // ),
+
+                            Divider(height: 30.0),
+
+                            Text('Some people you may know',
                                 style: TextStyle(
-                                    fontSize: 17.0,
+                                    fontSize: 21.0,
                                     fontWeight: FontWeight.bold)),
-                          )
-                        ],
-                      ),
 
-                      Divider(height: 30.0),
+                            SizedBox(height: 20.0),
 
-                      Row(
-                        children: <Widget>[
-                          Text('Lời mời kết bạn',
-                              style: TextStyle(
-                                  fontSize: 21.0,
-                                  fontWeight: FontWeight.bold)),
-                          SizedBox(width: 10.0),
-                          Text(
-                              requestedFriends != null
-                                  ? requestedFriends.length.toString()
-                                  : "0",
-                              style: TextStyle(
-                                  fontSize: 21.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red)),
-                        ],
-                      ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: suggestFriends
+                                  .map((eachFriend) => SuggestedFriendItem(
+                                      suggestedFriendItem: eachFriend))
+                                  .toList(),
+                            ),
 
-                      SizedBox(height: 20.0),
-                      // Expanded(
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: requestedFriends
-                            .map((eachFriend) =>
-                            RequestedFriendItem(eachFriend))
-                            .toList(),
-                      ),
-                      // ),
-
-                      Divider(height: 30.0),
-
-                      Text('Những người bạn có thể biết',
-                          style: TextStyle(
-                              fontSize: 21.0,
-                              fontWeight: FontWeight.bold)),
-
-                      SizedBox(height: 20.0),
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: suggestFriends
-                            .map((eachFriend) => SuggestedFriendItem(
-                            suggestedFriendItem: eachFriend))
-                            .toList(),
-                      ),
-
-                      SizedBox(height: 20.0),
-                    ],
-                  )),
+                            SizedBox(height: 20.0),
+                          ],
+                        )),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -232,16 +232,16 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
               child: Text(
                   requestedFriendItem["username"] != null
                       ? requestedFriendItem["username"]
-                      : "Người dùng Fakebook",
+                      : "Facebook user",
                   style:
-                  TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
             Text(
                 requestedFriendItem["same_friend"] != null
-                    ? '${requestedFriendItem["same_friend"]["same_friends"]} bạn chung'
-                    : "0 bạn chung",
+                    ? '${requestedFriendItem["same_friend"]["same_friends"]} mutual friends'
+                    : "0 mutual friend",
                 style:
-                TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
+                    TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
             Row(
               children: <Widget>[
                 GestureDetector(
@@ -251,25 +251,25 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
                     });
                     if (await InternetConnection.isConnect()) {
                       String token = await StorageUtil.getToken();
-                      // var res = await FetchData.setAcceptFriend(
-                      //     token, requestedFriendItem["_id"], "1");
-                      // // var data = await jsonDecode(res.body);
-                      // if (res.statusCode == 200) {
-                      //   print("chấp nhận thành công");
-                      // } else {
-                      //   print("lỗi server");
-                      // }
+                      var res = await FetchData.setAcceptFriend(
+                          token, requestedFriendItem["_id"], "1");
+                      // var data = await jsonDecode(res.body);
+                      if (res.statusCode == 200) {
+                        print("chấp nhận thành công");
+                      } else {
+                        print("lỗi server");
+                      }
                     } else {
                       print("lỗi internet");
                     }
                   },
                   child: Container(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                        EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
                     decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(5.0)),
-                    child: Text('Chấp nhận',
+                    child: Text('Accept',
                         style: TextStyle(color: Colors.white, fontSize: 15.0)),
                   ),
                 ),
@@ -281,14 +281,14 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
                       });
                       if (await InternetConnection.isConnect()) {
                         String token = await StorageUtil.getToken();
-                        // var res = await FetchData.setAcceptFriend(
-                        //     token, requestedFriendItem["_id"], "0");
-                        // // var data = await jsonDecode(res.body);
-                        // if (res.statusCode == 200) {
-                        //   print("xoá thành công");
-                        // } else {
-                        //   print("lỗi server");
-                        // }
+                        var res = await FetchData.setAcceptFriend(
+                            token, requestedFriendItem["_id"], "0");
+                        // var data = await jsonDecode(res.body);
+                        if (res.statusCode == 200) {
+                          print("xoá thành công");
+                        } else {
+                          print("lỗi server");
+                        }
                       } else {
                         print("lỗi internet");
                       }
@@ -299,9 +299,9 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
                       decoration: BoxDecoration(
                           color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(5.0)),
-                      child: Text('Xóa ',
+                      child: Text('Delete',
                           style:
-                          TextStyle(color: Colors.black, fontSize: 15.0)),
+                              TextStyle(color: Colors.black, fontSize: 15.0)),
                     )),
               ],
             )
@@ -338,43 +338,43 @@ class _RequestedFriendItemState extends State<RequestedFriendItem> {
               child: Text(
                   requestedFriendItem["username"] != null
                       ? requestedFriendItem["username"]
-                      : "Người dùng Fakebook",
+                      : "Fakebook user",
                   style:
-                  TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
-            Text("Yêu cầu đã được chấp nhận",
+            Text("The request has been accepted",
                 style:
-                TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
+                    TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
             Row(
               children: <Widget>[
                 GestureDetector(
                   onTap: () async {
-                    // setState(() {
-                    //   statusAccept = "chua chap nhan";
-                    // });
-                    // if (await InternetConnection.isConnect()) {
-                    //   String token = await StorageUtil.getToken();
-                    //   var res = await FetchData.setAcceptFriend(
-                    //       token, requestedFriendItem["_id"], "1");
-                    //   // var data = await jsonDecode(res.body);
-                    //   if (res.statusCode == 200) {
-                    print("chấp nhận thành công");
-                    //   } else {
-                    //     print("lỗi server");
-                    //   }
-                    // } else {
-                    //   print("lỗi internet");
-                    // }
+                    setState(() {
+                      statusAccept = "chua chap nhan";
+                    });
+                    if (await InternetConnection.isConnect()) {
+                      String token = await StorageUtil.getToken();
+                      var res = await FetchData.setAcceptFriend(
+                          token, requestedFriendItem["_id"], "1");
+                      // var data = await jsonDecode(res.body);
+                      if (res.statusCode == 200) {
+                        print("chấp nhận thành công");
+                      } else {
+                        print("lỗi server");
+                      }
+                    } else {
+                      print("lỗi internet");
+                    }
                   },
                   child: Container(
                     constraints: BoxConstraints(minWidth: 220),
                     alignment: Alignment.center,
                     padding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(5.0)),
-                    child: Text("Đã là bạn bè",
+                    child: Text("Already friends",
                         style: TextStyle(color: Colors.black, fontSize: 15.0)),
                   ),
                 ),
@@ -418,7 +418,7 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
   void initState() {
     setState(() {
       suggestedFriendItem = widget.suggestedFriendItem;
-      addFriend = "Thêm bạn bè";
+      addFriend = "Add friend̀";
       statusAddFriend = "chua them";
     });
     super.initState();
@@ -456,16 +456,16 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
               child: Text(
                   suggestedFriendItem["username"] != null
                       ? suggestedFriendItem["username"]
-                      : "Người dùng Fakebook",
+                      : "Fakebook user",
                   style:
-                  TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
             Text(
                 suggestedFriendItem["same_friends"] != null
-                    ? '${suggestedFriendItem["same_friends"]} bạn chung'
-                    : "0 bạn chung",
+                    ? '${suggestedFriendItem["same_friends"]} mutual friends'
+                    : "0 mutual friend",
                 style:
-                TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
+                    TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
             Row(children: <Widget>[
               GestureDetector(
                   onTap: () async {
@@ -474,25 +474,25 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
                     });
                     if (await InternetConnection.isConnect()) {
                       String token = await StorageUtil.getToken();
-                      // var res = await FetchData.setRequestFriend(
-                      //     token, suggestedFriendItem["_id"]);
-                      // // var data =await jsonDecode(res.body);
-                      // if (res.statusCode == 200) {
-                      //   print("gửi kết bạn thành công");
-                      // } else {
-                      //   print("lỗi server");
-                      // }
+                      var res = await FetchData.setRequestFriend(
+                          token, suggestedFriendItem["_id"]);
+                      // var data =await jsonDecode(res.body);
+                      if (res.statusCode == 200) {
+                        print("gửi kết bạn thành công");
+                      } else {
+                        print("lỗi server");
+                      }
                     } else {
                       print("lỗi internet");
                     }
                   },
                   child: Container(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(5.0)),
-                    child: Text("Thêm bạn bè",
+                    child: Text("Add friend",
                         style: TextStyle(color: Colors.white, fontSize: 15.0)),
                   )),
               SizedBox(width: 10.0),
@@ -503,25 +503,25 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
                   });
                   if (await InternetConnection.isConnect()) {
                     String token = await StorageUtil.getToken();
-                    // var res = await FetchData.notSuggest(
-                    //     token, suggestedFriendItem["_id"]);
-                    // // var data =await jsonDecode(res.body);
-                    // if (res.statusCode == 200) {
-                    //   print("thêm vào danh sách không gợi ý");
-                    // } else {
-                    //   print("lỗi server");
-                    // }
+                    var res = await FetchData.notSuggest(
+                        token, suggestedFriendItem["_id"]);
+                    // var data =await jsonDecode(res.body);
+                    if (res.statusCode == 200) {
+                      print("thêm vào danh sách không gợi ý");
+                    } else {
+                      print("lỗi server");
+                    }
                   } else {
                     print("lỗi internet");
                   }
                 },
                 child: Container(
                   padding:
-                  EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+                      EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
                   decoration: BoxDecoration(
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(5.0)),
-                  child: Text('Xóa ',
+                  child: Text('Delete',
                       style: TextStyle(color: Colors.black, fontSize: 15.0)),
                 ),
               ),
@@ -559,29 +559,29 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
               child: Text(
                   suggestedFriendItem["username"] != null
                       ? suggestedFriendItem["username"]
-                      : "Người dùng Fakebook",
+                      : "Fakebook user",
                   style:
-                  TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
-            Text("Đã gửi yêu cầu",
+            Text("Sented request",
                 style:
-                TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
+                    TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal)),
             Row(children: <Widget>[
               GestureDetector(
                   onTap: () async {
                     if (await InternetConnection.isConnect()) {
                       String token = await StorageUtil.getToken();
-                      // var res = await FetchData.setRequestFriend(
-                      //     token, suggestedFriendItem["_id"]);
-                      // // var data =await jsonDecode(res.body);
-                      // if (res.statusCode == 200) {
-                      //   setState(() {
-                      //     statusAddFriend = "chua them";
-                      //   });
-                      //   print("undo gửi kết bạn thành công");
-                      // } else {
-                      //   print("lỗi server");
-                      // }
+                      var res = await FetchData.setRequestFriend(
+                          token, suggestedFriendItem["_id"]);
+                      // var data =await jsonDecode(res.body);
+                      if (res.statusCode == 200) {
+                        setState(() {
+                          statusAddFriend = "chua them";
+                        });
+                        print("undo gửi kết bạn thành công");
+                      } else {
+                        print("lỗi server");
+                      }
                     } else {
                       print("lỗi internet");
                     }
@@ -590,11 +590,11 @@ class SuggestedFriendItemState extends State<SuggestedFriendItem> {
                     constraints: BoxConstraints(minWidth: 220),
                     alignment: Alignment.center,
                     padding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(5.0)),
-                    child: Text("Huỷ bỏ",
+                    child: Text("Cancel̉",
                         style: TextStyle(color: Colors.black, fontSize: 15.0)),
                   )),
               SizedBox(width: 10.0),

@@ -82,6 +82,46 @@ class FetchData {
         "token=$token&index=$index&count=$count&user_id=$userId");
   }
 
+  static Future<http.Response> getRequestedFriends(
+      String token, String index, String count) async {
+    return await http.post(apiLink +
+        'get_requested_friends' +
+        '/?' +
+        "token=$token&index=$index&count=$count");
+  }
+
+  static Future<http.Response> getListSuggestedFriends(
+      String token, String index, String count) async {
+    return await http.post(apiLink +
+        'get_list_suggested_friends' +
+        '/?' +
+        "token=$token&index=$index&count=$count");
+  }
+
+  static Future<http.Response> setRequestFriend(
+      String token, String userId) async {
+    return await http.post(apiLink +
+        'set_request_friend' +
+        '/?' +
+        "token=$token&user_id=$userId");
+  }
+
+  static Future<http.Response> setAcceptFriend(
+      String token, String userId, String isAccept) async {
+    return await http.post(apiLink +
+        'set_accept_friend' +
+        '/?' +
+        "token=$token&user_id=$userId&is_accept=$isAccept");
+  }
+
+  static Future<http.Response> notSuggest(
+      String token, String userId) async {
+    return await http.post(apiLink +
+        'not_suggest' +
+        '/?' +
+        "token=$token&user_id=$userId");
+  }
+
   static Future<http.Response> getPost(String token, String postId) async {
     return await http
         .post(apiLink + 'get_post' + '/?' + "token=$token&id=$postId");

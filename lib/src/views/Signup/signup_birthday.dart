@@ -3,7 +3,6 @@ import 'package:Facebook_cnpm/src/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Facebook_cnpm/src/utils/time_ext.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class SignupBirthday extends StatefulWidget {
   late UserModel userInput;

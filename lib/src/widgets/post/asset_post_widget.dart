@@ -92,12 +92,14 @@ class _AssetPostState extends State<AssetPost> {
                   child: Column(
                     children: [
                       Image.network(widget.post.image![1].url,
-                          fit: BoxFit.fitHeight,
+                          fit: BoxFit.fill,
                           height: MediaQuery.of(context).size.width / 2.10),
-                      SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Image.network(
                         widget.post.image![2].url,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                         height: MediaQuery.of(context).size.width / 2.10,
                       )
                     ],
